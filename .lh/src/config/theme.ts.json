@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/config/theme.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1695823238091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695826528684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { createTheme } from \"@mui/material\";\n \n export const appTheme = createTheme({\n   palette: {\n+    mode: \"light\",\n     primary: {\n       main: \"#f5f5f1\",\n     },\n     secondary: {\n"
+                },
+                {
+                    "date": 1695826720091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createTheme } from \"@mui/material\";\n \n export const appTheme = createTheme({\n   palette: {\n-    mode: \"light\",\n+    mode: \"dark\",\n     primary: {\n       main: \"#f5f5f1\",\n     },\n     secondary: {\n"
+                }
+            ],
+            "date": 1695823238091,
+            "name": "Commit-0",
+            "content": "import { createTheme } from \"@mui/material\";\n\nexport const appTheme = createTheme({\n  palette: {\n    primary: {\n      main: \"#f5f5f1\",\n    },\n    secondary: {\n      main: \"#E50914\",\n    },\n    text: {\n      primary: \"#f5f5f1\",\n    },\n  },\n})"
+        }
+    ]
+}

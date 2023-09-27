@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -52,6 +52,58 @@
                 {
                     "date": 1695815368977,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, Button, ThemeProvider, createTheme } from '@mui/material'\n+import { Box, ThemeProvider, createTheme } from '@mui/material'\n import Header from './components/Header'\n \n const theme = createTheme({})\n \n"
+                },
+                {
+                    "date": 1695826065067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n import { Box, ThemeProvider, createTheme } from '@mui/material'\n import Header from './components/Header'\n+import { appTheme } from './config/theme'\n \n-const theme = createTheme({})\n \n export default function App() {\n   return (\n \n-    <ThemeProvider theme={theme}>\n+    <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: \"#000\" }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n"
+                },
+                {
+                    "date": 1695826483276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: \"#000\" }}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.gray[900] }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695826758378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.gray[900] }}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695826778900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[0] }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695826786609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[0] }}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[100] }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695826792547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[100] }}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695826818040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, ThemeProvider, createTheme } from '@mui/material'\n+import { Box, ThemeProvider } from '@mui/material'\n import Header from './components/Header'\n import { appTheme } from './config/theme'\n \n \n"
+                },
+                {
+                    "date": 1695826870844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,11 @@\n \n     <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n+        <Layout>\n+\n+        </Layout>\n       </Box>\n     </ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1695826876663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { Box, ThemeProvider } from '@mui/material'\n import Header from './components/Header'\n import { appTheme } from './config/theme'\n+import Layout from './components/Layout'\n \n \n export default function App() {\n   return (\n"
+                },
+                {
+                    "date": 1695826976024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,11 @@\n     <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n         <Layout>\n-\n+          <Typography class=\"h1\" component=\"h1\">\n+            News\n+          </Typography>\n         </Layout>\n       </Box>\n     </ThemeProvider>\n   )\n"
+                },
+                {
+                    "date": 1695827005663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, ThemeProvider } from '@mui/material'\n+import { Box, ThemeProvider, Typography } from '@mui/material'\n import Header from './components/Header'\n import { appTheme } from './config/theme'\n import Layout from './components/Layout'\n \n"
+                },
+                {
+                    "date": 1695827033674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n         <Layout>\n-          <Typography class=\"h1\" component=\"h1\">\n+          <Typography variant=\"h1\" component=\"h1\">\n             News\n           </Typography>\n         </Layout>\n       </Box>\n"
+                },
+                {
+                    "date": 1695854228594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n import { Box, ThemeProvider, Typography } from '@mui/material'\n import Header from './components/Header'\n import { appTheme } from './config/theme'\n import Layout from './components/Layout'\n+import { Route, Routes } from 'react-router-dom'\n \n+const About = () => <h1>About</h1>\n+const Home = () => <h1>Home</h1>\n \n export default function App() {\n   return (\n \n@@ -13,8 +16,12 @@\n         <Layout>\n           <Typography variant=\"h1\" component=\"h1\">\n             News\n           </Typography>\n+          <Routes>\n+            <Route path=\"/\" element={<Home />} />\n+            <Route path=\"/news\" element={<About />} />\n+          </Routes>\n         </Layout>\n       </Box>\n     </ThemeProvider>\n   )\n"
                 }
             ],
             "date": 1695757259942,
