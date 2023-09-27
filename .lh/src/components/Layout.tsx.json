@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/Layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1695815519415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695815532984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n \n export default function Layout({ children }: { children: React.ReactNode }) {\n   return (\n     <Box>\n-      <Container></Container>\n+      <Container>{children}</Container>\n     </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1695816177878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n \n export default function Layout({ children }: { children: React.ReactNode }) {\n   return (\n     <Box>\n-      <Container>{children}</Container>\n+      <Container maxWidth=\"lg\" sx={{ mt: 4, mb: 4, bg: \"white\" }}>{children}</Container>\n     </Box>\n   )\n }\n"
+                }
+            ],
+            "date": 1695815519415,
+            "name": "Commit-0",
+            "content": "import { Box, Container } from '@mui/material'\nimport React from 'react'\n\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return (\n    <Box>\n      <Container></Container>\n    </Box>\n  )\n}\n"
+        }
+    ]
+}

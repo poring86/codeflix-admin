@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/Header.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695782229304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695782695017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,27 @@\n+import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'\n+import MenuIcon from '@mui/icons-material/Menu';\n import React from 'react'\n \n export default function Header() {\n   return (\n-    <></>\n+    <Box sx={{ flexGrow: 1 }}>\n+      <AppBar position=\"static\">\n+        <Toolbar>\n+          <IconButton\n+            size=\"large\"\n+            edge=\"start\"\n+            color=\"inherit\"\n+            aria-label=\"menu\"\n+            sx={{ mr: 2 }}\n+          >\n+            <MenuIcon />\n+          </IconButton>\n+          <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n+            News\n+          </Typography>\n+          <Button color=\"inherit\">Login</Button>\n+        </Toolbar>\n+      </AppBar>\n+    </Box>\n   )\n }\n"
+                }
+            ],
+            "date": 1695782229304,
+            "name": "Commit-0",
+            "content": "import React from 'react'\n\nexport default function Header() {\n  return (\n    <></>\n  )\n}\n"
+        }
+    ]
+}

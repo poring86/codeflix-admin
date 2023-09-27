@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -20,6 +20,38 @@
                 {
                     "date": 1695757610175,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n \n export default function App() {\n   return (\n \n-    <Button>Hello World</Button>\n+    <Button variant=\"contained\">Hello World</Button>\n   )\n }\n"
+                },
+                {
+                    "date": 1695758325448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n import { Button } from '@mui/material'\n-import React from 'react'\n \n export default function App() {\n   return (\n \n"
+                },
+                {
+                    "date": 1695758355196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n-import { Button } from '@mui/material'\n+import { Button, ThemeProvider } from '@mui/material'\n \n export default function App() {\n   return (\n \n-    <Button variant=\"contained\">Hello World</Button>\n+    <ThemeProvider theme={{}}></ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1695781479736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n-import { Button, ThemeProvider } from '@mui/material'\n+import { Box, Button, ThemeProvider } from '@mui/material'\n \n export default function App() {\n   return (\n \n-    <ThemeProvider theme={{}}></ThemeProvider>\n+    <ThemeProvider theme={{}}>\n+      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: \"#000\" }}>\n+\n+      </Box>\n+    </ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1695783293132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   return (\n \n     <ThemeProvider theme={{}}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: \"#000\" }}>\n-\n+        <Header />\n       </Box>\n     </ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1695783300698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { Box, Button, ThemeProvider } from '@mui/material'\n+import Header from './components/Header'\n \n export default function App() {\n   return (\n \n"
+                },
+                {
+                    "date": 1695783333878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,13 @@\n import { Box, Button, ThemeProvider } from '@mui/material'\n import Header from './components/Header'\n \n+const theme = createTheme({})\n+\n export default function App() {\n   return (\n \n-    <ThemeProvider theme={{}}>\n+    <ThemeProvider theme={theme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: \"#000\" }}>\n         <Header />\n       </Box>\n     </ThemeProvider>\n"
+                },
+                {
+                    "date": 1695783343586,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, Button, ThemeProvider } from '@mui/material'\n+import { Box, Button, ThemeProvider, createTheme } from '@mui/material'\n import Header from './components/Header'\n \n const theme = createTheme({})\n \n"
+                },
+                {
+                    "date": 1695815368977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, Button, ThemeProvider, createTheme } from '@mui/material'\n+import { Box, ThemeProvider, createTheme } from '@mui/material'\n import Header from './components/Header'\n \n const theme = createTheme({})\n \n"
                 }
             ],
             "date": 1695757259942,
