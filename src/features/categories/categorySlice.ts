@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { RootState } from "../../app/store"
 
 interface Category {
   id: string,
@@ -27,14 +28,16 @@ const categories = [
   { ...category, id: "199183e2-5d97-11ee-8c99-0242ac120003", name: "Banana" },
 ]
 
-export const initialState = {
+export const initialState = [
   ...categories
-}
+]
 
 const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {}
 })
+
+export const selectCategories = (state: RootState) => state.categories
 
 export default categoriesSlice.reducer
