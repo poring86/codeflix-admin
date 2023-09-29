@@ -3,11 +3,47 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1695855743800,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695990990111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,54 @@\n import React from 'react'\n+import { useAppSelector } from '../../app/hooks'\n+import { selectCategories } from './categorySlice'\n+import { Box, Button, Typography } from '@mui/material'\n+import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n+  const categories = useAppSelector(selectCategories)\n+\n+  const rows: GridRowsProp = categories.map((category) => ({\n+    id: category.id,\n+    name: category.name,\n+    description: category.description,\n+    isActive: category.is_active,\n+    createdAt: category.created_at\n+  }))\n+\n+  const columns: GridColDef[] = [\n+    { field: 'name', headerName: \"Name\", flex: 1 },\n+    { field: 'description', headerName: \"Description\", flex: 1 },\n+    {\n+      field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n+    },\n+    {\n+      field: 'createdAt', headerName: \"Active\", flex: 1\n+    },\n+  ]\n+\n+  function renderIsActiveCell(rowData: GridRenderCellParams) {\n+    return (\n+      <Typography color={rowData.value ? \"primary\" : \"secondary\"}>\n+        {rowData.value ? \"Active\" : \"Inactive\"}\n+      </Typography>\n+    )\n+  }\n+\n   return (\n-    <div>ListCategory</div>\n+    <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n+      <Box display=\"flex\" justifyContent=\"flex-end\">\n+        <Button>New category</Button>\n+      </Box>\n+      <Typography variant='h3' component='h1'>\n+        Category page list\n+      </Typography>\n+\n+\n+      <div style={{ height: 500, width: \"100%\" }}>\n+        <DataGrid columns={columns} rows={rows} />\n+      </div>\n+\n+\n+    </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1695991557798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     id: category.id,\n     name: category.name,\n     description: category.description,\n     isActive: category.is_active,\n-    createdAt: category.created_at\n+    createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')\n   }))\n \n   const columns: GridColDef[] = [\n     { field: 'name', headerName: \"Name\", flex: 1 },\n"
+                },
+                {
+                    "date": 1695991639530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,15 +16,16 @@\n   }))\n \n   const columns: GridColDef[] = [\n     { field: 'name', headerName: \"Name\", flex: 1 },\n-    { field: 'description', headerName: \"Description\", flex: 1 },\n+\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n     },\n     {\n       field: 'createdAt', headerName: \"Active\", flex: 1\n     },\n+    { field: 'description', headerName: \"Description\", flex: 1 },\n   ]\n \n   function renderIsActiveCell(rowData: GridRenderCellParams) {\n     return (\n"
+                },
+                {
+                    "date": 1695991732735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,14 +16,13 @@\n   }))\n \n   const columns: GridColDef[] = [\n     { field: 'name', headerName: \"Name\", flex: 1 },\n-\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n     },\n     {\n-      field: 'createdAt', headerName: \"Active\", flex: 1\n+      field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n     { field: 'description', headerName: \"Description\", flex: 1 },\n   ]\n \n"
+                },
+                {
+                    "date": 1695991746233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,12 +19,13 @@\n     { field: 'name', headerName: \"Name\", flex: 1 },\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n     },\n+\n+    { field: 'description', headerName: \"Description\", flex: 1 },\n     {\n       field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n-    { field: 'description', headerName: \"Description\", flex: 1 },\n   ]\n \n   function renderIsActiveCell(rowData: GridRenderCellParams) {\n     return (\n"
+                },
+                {
+                    "date": 1695991794654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,13 +19,15 @@\n     { field: 'name', headerName: \"Name\", flex: 1 },\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n     },\n-\n     { field: 'description', headerName: \"Description\", flex: 1 },\n     {\n       field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n+    {\n+      field: 'id', headerName: \"Actions\", flex: 1\n+    },\n   ]\n \n   function renderIsActiveCell(rowData: GridRenderCellParams) {\n     return (\n"
+                },
+                {
+                    "date": 1695993793138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import React from 'react'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategories } from './categorySlice'\n-import { Box, Button, Typography } from '@mui/material'\n+import { Box, Button, IconButton, Typography } from '@mui/material'\n+import { DeleteIcon } from '@mui/icons-material'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n@@ -24,12 +25,20 @@\n     {\n       field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n     {\n-      field: 'id', headerName: \"Actions\", flex: 1\n+      field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell\n     },\n   ]\n \n+  function renderActionCell(params: GridRenderCellParams) {\n+    return (\n+      <IconButton color=\"secondary\" onClick={() => console.log(\"isActiveCell\")}>\n+        <DeleteIcon />\n+      </IconButton>\n+    )\n+  }\n+\n   function renderIsActiveCell(rowData: GridRenderCellParams) {\n     return (\n       <Typography color={rowData.value ? \"primary\" : \"secondary\"}>\n         {rowData.value ? \"Active\" : \"Inactive\"}\n"
+                },
+                {
+                    "date": 1695993842059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n-import { DeleteIcon } from '@mui/icons-material'\n+import DeleteIcon from '@mui/icons-material/delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n"
+                },
+                {
+                    "date": 1695993870762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n-import DeleteIcon from '@mui/icons-material/delete'\n+import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n"
                 }
             ],
             "date": 1695855743800,
