@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -44,6 +44,130 @@
                 {
                     "date": 1695993870762,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n-import DeleteIcon from '@mui/icons-material/delete'\n+import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n"
+                },
+                {
+                    "date": 1696003408954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useAppSelector } from '../../app/hooks'\n import { selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n-import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'\n+import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n \n@@ -56,9 +56,9 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid columns={columns} rows={rows} />\n+        <DataGrid components={{ Toolbar: GridToolbar }} rowsPerPageOptions={[2, 20, 50, 100]} columns={columns} rows={rows} />\n       </div>\n \n \n     </Box>\n"
+                },
+                {
+                    "date": 1696003508793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} rowsPerPageOptions={[2, 20, 50, 100]} columns={columns} rows={rows} />\n+        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} />\n       </div>\n \n \n     </Box>\n"
+                },
+                {
+                    "date": 1696004052575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,14 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} />\n+        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} componentsProps={{\n+          toolbar: {\n+            showQuickFilter: true,\n+            quickFilterProps: { debounceMs: 500 }\n+          }\n+        }} />\n       </div>\n \n \n     </Box>\n"
+                },
+                {
+                    "date": 1696004191918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,9 @@\n         <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 }\n+            disableColumnSelector = { true}\n           }\n         }} />\n       </div>\n \n"
+                },
+                {
+                    "date": 1696004198461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n       <div style={{ height: 500, width: \"100%\" }}>\n         <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n-            quickFilterProps: { debounceMs: 500 }\n+            quickFilterProps: { debounceMs: 500 },\n             disableColumnSelector = { true}\n           }\n         }} />\n       </div>\n"
+                },
+                {
+                    "date": 1696004216191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 },\n-            disableColumnSelector = { true}\n+            disableColumnSelector: true\n           }\n         }} />\n       </div>\n \n"
+                },
+                {
+                    "date": 1696004340428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,15 +56,17 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} componentsProps={{\n+        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 },\n-            disableColumnSelector: true\n+\n+\n           }\n-        }} />\n+        }}\n+        />\n       </div>\n \n \n     </Box>\n"
+                },
+                {
+                    "date": 1696004348570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,10 +60,8 @@\n         <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 },\n-\n-\n           }\n         }}\n         />\n       </div>\n"
+                },
+                {
+                    "date": 1696004370304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} componentsProps={{\n+        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 },\n           }\n"
+                },
+                {
+                    "date": 1696004416485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} componentsProps={{\n+        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} checkboxSelection={true} componentsProps={{\n           toolbar: {\n             showQuickFilter: true,\n             quickFilterProps: { debounceMs: 500 },\n           }\n"
+                },
+                {
+                    "date": 1696004428505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,14 +56,17 @@\n       </Typography>\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n-        <DataGrid components={{ Toolbar: GridToolbar }} columns={columns} rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} checkboxSelection={true} componentsProps={{\n-          toolbar: {\n-            showQuickFilter: true,\n-            quickFilterProps: { debounceMs: 500 },\n-          }\n-        }}\n+        <DataGrid\n+          components={{ Toolbar: GridToolbar }}\n+          columns={columns}\n+          rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} checkboxSelection={true} componentsProps={{\n+            toolbar: {\n+              showQuickFilter: true,\n+              quickFilterProps: { debounceMs: 500 },\n+            }\n+          }}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696004442572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,14 @@\n       <div style={{ height: 500, width: \"100%\" }}>\n         <DataGrid\n           components={{ Toolbar: GridToolbar }}\n           columns={columns}\n-          rows={rows} disableColumnSelector={true} disableColumnFilter={true} disableDensitySelector={true} checkboxSelection={true} componentsProps={{\n+          rows={rows}\n+          disableColumnSelector={true}\n+          disableColumnFilter={true}\n+          disableDensitySelector={true}\n+          checkboxSelection={true}\n+          componentsProps={{\n             toolbar: {\n               showQuickFilter: true,\n               quickFilterProps: { debounceMs: 500 },\n             }\n"
+                },
+                {
+                    "date": 1696004641063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,9 @@\n \n       <div style={{ height: 500, width: \"100%\" }}>\n         <DataGrid\n           components={{ Toolbar: GridToolbar }}\n+          disableRowSelectionOnClick={true}\n           columns={columns}\n           rows={rows}\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n"
+                },
+                {
+                    "date": 1696011968761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n+import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n \n@@ -16,9 +17,9 @@\n     createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')\n   }))\n \n   const columns: GridColDef[] = [\n-    { field: 'name', headerName: \"Name\", flex: 1 },\n+    { field: 'name', headerName: \"Name\", flex: 1, renderCell: renderNameCell },\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n     },\n     { field: 'description', headerName: \"Description\", flex: 1 },\n@@ -29,8 +30,16 @@\n       field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell\n     },\n   ]\n \n+  function renderNameCell(rowData: GridRenderCellParams) {\n+    return (\n+      <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.value}`}>\n+        <Typography color=\"primary\">{rowData.value}</Typography>\n+      </Link>\n+    )\n+  }\n+\n   function renderActionCell(params: GridRenderCellParams) {\n     return (\n       <IconButton color=\"secondary\" onClick={() => console.log(\"isActiveCell\")}>\n         <DeleteIcon />\n"
+                },
+                {
+                    "date": 1696029550254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,15 @@\n     isActive: category.is_active,\n     createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')\n   }))\n \n+  const componentsProps = {\n+    toolbar: {\n+      showQuickFilter: true,\n+      quickFilterProps: { debounceMs: 500 },\n+    }\n+  }\n+\n   const columns: GridColDef[] = [\n     { field: 'name', headerName: \"Name\", flex: 1, renderCell: renderNameCell },\n     {\n       field: 'isActive', headerName: \"Active\", flex: 1, type: \"boolean\", renderCell: renderIsActiveCell\n@@ -74,14 +81,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          componentsProps={{\n-            toolbar: {\n-              showQuickFilter: true,\n-              quickFilterProps: { debounceMs: 500 },\n-            }\n-          }}\n+          componentsProps={ }\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696029560781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          componentsProps={ }\n+          componentsProps={componentsProps}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696029619088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,17 +73,18 @@\n \n \n       <div style={{ height: 500, width: \"100%\" }}>\n         <DataGrid\n+          componentsProps={componentsProps}\n           components={{ Toolbar: GridToolbar }}\n           disableRowSelectionOnClick={true}\n           columns={columns}\n           rows={rows}\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          componentsProps={componentsProps}\n+\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696029655937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-\n+          rowsPerPageOptions={[2, 20, 50, 100]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696029737123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          rowsPerPageOptions={[2, 20, 50, 100]}\n+          pageSizeOptions={[5, 10, 25]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696029819089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          pageSizeOptions={[5, 10, 25]}\n+          pageSizeOptions={[1, 10, 25]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030151804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          pageSizeOptions={[1, 10, 25]}\n+          pageSizeOptions={[5]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030248325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          pageSizeOptions={[5]}\n+          pageSizeOptions={[1, 2, 3]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030384357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,10 +81,10 @@\n           rows={rows}\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n-          checkboxSelection={true}\n-          pageSizeOptions={[1, 2, 3]}\n+          checkboxSelection={true},\n+        rowsPerPage={[10, 20, 30]},\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030392377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,10 +81,10 @@\n           rows={rows}\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n-          checkboxSelection={true},\n-        rowsPerPage={[10, 20, 30]},\n+          checkboxSelection={true}\n+          rowsPerPage={[10, 20, 30]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030534289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          rowsPerPage={[10, 20, 30]}\n+          rowsPerPageOptions={[10, 20, 30]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030616679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n           disableColumnSelector={true}\n           disableColumnFilter={true}\n           disableDensitySelector={true}\n           checkboxSelection={true}\n-          rowsPerPageOptions={[10, 20, 30]}\n+          pageSizeOptions={[5, 10]}\n         />\n       </div>\n \n \n"
+                },
+                {
+                    "date": 1696030646411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,13 +66,9 @@\n     <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n       <Box display=\"flex\" justifyContent=\"flex-end\">\n         <Button>New category</Button>\n       </Box>\n-      <Typography variant='h3' component='h1'>\n-        Category page list\n-      </Typography>\n \n-\n       <div style={{ height: 500, width: \"100%\" }}>\n         <DataGrid\n           componentsProps={componentsProps}\n           components={{ Toolbar: GridToolbar }}\n"
+                },
+                {
+                    "date": 1696031018060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n       <Box display=\"flex\" justifyContent=\"flex-end\">\n         <Button>New category</Button>\n       </Box>\n \n-      <div style={{ height: 500, width: \"100%\" }}>\n+      <Box style={{ display: \"flex\", height: 600 }}>\n         <DataGrid\n           componentsProps={componentsProps}\n           components={{ Toolbar: GridToolbar }}\n           disableRowSelectionOnClick={true}\n@@ -80,9 +80,9 @@\n           disableDensitySelector={true}\n           checkboxSelection={true}\n           pageSizeOptions={[5, 10]}\n         />\n-      </div>\n+      </Box>\n \n \n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1696031110391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,12 @@\n \n   return (\n     <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n       <Box display=\"flex\" justifyContent=\"flex-end\">\n-        <Button>New category</Button>\n+        <Button\n+          variant=\"contained\"\n+          color=\"secondary\"\n+        >New category</Button>\n       </Box>\n \n       <Box style={{ display: \"flex\", height: 600 }}>\n         <DataGrid\n"
+                },
+                {
+                    "date": 1696031169701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,8 +67,11 @@\n       <Box display=\"flex\" justifyContent=\"flex-end\">\n         <Button\n           variant=\"contained\"\n           color=\"secondary\"\n+          component={Link}\n+          to=\"/categories/create\"\n+          style={{ marginBottom: \"1rem\" }}\n         >New category</Button>\n       </Box>\n \n       <Box style={{ display: \"flex\", height: 600 }}>\n"
+                },
+                {
+                    "date": 1696039226493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n   ]\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n-      <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.value}`}>\n+      <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.id}`}>\n         <Typography color=\"primary\">{rowData.value}</Typography>\n       </Link>\n     )\n   }\n"
                 }
             ],
             "date": 1695855743800,

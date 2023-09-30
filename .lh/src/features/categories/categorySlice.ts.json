@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -32,6 +32,34 @@
                 {
                     "date": 1695866244380,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,5 +36,5 @@\n   initialState,\n   reducers: {}\n })\n \n-export categoriesSlice.reducer\n\\ No newline at end of file\n+export default categoriesSlice.reducer\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696032497784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { createSlice } from \"@reduxjs/toolkit\"\n+import { RootState } from \"../../app/store\"\n \n interface Category {\n   id: string,\n   name: string,\n@@ -26,15 +27,19 @@\n   { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120003\", name: \"Apple\" },\n   { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120003\", name: \"Banana\" },\n ]\n \n-export const initialState = {\n-  categories: [categories]\n-}\n+export const initialState = [\n+  ...categories\n+]\n \n const categoriesSlice = createSlice({\n   name: \"categories\",\n   initialState,\n   reducers: {}\n })\n \n+export const selectCategories = (state: RootState) => state.categories\n+\n+export const selectCategoryById = (state: RootState, id: string) => state.categories.find((category) => category.id === id)\n+\n export default categoriesSlice.reducer\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696033449432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n   initialState,\n   reducers: {}\n })\n \n+// Selectors\n export const selectCategories = (state: RootState) => state.categories\n \n export const selectCategoryById = (state: RootState, id: string) => state.categories.find((category) => category.id === id)\n \n"
+                },
+                {
+                    "date": 1696033805104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,7 +40,19 @@\n \n // Selectors\n export const selectCategories = (state: RootState) => state.categories\n \n-export const selectCategoryById = (state: RootState, id: string) => state.categories.find((category) => category.id === id)\n+export const selectCategoryById = (state: RootState, id: string) => {\n+  const category = state.categories.find((category) => category.id === id)\n \n+  return category || {\n+    id: \"\",\n+    name: \"\",\n+    description: \"\",\n+    is_active: false,\n+    deleted_at: null,\n+    created_at: \"\",\n+    updated_at: \"\",\n+  }\n+}\n+\n export default categoriesSlice.reducer\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696033821152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,16 +43,16 @@\n \n export const selectCategoryById = (state: RootState, id: string) => {\n   const category = state.categories.find((category) => category.id === id)\n \n-  return category || {\n+  return (category || {\n     id: \"\",\n     name: \"\",\n     description: \"\",\n     is_active: false,\n     deleted_at: null,\n     created_at: \"\",\n     updated_at: \"\",\n-  }\n+  })\n }\n \n export default categoriesSlice.reducer\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696039145486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \n export const selectCategoryById = (state: RootState, id: string) => {\n   const category = state.categories.find((category) => category.id === id)\n \n-  return (category || {\n+  return (category ?? {\n     id: \"\",\n     name: \"\",\n     description: \"\",\n     is_active: false,\n"
+                },
+                {
+                    "date": 1696039168792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,10 @@\n \n export const selectCategoryById = (state: RootState, id: string) => {\n   const category = state.categories.find((category) => category.id === id)\n \n+  console.log('category 2', category)\n+\n   return (category ?? {\n     id: \"\",\n     name: \"\",\n     description: \"\",\n"
+                },
+                {
+                    "date": 1696039180059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \n export const selectCategoryById = (state: RootState, id: string) => {\n   const category = state.categories.find((category) => category.id === id)\n \n-  console.log('category 2', category)\n+  console.log('category 2', id)\n \n   return (category ?? {\n     id: \"\",\n     name: \"\",\n"
                 }
             ],
             "date": 1695861518172,

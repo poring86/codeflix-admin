@@ -15,14 +15,11 @@ export default function App() {
       <Box component="main" sx={{ height: "100vh", backgroundColor: (theme) => theme.palette.grey[900] }}>
         <Header />
         <Layout>
-          <Typography variant="h1" component="h1">
-            News
-          </Typography>
           <Routes>
             <Route path="/" element={<ListCategory />} />
             <Route path="/categories" element={<ListCategory />} />
             <Route path="/categories/create" element={<CreateCategory />} />
-            <Route path="/categories/:id/edit" element={<EditCategory />} />
+            <Route path="/categories/edit/:id" element={<EditCategory />} />
             <Route path="*" element={
               <Box sx={{ color: 'white' }}>
                 <Typography variant="h1" component="h1">

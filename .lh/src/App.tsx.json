@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 33,
+            "activePatchIndex": 35,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -140,6 +140,14 @@
                 {
                     "date": 1695859199074,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,12 @@\n import Header from './components/Header'\n import { appTheme } from './config/theme'\n import Layout from './components/Layout'\n import { Route, Routes } from 'react-router-dom'\n+import { ListCategory } from './features/categories/ListCategory'\n+import { CreateCategory } from './features/categories/CreateCategory'\n+import { EditCategory } from './features/categories/EditCategory'\n \n-const About = () => <h1>About</h1>\n-const Home = () => <h1>Home</h1>\n \n export default function App() {\n   return (\n \n@@ -17,10 +18,21 @@\n           <Typography variant=\"h1\" component=\"h1\">\n             News\n           </Typography>\n           <Routes>\n-            <Route path=\"/\" element={<Home />} />\n-            <Route path=\"/news\" element={<About />} />\n+            <Route path=\"/\" element={<ListCategory />} />\n+            <Route path=\"/categories\" element={<ListCategory />} />\n+            <Route path=\"/categories/create\" element={<CreateCategory />} />\n+            <Route path=\"/categories/:id/edit\" element={<EditCategory />} />\n+            <Route path=\"*\" element={\n+              <Box sx={{ color: 'white' }}>\n+                <Typography variant=\"h1\" component=\"h1\">\n+                  404\n+                </Typography>\n+                <Typography variant=\"h1\" component=\"h1\">\n+                  Page not found\n+                </Typography>\n+              </Box>} />\n           </Routes>\n         </Layout>\n       </Box>\n     </ThemeProvider>\n"
+                },
+                {
+                    "date": 1696014244258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n           <Routes>\n             <Route path=\"/\" element={<ListCategory />} />\n             <Route path=\"/categories\" element={<ListCategory />} />\n             <Route path=\"/categories/create\" element={<CreateCategory />} />\n-            <Route path=\"/categories/:id/edit\" element={<EditCategory />} />\n+            <Route path=\"/categories/edit/:id\" element={<EditCategory />} />\n             <Route path=\"*\" element={\n               <Box sx={{ color: 'white' }}>\n                 <Typography variant=\"h1\" component=\"h1\">\n                   404\n"
+                },
+                {
+                    "date": 1696030660322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,8 @@\n     <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n         <Layout>\n-          <Typography variant=\"h1\" component=\"h1\">\n-            News\n-          </Typography>\n           <Routes>\n             <Route path=\"/\" element={<ListCategory />} />\n             <Route path=\"/categories\" element={<ListCategory />} />\n             <Route path=\"/categories/create\" element={<CreateCategory />} />\n"
                 }
             ],
             "date": 1695757259942,

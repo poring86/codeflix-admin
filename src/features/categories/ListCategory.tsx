@@ -3,7 +3,8 @@ import { useAppSelector } from '../../app/hooks'
 import { selectCategories } from './categorySlice'
 import { Box, Button, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'
+import { Link } from 'react-router-dom'
 
 export const ListCategory = () => {
   const categories = useAppSelector(selectCategories)
@@ -16,8 +17,15 @@ export const ListCategory = () => {
     createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')
   }))
 
+  const componentsProps = {
+    toolbar: {
+      showQuickFilter: true,
+      quickFilterProps: { debounceMs: 500 },
+    }
+  }
+
   const columns: GridColDef[] = [
-    { field: 'name', headerName: "Name", flex: 1 },
+    { field: 'name', headerName: "Name", flex: 1, renderCell: renderNameCell },
     {
       field: 'isActive', headerName: "Active", flex: 1, type: "boolean", renderCell: renderIsActiveCell
     },
@@ -29,6 +37,14 @@ export const ListCategory = () => {
       field: 'id', headerName: "Actions", flex: 1, renderCell: renderActionCell
     },
   ]
+
+  function renderNameCell(rowData: GridRenderCellParams) {
+    return (
+      <Link style={{ textDecoration: "none" }} to={`/categories/edit/${rowData.id}`}>
+        <Typography color="primary">{rowData.value}</Typography>
+      </Link>
+    )
+  }
 
   function renderActionCell(params: GridRenderCellParams) {
     return (
@@ -49,16 +65,29 @@ export const ListCategory = () => {
   return (
     <Box maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box display="flex" justifyContent="flex-end">
-        <Button>New category</Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to="/categories/create"
+          style={{ marginBottom: "1rem" }}
+        >New category</Button>
       </Box>
-      <Typography variant='h3' component='h1'>
-        Category page list
-      </Typography>
 
-
-      <div style={{ height: 500, width: "100%" }}>
-        <DataGrid columns={columns} rows={rows} />
-      </div>
+      <Box style={{ display: "flex", height: 600 }}>
+        <DataGrid
+          componentsProps={componentsProps}
+          components={{ Toolbar: GridToolbar }}
+          disableRowSelectionOnClick={true}
+          columns={columns}
+          rows={rows}
+          disableColumnSelector={true}
+          disableColumnFilter={true}
+          disableDensitySelector={true}
+          checkboxSelection={true}
+          pageSizeOptions={[5, 10]}
+        />
+      </Box>
 
 
     </Box>

@@ -3,11 +3,155 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 36,
             "patches": [
                 {
                     "date": 1695855765191,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696031604077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,15 @@\n import React from 'react'\n \n export const EditCategory = () => {\n   return (\n-    <div>EditCategory</div>\n+    <Box>\n+      <Paper>\n+        <Box p={2}>\n+          <Box mb={2}>\n+            <Typography variant=\"h4\">Edit Category</Typography>\n+          </Box>\n+        </Box>\n+      </Paper>\n+    </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1696031618987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import { Box, Paper, Typography } from '@mui/material'\n import React from 'react'\n \n export const EditCategory = () => {\n   return (\n"
+                },
+                {
+                    "date": 1696031668368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,12 @@\n         <Box p={2}>\n           <Box mb={2}>\n             <Typography variant=\"h4\">Edit Category</Typography>\n           </Box>\n-        </Box>\n+          <Box p={2}>\n+            <form></form>\n+\n+          </Box>\n       </Paper>\n     </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1696031679440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n           <Box p={2}>\n             <form></form>\n \n           </Box>\n+        </Box>\n       </Paper>\n     </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1696031904477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n import { Box, Paper, Typography } from '@mui/material'\n import React from 'react'\n+import { useParams } from 'react-router-dom'\n \n export const EditCategory = () => {\n+  const id = useParams().id\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n"
+                },
+                {
+                    "date": 1696031915703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import React from 'react'\n import { useParams } from 'react-router-dom'\n \n export const EditCategory = () => {\n-  const id = useParams().id\n+  const id = useParams().id || \"\"\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n"
+                },
+                {
+                    "date": 1696032395442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,12 @@\n import { Box, Paper, Typography } from '@mui/material'\n import React from 'react'\n import { useParams } from 'react-router-dom'\n+import { useAppSelector } from '../../app/hooks'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n+  const category = useAppSelector((state) => selectCategoryById(state, id))\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n@@ -19,4 +21,8 @@\n       </Paper>\n     </Box>\n   )\n }\n+function selectCategoryById(id: string): (state: { counter: import(\"../counter/counterSlice\").CounterState; categories: { id: string; name: string; description: string; is_active: boolean; delete_at: null; created_at: string; updated_at: string }[] }) => unknown {\n+  throw new Error('Function not implemented.')\n+}\n+\n"
+                },
+                {
+                    "date": 1696033991050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { Box, Paper, Typography } from '@mui/material'\n import React from 'react'\n import { useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n+import { selectCategoryById } from './categorySlice'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n@@ -21,8 +22,4 @@\n       </Paper>\n     </Box>\n   )\n }\n-function selectCategoryById(id: string): (state: { counter: import(\"../counter/counterSlice\").CounterState; categories: { id: string; name: string; description: string; is_active: boolean; delete_at: null; created_at: string; updated_at: string }[] }) => unknown {\n-  throw new Error('Function not implemented.')\n-}\n-\n"
+                },
+                {
+                    "date": 1696034044550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,12 @@\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n+\n+  const handleChange = (e) => {\n+\n+  }\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n"
+                },
+                {
+                    "date": 1696034581698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,16 @@\n-import { Box, Paper, Typography } from '@mui/material'\n-import React from 'react'\n+import { Box, FormControl, Grid, Paper, Typography } from '@mui/material'\n+import React, { useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n+  const [isDisabled, setIsDisabled] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n-  const handleChange = (e) => {\n+  const handleChange = (e: Event) => {\n \n   }\n   return (\n     <Box>\n@@ -18,10 +19,23 @@\n           <Box mb={2}>\n             <Typography variant=\"h4\">Edit Category</Typography>\n           </Box>\n           <Box p={2}>\n-            <form></form>\n+            <form>\n+              <Grid container spacing={3}>\\\n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      label=\"Category Name\"\n+                      value={category.name}\n+                      onChange={(e) => handleChange(e)}\n+                    />\n+                  </FormControl>\n+                </Grid>\n+              </Grid>\n \n+            </form>\n+\n           </Box>\n         </Box>\n       </Paper>\n     </Box>\n"
+                },
+                {
+                    "date": 1696034626003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, FormControl, Grid, Paper, Typography } from '@mui/material'\n+import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import React, { useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n@@ -26,9 +26,10 @@\n                   <FormControl fullWidth>\n                     <TextField\n                       label=\"Category Name\"\n                       value={category.name}\n-                      onChange={(e) => handleChange(e)}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n                     />\n                   </FormControl>\n                 </Grid>\n               </Grid>\n"
+                },
+                {
+                    "date": 1696034677794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   const id = useParams().id || \"\"\n   const [isDisabled, setIsDisabled] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n-  const handleChange = (e: Event) => {\n+  const handleChange = (e: any) => {\n \n   }\n   return (\n     <Box>\n"
+                },
+                {
+                    "date": 1696034686034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,21 @@\n                   </FormControl>\n                 </Grid>\n               </Grid>\n \n+              <Grid container spacing={3}>\\\n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      label=\"Category Name\"\n+                      value={category.name}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n+                    />\n+                  </FormControl>\n+                </Grid>\n+              </Grid>\n+\n             </form>\n \n           </Box>\n         </Box>\n"
+                },
+                {
+                    "date": 1696034709093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,10 @@\n               <Grid container spacing={3}>\\\n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n-                      label=\"Category Name\"\n-                      value={category.name}\n+                      label=\"Category description\"\n+                      value={category.description}\n                       disabled={isDisabled}\n                       onChange={handleChange}\n                     />\n                   </FormControl>\n"
+                },
+                {
+                    "date": 1696035417935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,22 @@\n                   </FormControl>\n                 </Grid>\n               </Grid>\n \n-              <Grid container spacing={3}>\\\n+\n+              <Grid item xs={12}>\n+                <FormControl fullWidth>\n+                  <TextField\n+                    label=\"Category description\"\n+                    value={category.description}\n+                    disabled={isDisabled}\n+                    onChange={handleChange}\n+                  />\n+                </FormControl>\n+              </Grid>\n+\n+\n+              <Grid container spacing={3}>\n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n                       label=\"Category description\"\n"
+                },
+                {
+                    "date": 1696035864527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,18 +47,16 @@\n               </Grid>\n \n \n               <Grid container spacing={3}>\n-                <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      label=\"Category description\"\n-                      value={category.description}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n+                <FormControl fullWidth>\n+                  <TextField\n+                    label=\"Category description\"\n+                    value={category.description}\n+                    disabled={isDisabled}\n+                    onChange={handleChange}\n+                  />\n+                </FormControl>\n               </Grid>\n \n             </form>\n \n"
+                },
+                {
+                    "date": 1696035914936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n                 </FormControl>\n               </Grid>\n \n \n-              <Grid container spacing={3}>\n+              <Grid item xs={12}>\n                 <FormControl fullWidth>\n                   <TextField\n                     label=\"Category description\"\n                     value={category.description}\n"
+                },
+                {
+                    "date": 1696035952590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,34 +31,34 @@\n                       onChange={handleChange}\n                     />\n                   </FormControl>\n                 </Grid>\n-              </Grid>\n \n \n-              <Grid item xs={12}>\n-                <FormControl fullWidth>\n-                  <TextField\n-                    label=\"Category description\"\n-                    value={category.description}\n-                    disabled={isDisabled}\n-                    onChange={handleChange}\n-                  />\n-                </FormControl>\n-              </Grid>\n \n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      label=\"Category description\"\n+                      value={category.description}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n+                    />\n+                  </FormControl>\n+                </Grid>\n \n-              <Grid item xs={12}>\n-                <FormControl fullWidth>\n-                  <TextField\n-                    label=\"Category description\"\n-                    value={category.description}\n-                    disabled={isDisabled}\n-                    onChange={handleChange}\n-                  />\n-                </FormControl>\n+\n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      label=\"Category description\"\n+                      value={category.description}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n+                    />\n+                  </FormControl>\n+                </Grid>\n               </Grid>\n-\n             </form>\n \n           </Box>\n         </Box>\n"
+                },
+                {
+                    "date": 1696036589636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n+import { Box, Button, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import React, { useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n@@ -56,8 +56,19 @@\n                       onChange={handleChange}\n                     />\n                   </FormControl>\n                 </Grid>\n+                <Grid item xs={12}>\n+                  <Box display=\"flex\" gap={2}>\n+                    <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(true)}>\n+                      Back\n+                    </Button>\n+                    <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(false)}>\n+                      {isLoading ? \"Loading\" : \"Save\"}\n+                    </Button>\n+\n+                  </Box>\n+                </Grid>\n               </Grid>\n             </form>\n \n           </Box>\n"
+                },
+                {
+                    "date": 1696036607283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const [isDisabled, setIsDisabled] = useState(false)\n+  const [isLoading, setIsLoading] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n   const handleChange = (e: any) => {\n \n"
+                },
+                {
+                    "date": 1696036629247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n                     <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(true)}>\n                       Back\n                     </Button>\n                     <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(false)}>\n-                      {isLoading ? \"Loading\" : \"Save\"}\n+                      \"Save\"\n                     </Button>\n \n                   </Box>\n                 </Grid>\n"
+                },
+                {
+                    "date": 1696036681288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,13 +59,13 @@\n                   </FormControl>\n                 </Grid>\n                 <Grid item xs={12}>\n                   <Box display=\"flex\" gap={2}>\n-                    <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(true)}>\n+                    <Button variant=\"contained\" component={Link} onClick={() => setIsDisabled(true)}>\n                       Back\n                     </Button>\n-                    <Button variant=\"contained\" color=\"primary\" onClick={() => setIsDisabled(false)}>\n-                      \"Save\"\n+                    <Button variant=\"contained\" color=\"secondary\" onClick={() => setIsDisabled(false)}>\n+                      Save\n                     </Button>\n \n                   </Box>\n                 </Grid>\n"
+                },
+                {
+                    "date": 1696036738596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, Button, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import React, { useState } from 'react'\n-import { useParams } from 'react-router-dom'\n+import { Link, useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n \n export const EditCategory = () => {\n"
+                },
+                {
+                    "date": 1696036760540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n                   </FormControl>\n                 </Grid>\n                 <Grid item xs={12}>\n                   <Box display=\"flex\" gap={2}>\n-                    <Button variant=\"contained\" component={Link} onClick={() => setIsDisabled(true)}>\n+                    <Button variant=\"contained\" component={Link} to=\"/categories\">\n                       Back\n                     </Button>\n                     <Button variant=\"contained\" color=\"secondary\" onClick={() => setIsDisabled(false)}>\n                       Save\n"
+                },
+                {
+                    "date": 1696036873317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,8 @@\n                     </Button>\n                     <Button variant=\"contained\" color=\"secondary\" onClick={() => setIsDisabled(false)}>\n                       Save\n                     </Button>\n-\n                   </Box>\n                 </Grid>\n               </Grid>\n             </form>\n"
+                },
+                {
+                    "date": 1696036961683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n                   <Box display=\"flex\" gap={2}>\n                     <Button variant=\"contained\" component={Link} to=\"/categories\">\n                       Back\n                     </Button>\n-                    <Button variant=\"contained\" color=\"secondary\" onClick={() => setIsDisabled(false)}>\n+                    <Button variant=\"contained\" color=\"secondary\" disabled={isDisabled}>\n                       Save\n                     </Button>\n                   </Box>\n                 </Grid>\n"
+                },
+                {
+                    "date": 1696037023060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n             <Typography variant=\"h4\">Edit Category</Typography>\n           </Box>\n           <Box p={2}>\n             <form>\n-              <Grid container spacing={3}>\\\n+              <Grid container spacing={3}>\n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n                       label=\"Category Name\"\n"
+                },
+                {
+                    "date": 1696038674021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, Button, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n+import { Box, Button, FormControl, FormControlLabel, FormGroup, Grid, Paper, Switch, TextField, Typography } from '@mui/material'\n import React, { useState } from 'react'\n import { Link, useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n@@ -58,8 +58,24 @@\n                     />\n                   </FormControl>\n                 </Grid>\n                 <Grid item xs={12}>\n+                  <FormGroup>\n+                    <FormControlLabel\n+                      control={\n+                        <Switch\n+                          checked={category.is_active}\n+                          onChange={handleChange}\n+                          name=\"is_active\"\n+                          color=\"secondary\"\n+                          checked={category.is_active}\n+                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n+                      }\n+                      label=\"Active\"\n+                    />\n+                  </FormGroup>\n+                </Grid>\n+                <Grid item xs={12}>\n                   <Box display=\"flex\" gap={2}>\n                     <Button variant=\"contained\" component={Link} to=\"/categories\">\n                       Back\n                     </Button>\n"
+                },
+                {
+                    "date": 1696038691374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n                           onChange={handleChange}\n                           name=\"is_active\"\n                           color=\"secondary\"\n                           checked={category.is_active}\n-                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n+                          inputProps={{ 'aria-label': 'secondary checkbox' }} />\n                       }\n                       label=\"Active\"\n                     />\n                   </FormGroup>\n"
+                },
+                {
+                    "date": 1696038718004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,10 +66,10 @@\n                           checked={category.is_active}\n                           onChange={handleChange}\n                           name=\"is_active\"\n                           color=\"secondary\"\n-                          checked={category.is_active}\n-                          inputProps={{ 'aria-label': 'secondary checkbox' }} />\n+                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n+                        />\n                       }\n                       label=\"Active\"\n                     />\n                   </FormGroup>\n"
+                },
+                {
+                    "date": 1696038730371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,20 +46,9 @@\n                     />\n                   </FormControl>\n                 </Grid>\n \n-\n                 <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      label=\"Category description\"\n-                      value={category.description}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n-                <Grid item xs={12}>\n                   <FormGroup>\n                     <FormControlLabel\n                       control={\n                         <Switch\n"
+                },
+                {
+                    "date": 1696038955468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n               <Grid container spacing={3}>\n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n-                      label=\"Category Name\"\n+                      label=\"Name\"\n                       value={category.name}\n                       disabled={isDisabled}\n                       onChange={handleChange}\n                     />\n"
+                },
+                {
+                    "date": 1696038966537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,10 @@\n               <Grid container spacing={3}>\n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n+                      required\n+                      name=\"name\"\n                       label=\"Name\"\n                       value={category.name}\n                       disabled={isDisabled}\n                       onChange={handleChange}\n"
+                },
+                {
+                    "date": 1696038988103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,11 @@\n \n                 <Grid item xs={12}>\n                   <FormControl fullWidth>\n                     <TextField\n-                      label=\"Category description\"\n+                      required\n+                      name=\"description\"\n+                      label=\"Description\"\n                       value={category.description}\n                       disabled={isDisabled}\n                       onChange={handleChange}\n                     />\n"
+                },
+                {
+                    "date": 1696039075974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,10 @@\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [isLoading, setIsLoading] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n+  console.log(category)\n+\n   const handleChange = (e: any) => {\n \n   }\n   return (\n"
+                },
+                {
+                    "date": 1696039083958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [isLoading, setIsLoading] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n-  console.log(category)\n+  console.log(`category`, category)\n \n   const handleChange = (e: any) => {\n \n   }\n"
                 }
             ],
             "date": 1695855765191,
