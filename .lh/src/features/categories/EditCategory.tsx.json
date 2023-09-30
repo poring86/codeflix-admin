@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 36,
+            "activePatchIndex": 39,
             "patches": [
                 {
                     "date": 1695855765191,
@@ -152,6 +152,18 @@
                 {
                     "date": 1696039083958,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [isLoading, setIsLoading] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n-  console.log(category)\n+  console.log(`category`, category)\n \n   const handleChange = (e: any) => {\n \n   }\n"
+                },
+                {
+                    "date": 1696042363451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const [isDisabled, setIsDisabled] = useState(false)\n-  const [isLoading, setIsLoading] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n   console.log(`category`, category)\n \n"
+                },
+                {
+                    "date": 1696093681983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import React, { useState } from 'react'\n import { Link, useParams } from 'react-router-dom'\n import { useAppSelector } from '../../app/hooks'\n import { selectCategoryById } from './categorySlice'\n+import CategoryForm from './components/CategoryForm'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const [isDisabled, setIsDisabled] = useState(false)\n@@ -20,69 +21,15 @@\n         <Box p={2}>\n           <Box mb={2}>\n             <Typography variant=\"h4\">Edit Category</Typography>\n           </Box>\n-          <Box p={2}>\n-            <form>\n-              <Grid container spacing={3}>\n-                <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      required\n-                      name=\"name\"\n-                      label=\"Name\"\n-                      value={category.name}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n-\n-\n-\n-                <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      required\n-                      name=\"description\"\n-                      label=\"Description\"\n-                      value={category.description}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n-\n-                <Grid item xs={12}>\n-                  <FormGroup>\n-                    <FormControlLabel\n-                      control={\n-                        <Switch\n-                          checked={category.is_active}\n-                          onChange={handleChange}\n-                          name=\"is_active\"\n-                          color=\"secondary\"\n-                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n-                        />\n-                      }\n-                      label=\"Active\"\n-                    />\n-                  </FormGroup>\n-                </Grid>\n-                <Grid item xs={12}>\n-                  <Box display=\"flex\" gap={2}>\n-                    <Button variant=\"contained\" component={Link} to=\"/categories\">\n-                      Back\n-                    </Button>\n-                    <Button variant=\"contained\" color=\"secondary\" disabled={isDisabled}>\n-                      Save\n-                    </Button>\n-                  </Box>\n-                </Grid>\n-              </Grid>\n-            </form>\n-\n-          </Box>\n+          <CategoryForm\n+            category={category}\n+            isDisabled={isDisabled}\n+            isLoading={false}\n+            handleSubmit={() => { }}\n+            handleChange={handleChange}\n+            handleToggle={handleToggle} />\n         </Box>\n       </Paper>\n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1696093704225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n   const id = useParams().id || \"\"\n   const [isDisabled, setIsDisabled] = useState(false)\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n \n-  console.log(`category`, category)\n-\n   const handleChange = (e: any) => {\n+  }\n \n+  const handleToggle = (e: any) => {\n   }\n   return (\n     <Box>\n       <Paper>\n@@ -27,9 +27,10 @@\n             isDisabled={isDisabled}\n             isLoading={false}\n             handleSubmit={() => { }}\n             handleChange={handleChange}\n-            handleToggle={handleToggle} />\n+            handleToggle={handleToggle}\n+          />\n         </Box>\n       </Paper>\n     </Box>\n   )\n"
                 }
             ],
             "date": 1695855765191,

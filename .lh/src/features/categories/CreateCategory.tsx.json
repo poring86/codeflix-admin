@@ -3,11 +3,83 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1695855701445,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696042684025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,82 @@\n+import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import React from 'react'\n \n export const CreateCategory = () => {\n+  const [isDisabled, setIsDisabled] = useState(false)\n+\n+  const handleChange = (e: any) => {\n+\n+  }\n   return (\n-    <div>CreateCategory</div>\n+    <Box>\n+      <Paper>\n+        <Box p={2}>\n+          <Box mb={2}>\n+            <Typography variant=\"h4\">Edit Category</Typography>\n+          </Box>\n+          <Box p={2}>\n+            <form>\n+              <Grid container spacing={3}>\n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      required\n+                      name=\"name\"\n+                      label=\"Name\"\n+                      value={category.name}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n+                    />\n+                  </FormControl>\n+                </Grid>\n+\n+\n+\n+                <Grid item xs={12}>\n+                  <FormControl fullWidth>\n+                    <TextField\n+                      required\n+                      name=\"description\"\n+                      label=\"Description\"\n+                      value={category.description}\n+                      disabled={isDisabled}\n+                      onChange={handleChange}\n+                    />\n+                  </FormControl>\n+                </Grid>\n+\n+                <Grid item xs={12}>\n+                  <FormGroup>\n+                    <FormControlLabel\n+                      control={\n+                        <Switch\n+                          checked={category.is_active}\n+                          onChange={handleChange}\n+                          name=\"is_active\"\n+                          color=\"secondary\"\n+                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n+                        />\n+                      }\n+                      label=\"Active\"\n+                    />\n+                  </FormGroup>\n+                </Grid>\n+                <Grid item xs={12}>\n+                  <Box display=\"flex\" gap={2}>\n+                    <Button variant=\"contained\" component={Link} to=\"/categories\">\n+                      Back\n+                    </Button>\n+                    <Button variant=\"contained\" color=\"secondary\" disabled={isDisabled}>\n+                      Save\n+                    </Button>\n+                  </Box>\n+                </Grid>\n+              </Grid>\n+            </form>\n+\n+          </Box>\n+        </Box>\n+      </Paper>\n+    </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1696042698273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n-import React from 'react'\n+import { useState } from 'react'\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n"
+                },
+                {
+                    "date": 1696042746797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,10 @@\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n+  const [category, setCategory] = useState(false)\n+\n   const handleChange = (e: any) => {\n \n   }\n   return (\n"
+                },
+                {
+                    "date": 1696079125851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     <Box>\n       <Paper>\n         <Box p={2}>\n           <Box mb={2}>\n-            <Typography variant=\"h4\">Edit Category</Typography>\n+            <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n           <Box p={2}>\n             <form>\n               <Grid container spacing={3}>\n"
+                },
+                {
+                    "date": 1696079180372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n-  const [category, setCategory] = useState(false)\n+  const [category, setCategory] = useState<Category>(false)\n \n   const handleChange = (e: any) => {\n \n   }\n"
+                },
+                {
+                    "date": 1696079211708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n+import { Category } from './categorySlice'\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n"
+                },
+                {
+                    "date": 1696079258237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,15 @@\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n-  const [category, setCategory] = useState<Category>(false)\n+  const [category, setCategory] = useState<Category>({\n+    id: \"\",\n+    name: \"\",\n+    description: \"\",\n+    is_active: false,\n+    created_at: \"\",\n+  })\n \n   const handleChange = (e: any) => {\n \n   }\n"
+                },
+                {
+                    "date": 1696079420691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,15 +4,9 @@\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n-  const [category, setCategory] = useState<Category>({\n-    id: \"\",\n-    name: \"\",\n-    description: \"\",\n-    is_active: false,\n-    created_at: \"\",\n-  })\n+  const [category, setCategory] = useState<Category>()\n \n   const handleChange = (e: any) => {\n \n   }\n"
+                },
+                {
+                    "date": 1696079449122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,16 @@\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n-  const [category, setCategory] = useState<Category>()\n+  const [category, setCategory] = useState<Category>({\n+    id: \"\",\n+    name: \"\",\n+    description: \"\",\n+    is_active: false,\n+    created_at: \"\",\n+    delete_at: \"\",\n+  })\n \n   const handleChange = (e: any) => {\n \n   }\n"
+                },
+                {
+                    "date": 1696079481998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n     description: \"\",\n     is_active: false,\n     created_at: \"\",\n     delete_at: \"\",\n+    updated_at: \"\",\n   })\n \n   const handleChange = (e: any) => {\n \n"
+                },
+                {
+                    "date": 1696079525524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n     created_at: \"\",\n     delete_at: \"\",\n     updated_at: \"\",\n   })\n-\n   const handleChange = (e: any) => {\n \n   }\n   return (\n"
+                },
+                {
+                    "date": 1696093133243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,69 +23,16 @@\n         <Box p={2}>\n           <Box mb={2}>\n             <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n-          <Box p={2}>\n-            <form>\n-              <Grid container spacing={3}>\n-                <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      required\n-                      name=\"name\"\n-                      label=\"Name\"\n-                      value={category.name}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n \n-\n-\n-                <Grid item xs={12}>\n-                  <FormControl fullWidth>\n-                    <TextField\n-                      required\n-                      name=\"description\"\n-                      label=\"Description\"\n-                      value={category.description}\n-                      disabled={isDisabled}\n-                      onChange={handleChange}\n-                    />\n-                  </FormControl>\n-                </Grid>\n-\n-                <Grid item xs={12}>\n-                  <FormGroup>\n-                    <FormControlLabel\n-                      control={\n-                        <Switch\n-                          checked={category.is_active}\n-                          onChange={handleChange}\n-                          name=\"is_active\"\n-                          color=\"secondary\"\n-                          inputProps={{ 'aria-label': 'secondary checkbox' }}\n-                        />\n-                      }\n-                      label=\"Active\"\n-                    />\n-                  </FormGroup>\n-                </Grid>\n-                <Grid item xs={12}>\n-                  <Box display=\"flex\" gap={2}>\n-                    <Button variant=\"contained\" component={Link} to=\"/categories\">\n-                      Back\n-                    </Button>\n-                    <Button variant=\"contained\" color=\"secondary\" disabled={isDisabled}>\n-                      Save\n-                    </Button>\n-                  </Box>\n-                </Grid>\n-              </Grid>\n-            </form>\n-\n-          </Box>\n+          <CategoryForm\n+            category={category}\n+            isDisabled={isDisabled}\n+            isLoading={false}\n+            onSubmit={() => { }}\n+            handleChange={handleChange}\n+          />\n         </Box>\n       </Paper>\n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1696093141003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n import { Category } from './categorySlice'\n+import CategoryForm from './components/CategoryForm'\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n"
+                },
+                {
+                    "date": 1696093167515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n import { Category } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n+import { DragHandleTwoTone } from '@mui/icons-material'\n \n export const CreateCategory = () => {\n   const [isDisabled, setIsDisabled] = useState(false)\n \n@@ -31,8 +32,9 @@\n             isDisabled={isDisabled}\n             isLoading={false}\n             onSubmit={() => { }}\n             handleChange={handleChange}\n+            handleToggle={handleToggle}\n           />\n         </Box>\n       </Paper>\n     </Box>\n"
+                },
+                {
+                    "date": 1696093240947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,12 @@\n   })\n   const handleChange = (e: any) => {\n \n   }\n+\n+  const handleToggle = (e: any) => {\n+\n+  }\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n"
+                },
+                {
+                    "date": 1696093462218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n           <CategoryForm\n             category={category}\n             isDisabled={isDisabled}\n             isLoading={false}\n-            onSubmit={() => { }}\n+            handleSubmit={() => { }}\n             handleChange={handleChange}\n             handleToggle={handleToggle}\n           />\n         </Box>\n"
+                },
+                {
+                    "date": 1696093469973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,13 +16,11 @@\n     delete_at: \"\",\n     updated_at: \"\",\n   })\n   const handleChange = (e: any) => {\n-\n   }\n \n   const handleToggle = (e: any) => {\n-\n   }\n   return (\n     <Box>\n       <Paper>\n"
+                },
+                {
+                    "date": 1696093880350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     name: \"\",\n     description: \"\",\n     is_active: false,\n     created_at: \"\",\n-    delete_at: \"\",\n+    deleted_at: \"\",\n     updated_at: \"\",\n   })\n   const handleChange = (e: any) => {\n   }\n"
                 }
             ],
             "date": 1695855701445,

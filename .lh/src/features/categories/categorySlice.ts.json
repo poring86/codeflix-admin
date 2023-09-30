@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -60,6 +60,18 @@
                 {
                     "date": 1696039180059,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \n export const selectCategoryById = (state: RootState, id: string) => {\n   const category = state.categories.find((category) => category.id === id)\n \n-  console.log('category 2', category)\n+  console.log('category 2', id)\n \n   return (category ?? {\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1696079200337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\"\n import { RootState } from \"../../app/store\"\n \n-interface Category {\n+export interface Category {\n   id: string,\n   name: string,\n   description: string,\n   is_active: boolean,\n"
+                },
+                {
+                    "date": 1696093894843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   id: string,\n   name: string,\n   description: string,\n   is_active: boolean,\n-  delete_at: string | null,\n+  deleted_at: string | null,\n   created_at: string,\n   updated_at: string,\n }\n \n"
+                },
+                {
+                    "date": 1696093900860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   id: \"199183e2-5d97-11ee-8c99-0242ac120001\",\n   name: \"Olive\",\n   description: \"Earum quo at dolor tempore nisi.\",\n   is_active: true,\n-  delete_at: null,\n+  deleted_at: null,\n   created_at: \"2020-06-06T11:00:00+0000\",\n   updated_at: \"2020-06-06T11:00:00+0000\",\n }\n \n"
                 }
             ],
             "date": 1695861518172,
