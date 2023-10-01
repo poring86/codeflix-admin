@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAppSelector } from '../../app/hooks'
-import { selectCategories } from './categorySlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { deleteCategory, selectCategories } from './categorySlice'
 import { Box, Button, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 
 export const ListCategory = () => {
   const categories = useAppSelector(selectCategories)
+  const dispatch = useAppDispatch()
 
   const rows: GridRowsProp = categories.map((category) => ({
     id: category.id,
@@ -34,9 +35,13 @@ export const ListCategory = () => {
       field: 'createdAt', headerName: "Created At", flex: 1
     },
     {
-      field: 'id', headerName: "Actions", flex: 1, renderCell: renderActionCell
+      field: 'id', headerName: "Actions", flex: 1, renderCell: renderActionCell, type: "string"
     },
   ]
+
+  function handleDeleteCategory(id: string) {
+    dispatch(deleteCategory(id))
+  }
 
   function renderNameCell(rowData: GridRenderCellParams) {
     return (
@@ -48,7 +53,7 @@ export const ListCategory = () => {
 
   function renderActionCell(params: GridRenderCellParams) {
     return (
-      <IconButton color="secondary" onClick={() => console.log("isActiveCell")}>
+      <IconButton color="secondary" onClick={() => handleDeleteCategory(params.value)}>
         <DeleteIcon />
       </IconButton>
     )

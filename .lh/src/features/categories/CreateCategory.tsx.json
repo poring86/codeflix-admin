@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 18,
+            "activePatchIndex": 29,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -80,6 +80,50 @@
                 {
                     "date": 1696093880350,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     name: \"\",\n     description: \"\",\n     is_active: false,\n     created_at: \"\",\n-    delete_at: \"\",\n+    deleted_at: \"\",\n     updated_at: \"\",\n   })\n   const handleChange = (e: any) => {\n   }\n"
+                },
+                {
+                    "date": 1696167649287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,12 @@\n     created_at: \"\",\n     deleted_at: \"\",\n     updated_at: \"\",\n   })\n+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n+    e.preventDefault()\n+    dispatch(updateCategory(categoryState))\n+  }\n   const handleChange = (e: any) => {\n   }\n \n   const handleToggle = (e: any) => {\n"
+                },
+                {
+                    "date": 1696167663443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n-import { Category } from './categorySlice'\n+import { Category, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { DragHandleTwoTone } from '@mui/icons-material'\n \n export const CreateCategory = () => {\n"
+                },
+                {
+                    "date": 1696167691038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,12 @@\n import { useState } from 'react'\n import { Category, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { DragHandleTwoTone } from '@mui/icons-material'\n+import { useAppDispatch } from '../../app/hooks'\n \n export const CreateCategory = () => {\n+  const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n \n   const [category, setCategory] = useState<Category>({\n     id: \"\",\n"
+                },
+                {
+                    "date": 1696167713977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n+  const [categoryState, setCategoryState] = useState<Category>(category)\n \n   const [category, setCategory] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1696167736470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n-  const [categoryState, setCategoryState] = useState<Category>(category)\n+  const [categoryState, setCategoryState] = useState<Category>()\n \n   const [category, setCategory] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1696168526604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n           <CategoryForm\n             category={category}\n             isDisabled={isDisabled}\n             isLoading={false}\n-            handleSubmit={() => { }}\n+            handleSubmit={handleSubmit}\n             handleChange={handleChange}\n             handleToggle={handleToggle}\n           />\n         </Box>\n"
+                },
+                {
+                    "date": 1696168557738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,12 +22,16 @@\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n     dispatch(updateCategory(categoryState))\n   }\n-  const handleChange = (e: any) => {\n+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n+    const { name, value } = e.target\n+    setCategoryState({ ...categoryState, [name]: value })\n   }\n \n-  const handleToggle = (e: any) => {\n+  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {\n+    const { name, checked } = e.target\n+    setCategoryState({ ...categoryState, [name]: checked })\n   }\n   return (\n     <Box>\n       <Paper>\n"
+                },
+                {
+                    "date": 1696168621129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,17 @@\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n-  const [categoryState, setCategoryState] = useState<Category>()\n+  const [categoryState, setCategoryState] = useState<Category>({\n+    id: \"\",\n+    name: \"\",\n+    description: \"\",\n+    is_active: false,\n+    created_at: \"\",\n+    deleted_at: \"\",\n+    updated_at: \"\",\n+  })\n \n   const [category, setCategory] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1696169706310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,18 +16,8 @@\n     created_at: \"\",\n     deleted_at: \"\",\n     updated_at: \"\",\n   })\n-\n-  const [category, setCategory] = useState<Category>({\n-    id: \"\",\n-    name: \"\",\n-    description: \"\",\n-    is_active: false,\n-    created_at: \"\",\n-    deleted_at: \"\",\n-    updated_at: \"\",\n-  })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n     dispatch(updateCategory(categoryState))\n   }\n@@ -48,9 +38,9 @@\n             <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n \n           <CategoryForm\n-            category={category}\n+            category={categoryState}\n             isDisabled={isDisabled}\n             isLoading={false}\n             handleSubmit={handleSubmit}\n             handleChange={handleChange}\n"
+                },
+                {
+                    "date": 1696181856355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n     updated_at: \"\",\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n-    dispatch(updateCategory(categoryState))\n+    dispatch(createCategory(categoryState))\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
+                },
+                {
+                    "date": 1696182039755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n-import { Category, updateCategory } from './categorySlice'\n+import { Category, createCategory, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { DragHandleTwoTone } from '@mui/icons-material'\n import { useAppDispatch } from '../../app/hooks'\n \n"
                 }
             ],
             "date": 1695855701445,

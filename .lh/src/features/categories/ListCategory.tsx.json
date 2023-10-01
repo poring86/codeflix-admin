@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 40,
+            "activePatchIndex": 44,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -168,6 +168,22 @@
                 {
                     "date": 1696039226493,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n   ]\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n-      <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.value}`}>\n+      <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.id}`}>\n         <Typography color=\"primary\">{rowData.value}</Typography>\n       </Link>\n     )\n   }\n"
+                },
+                {
+                    "date": 1696183328738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import React from 'react'\n-import { useAppSelector } from '../../app/hooks'\n-import { selectCategories } from './categorySlice'\n+import { useAppDispatch, useAppSelector } from '../../app/hooks'\n+import { deleteCategory, selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n+  const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = categories.map((category) => ({\n     id: category.id,\n     name: category.name,\n@@ -33,12 +34,16 @@\n     {\n       field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n     {\n-      field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell\n+      field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell, type: 'string'\n     },\n   ]\n \n+  function handleDeleteCategory(id: string) {\n+    dispatch(deleteCategory(id))\n+  }\n+\n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n       <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.id}`}>\n         <Typography color=\"primary\">{rowData.value}</Typography>\n@@ -46,10 +51,11 @@\n     )\n   }\n \n   function renderActionCell(params: GridRenderCellParams) {\n+    const { id } = params\n     return (\n-      <IconButton color=\"secondary\" onClick={() => console.log(\"isActiveCell\")}>\n+      <IconButton color=\"secondary\" onClick={() => handleDeleteCategory(id)}>\n         <DeleteIcon />\n       </IconButton>\n     )\n   }\n"
+                },
+                {
+                    "date": 1696183340977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     {\n       field: 'createdAt', headerName: \"Created At\", flex: 1\n     },\n     {\n-      field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell, type: 'string'\n+      field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell, type: \"string\"\n     },\n   ]\n \n   function handleDeleteCategory(id: string) {\n"
+                },
+                {
+                    "date": 1696183379443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n \n   function renderActionCell(params: GridRenderCellParams) {\n     const { id } = params\n     return (\n-      <IconButton color=\"secondary\" onClick={() => handleDeleteCategory(id)}>\n+      <IconButton color=\"secondary\" onClick={() => handleDeleteCategory(params.value)}>\n         <DeleteIcon />\n       </IconButton>\n     )\n   }\n"
+                },
+                {
+                    "date": 1696183402654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,8 @@\n     )\n   }\n \n   function renderActionCell(params: GridRenderCellParams) {\n-    const { id } = params\n     return (\n       <IconButton color=\"secondary\" onClick={() => handleDeleteCategory(params.value)}>\n         <DeleteIcon />\n       </IconButton>\n"
                 }
             ],
             "date": 1695855743800,

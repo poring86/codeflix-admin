@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -72,6 +72,38 @@
                 {
                     "date": 1696093900860,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n   id: \"199183e2-5d97-11ee-8c99-0242ac120001\",\n   name: \"Olive\",\n   description: \"Earum quo at dolor tempore nisi.\",\n   is_active: true,\n-  delete_at: null,\n+  deleted_at: null,\n   created_at: \"2020-06-06T11:00:00+0000\",\n   updated_at: \"2020-06-06T11:00:00+0000\",\n }\n \n"
+                },
+                {
+                    "date": 1696115106642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,13 @@\n \n const categoriesSlice = createSlice({\n   name: \"categories\",\n   initialState,\n-  reducers: {}\n+  reducers: {\n+    updateCategory(state, action) {\n+      const index = state.findIndex((category) => category.id === action.payload.id)\n+    }\n+  }\n })\n \n // Selectors\n export const selectCategories = (state: RootState) => state.categories\n"
+                },
+                {
+                    "date": 1696115183834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,10 @@\n   initialState,\n   reducers: {\n     updateCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n+\n+      state[index] = action.payload\n     }\n   }\n })\n \n"
+                },
+                {
+                    "date": 1696116365925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,5 +62,7 @@\n     updated_at: \"\",\n   })\n }\n \n-export default categoriesSlice.reducer\n\\ No newline at end of file\n+export default categoriesSlice.reducer\n+\n+export default categoriesSlice.actions\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696161565996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,5 +64,5 @@\n }\n \n export default categoriesSlice.reducer\n \n-export default categoriesSlice.actions\n\\ No newline at end of file\n+export const { updateCategory } = categorySlice.actions\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696181899197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,13 @@\n     updateCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n \n       state[index] = action.payload\n+    },\n+    createCategory(state, action) {\n+      const index = state.findIndex((category) => category.id === action.payload.id)\n+\n+      state[index] = action.payload\n     }\n   }\n })\n \n@@ -64,5 +69,5 @@\n }\n \n export default categoriesSlice.reducer\n \n-export const { updateCategory } = categorySlice.actions\n\\ No newline at end of file\n+export const { updateCategory, createCategory } = categoriesSlice.actions\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696182018996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,9 @@\n \n       state[index] = action.payload\n     },\n     createCategory(state, action) {\n-      const index = state.findIndex((category) => category.id === action.payload.id)\n-\n-      state[index] = action.payload\n+      state.push(action.payload)\n     }\n   }\n })\n \n"
+                },
+                {
+                    "date": 1696183007961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,8 +42,13 @@\n       state[index] = action.payload\n     },\n     createCategory(state, action) {\n       state.push(action.payload)\n+    },\n+    deleteCategory(state, action) {\n+      const index = state.findIndex((category) => category.id === action.payload.id)\n+\n+      state[index] = action.payload\n     }\n   }\n })\n \n@@ -67,5 +72,5 @@\n }\n \n export default categoriesSlice.reducer\n \n-export const { updateCategory, createCategory } = categoriesSlice.actions\n\\ No newline at end of file\n+export const { updateCategory, createCategory, deleteCategory } = categoriesSlice.actions\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1696183702814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n     },\n     deleteCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n \n-      state[index] = action.payload\n+      state.splice(index, 1)\n     }\n   }\n })\n \n"
                 }
             ],
             "date": 1695861518172,
