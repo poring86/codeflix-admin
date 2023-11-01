@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 49,
+            "activePatchIndex": 53,
             "patches": [
                 {
                     "date": 1695855765191,
@@ -204,6 +204,22 @@
                 {
                     "date": 1696161952260,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n           <Box mb={2}>\n             <Typography variant=\"h4\">Edit Category</Typography>\n           </Box>\n           <CategoryForm\n-            category={category}\n+            category={categoryState}\n             isDisabled={isDisabled}\n             isLoading={false}\n             handleSubmit={handleSubmit}\n             handleChange={handleChange}\n"
+                },
+                {
+                    "date": 1698843778522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, Button, FormControl, FormControlLabel, FormGroup, Grid, Paper, Switch, TextField, Typography } from '@mui/material'\n+import { Box, Paper, Typography } from '@mui/material'\n import React, { useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n import { Category, selectCategoryById, updateCategory } from './categorySlice'\n"
+                },
+                {
+                    "date": 1698843793306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { Box, Paper, Typography } from '@mui/material'\n import React, { useState } from 'react'\n import { useParams } from 'react-router-dom'\n+import { useSnackbar } from 'notistack'\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n import { Category, selectCategoryById, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n \n"
+                },
+                {
+                    "date": 1698843846032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   const id = useParams().id || \"\"\n   const category = useAppSelector((state) => selectCategoryById(state, id))\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [categoryState, setCategoryState] = useState<Category>(category)\n+  const { enqueueSnackbar } = useSnackbar()\n   const dispatch = useAppDispatch()\n \n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n"
+                },
+                {
+                    "date": 1698843893131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n \n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n     dispatch(updateCategory(categoryState))\n+    enqueueSnackbar(\"Success updating a category!\", { variant: \"success\" })\n   }\n \n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n"
                 }
             ],
             "date": 1695855765191,

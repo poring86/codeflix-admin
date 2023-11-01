@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 29,
+            "activePatchIndex": 35,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -124,6 +124,30 @@
                 {
                     "date": 1696182039755,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n-import { Category, updateCategory } from './categorySlice'\n+import { Category, createCategory, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { DragHandleTwoTone } from '@mui/icons-material'\n import { useAppDispatch } from '../../app/hooks'\n \n"
+                },
+                {
+                    "date": 1696184191808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n     updated_at: \"\",\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n-    dispatch(createCategory(categoryState))\n+    dispatch(createCategory(...categoryState))\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
+                },
+                {
+                    "date": 1696184287234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { Category, createCategory, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { DragHandleTwoTone } from '@mui/icons-material'\n import { useAppDispatch } from '../../app/hooks'\n+import { v4 as uuidv4 } from 'uuid';\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n@@ -18,9 +19,9 @@\n     updated_at: \"\",\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n-    dispatch(createCategory(...categoryState))\n+    dispatch(createCategory({ id: uuidv4(), ...categoryState }))\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
+                },
+                {
+                    "date": 1696184307186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     updated_at: \"\",\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n-    dispatch(createCategory({ id: uuidv4(), ...categoryState }))\n+    dispatch(createCategory({ ...categoryState, id: uuidv4() }))\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
+                },
+                {
+                    "date": 1698844172042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n import { useState } from 'react'\n import { Category, createCategory, updateCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n-import { DragHandleTwoTone } from '@mui/icons-material'\n import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n \n export const CreateCategory = () => {\n"
+                },
+                {
+                    "date": 1698844185843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n-import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'\n+import { Box, Paper, Typography } from '@mui/material'\n import { useState } from 'react'\n-import { Category, createCategory, updateCategory } from './categorySlice'\n+import { Category, createCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n \n"
+                },
+                {
+                    "date": 1698846552043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { Category, createCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n+import { enqueueSnackbar } from 'notistack'\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n@@ -19,8 +20,9 @@\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n     dispatch(createCategory({ ...categoryState, id: uuidv4() }))\n+    enqueueSnackbar(\"Success creating a category!\", { variant: \"success\" })\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
                 }
             ],
             "date": 1695855701445,

@@ -1,9 +1,10 @@
-import { Box, FormControl, Grid, Paper, TextField, Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import { useState } from 'react'
-import { Category, createCategory, updateCategory } from './categorySlice'
+import { Category, createCategory } from './categorySlice'
 import CategoryForm from './components/CategoryForm'
-import { DragHandleTwoTone } from '@mui/icons-material'
 import { useAppDispatch } from '../../app/hooks'
+import { v4 as uuidv4 } from 'uuid';
+import { enqueueSnackbar } from 'notistack'
 
 export const CreateCategory = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +20,8 @@ export const CreateCategory = () => {
   })
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
-    dispatch(createCategory(categoryState))
+    dispatch(createCategory({ ...categoryState, id: uuidv4() }))
+    enqueueSnackbar("Success creating a category!", { variant: "success" })
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 35,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -148,6 +148,26 @@
                 {
                     "date": 1696030660322,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,8 @@\n     <ThemeProvider theme={appTheme}>\n       <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n         <Header />\n         <Layout>\n-          <Typography variant=\"h1\" component=\"h1\">\n-            News\n-          </Typography>\n           <Routes>\n             <Route path=\"/\" element={<ListCategory />} />\n             <Route path=\"/categories\" element={<ListCategory />} />\n             <Route path=\"/categories/create\" element={<CreateCategory />} />\n"
+                },
+                {
+                    "date": 1696185669469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,33 +5,36 @@\n import { Route, Routes } from 'react-router-dom'\n import { ListCategory } from './features/categories/ListCategory'\n import { CreateCategory } from './features/categories/CreateCategory'\n import { EditCategory } from './features/categories/EditCategory'\n+import { SnackbarProvider } from 'notistack'\n \n \n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n-        <Header />\n-        <Layout>\n-          <Routes>\n-            <Route path=\"/\" element={<ListCategory />} />\n-            <Route path=\"/categories\" element={<ListCategory />} />\n-            <Route path=\"/categories/create\" element={<CreateCategory />} />\n-            <Route path=\"/categories/edit/:id\" element={<EditCategory />} />\n-            <Route path=\"*\" element={\n-              <Box sx={{ color: 'white' }}>\n-                <Typography variant=\"h1\" component=\"h1\">\n-                  404\n-                </Typography>\n-                <Typography variant=\"h1\" component=\"h1\">\n-                  Page not found\n-                </Typography>\n-              </Box>} />\n-          </Routes>\n-        </Layout>\n-      </Box>\n+      <SnackbarProvider>\n+        <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n+          <Header />\n+          <Layout>\n+            <Routes>\n+              <Route path=\"/\" element={<ListCategory />} />\n+              <Route path=\"/categories\" element={<ListCategory />} />\n+              <Route path=\"/categories/create\" element={<CreateCategory />} />\n+              <Route path=\"/categories/edit/:id\" element={<EditCategory />} />\n+              <Route path=\"*\" element={\n+                <Box sx={{ color: 'white' }}>\n+                  <Typography variant=\"h1\" component=\"h1\">\n+                    404\n+                  </Typography>\n+                  <Typography variant=\"h1\" component=\"h1\">\n+                    Page not found\n+                  </Typography>\n+                </Box>} />\n+            </Routes>\n+          </Layout>\n+        </Box>\n+      </SnackbarProvider>\n     </ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1696185685251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <SnackbarProvider>\n+      <SnackbarProvider maxSnack={3}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n           <Header />\n           <Layout>\n             <Routes>\n"
+                },
+                {
+                    "date": 1696190792895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,12 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <SnackbarProvider maxSnack={3}>\n+      <SnackbarProvider maxSnack={3} onchorOrigin={{\n+        vertical: \"top\",\n+        right: \"right\"\n+      }}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n           <Header />\n           <Layout>\n             <Routes>\n"
+                },
+                {
+                    "date": 1696190824510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n export default function App() {\n   return (\n \n     <ThemeProvider theme={appTheme}>\n-      <SnackbarProvider maxSnack={3} onchorOrigin={{\n+      <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n         right: \"right\"\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n"
+                },
+                {
+                    "date": 1696190831792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n     <ThemeProvider theme={appTheme}>\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n-        right: \"right\"\n+        horizontal: \"right\"\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n           <Header />\n           <Layout>\n"
                 }
             ],
             "date": 1695757259942,

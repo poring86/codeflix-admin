@@ -25,7 +25,7 @@ const categories = [
   category,
   { ...category, id: "199183e2-5d97-11ee-8c99-0242ac120002", name: "Peach" },
   { ...category, id: "199183e2-5d97-11ee-8c99-0242ac120003", name: "Apple" },
-  { ...category, id: "199183e2-5d97-11ee-8c99-0242ac120003", name: "Banana" },
+  { ...category, id: "199183e2-5d97-11ee-8c99-0242ac120004", name: "Banana" },
 ]
 
 export const initialState = [
@@ -42,6 +42,7 @@ const categoriesSlice = createSlice({
       state[index] = action.payload
     },
     createCategory(state, action) {
+      console.log('action.payload', action.payload)
       state.push(action.payload)
     },
     deleteCategory(state, action) {

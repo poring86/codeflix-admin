@@ -4,6 +4,7 @@ import { deleteCategory, selectCategories } from './categorySlice'
 import { Box, Button, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'
+import { enqueueSnackbar } from 'notistack'
 import { Link } from 'react-router-dom'
 
 export const ListCategory = () => {
@@ -41,6 +42,7 @@ export const ListCategory = () => {
 
   function handleDeleteCategory(id: string) {
     dispatch(deleteCategory(id))
+    enqueueSnackbar("Category deleted successfully!", { variant: "warning" })
   }
 
   function renderNameCell(rowData: GridRenderCellParams) {

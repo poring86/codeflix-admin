@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 44,
+            "activePatchIndex": 47,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -184,6 +184,18 @@
                 {
                     "date": 1696183402654,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,8 @@\n     )\n   }\n \n   function renderActionCell(params: GridRenderCellParams) {\n-    const { id } = params\n     return (\n       <IconButton color=\"secondary\" onClick={() => handleDeleteCategory(params.value)}>\n         <DeleteIcon />\n       </IconButton>\n"
+                },
+                {
+                    "date": 1698846788842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,9 @@\n   ]\n \n   function handleDeleteCategory(id: string) {\n     dispatch(deleteCategory(id))\n+    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"success\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n"
+                },
+                {
+                    "date": 1698846813669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { deleteCategory, selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n+import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const categories = useAppSelector(selectCategories)\n"
+                },
+                {
+                    "date": 1698846902591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n   ]\n \n   function handleDeleteCategory(id: string) {\n     dispatch(deleteCategory(id))\n-    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"success\" })\n+    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n"
                 }
             ],
             "date": 1695855743800,

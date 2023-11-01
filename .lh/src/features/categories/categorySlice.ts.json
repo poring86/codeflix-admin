@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 24,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -104,6 +104,18 @@
                 {
                     "date": 1696183702814,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n     },\n     deleteCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n \n-      state[index] = action.payload\n+      state.splice(index, 1)\n     }\n   }\n })\n \n"
+                },
+                {
+                    "date": 1696184423284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,9 @@\n \n       state[index] = action.payload\n     },\n     createCategory(state, action) {\n+      console.log(action.payload)\n       state.push(action.payload)\n     },\n     deleteCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n"
+                },
+                {
+                    "date": 1696184438703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \n       state[index] = action.payload\n     },\n     createCategory(state, action) {\n-      console.log(action.payload)\n+      console.log('action.payload', action.payload)\n       state.push(action.payload)\n     },\n     deleteCategory(state, action) {\n       const index = state.findIndex((category) => category.id === action.payload.id)\n"
+                },
+                {
+                    "date": 1696184519826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n const categories = [\n   category,\n   { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120002\", name: \"Peach\" },\n   { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120003\", name: \"Apple\" },\n-  { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120003\", name: \"Banana\" },\n+  { ...category, id: \"199183e2-5d97-11ee-8c99-0242ac120004\", name: \"Banana\" },\n ]\n \n export const initialState = [\n   ...categories\n"
                 }
             ],
             "date": 1695861518172,
