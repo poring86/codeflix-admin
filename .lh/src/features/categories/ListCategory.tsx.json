@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 63,
+            "activePatchIndex": 64,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -260,6 +260,10 @@
                 {
                     "date": 1699049106485,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n+import { useEffect } from 'react'\n \n export const ListCategory = () => {\n   const { data, isFetching, error } = useGetCategoriesQuery()\n   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n@@ -42,11 +43,21 @@\n   ]\n \n   async function handleDeleteCategory(id: string) {\n     await deleteCategory({ id })\n-    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n+  useEffect(() => {\n+    if (deleteCategoryStatus.isSuccess) {\n+      enqueueSnackbar(\"Category deleted\", { variant: \"success\" })\n+    }\n+    if (deleteCategoryStatus.error) {\n+      enqueueSnackbar(\"Category not deleted\", { variant: \"error\" })\n+    }\n+  })\n+\n+\n+\n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n       <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.id}`}>\n         <Typography color=\"primary\">{rowData.value}</Typography>\n"
+                },
+                {
+                    "date": 1699050226134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { Link } from 'react-router-dom'\n import { useEffect } from 'react'\n \n export const ListCategory = () => {\n-  const { data, isFetching, error } = useGetCategoriesQuery()\n+  const { data } = useGetCategoriesQuery()\n   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n"
                 }
             ],
             "date": 1695855743800,

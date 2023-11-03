@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 
 export const ListCategory = () => {
-  const { data, isFetching, error } = useGetCategoriesQuery()
+  const { data } = useGetCategoriesQuery()
   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()
   const categories = useAppSelector(selectCategories)
   const dispatch = useAppDispatch()
