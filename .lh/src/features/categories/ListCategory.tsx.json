@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 47,
+            "activePatchIndex": 63,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -196,6 +196,70 @@
                 {
                     "date": 1698846902591,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n   ]\n \n   function handleDeleteCategory(id: string) {\n     dispatch(deleteCategory(id))\n-    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"success\" })\n+    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n"
+                },
+                {
+                    "date": 1698847049918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-import React from 'react'\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n import { deleteCategory, selectCategories } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n"
+                },
+                {
+                    "date": 1698938778441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n-import { deleteCategory, selectCategories } from './categorySlice'\n+import { deleteCategory, selectCategories, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n+  const { data, isFetching, error } = useGetCategoriesQuery()\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = categories.map((category) => ({\n"
+                },
+                {
+                    "date": 1699039100747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n-  const { data, isFetching, error } = useGetCategoriesQuery()\n+  // const { data, isFetching, error } = useGetCategoriesQuery()\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = categories.map((category) => ({\n"
+                },
+                {
+                    "date": 1699039154544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n-  // const { data, isFetching, error } = useGetCategoriesQuery()\n+  const { data, isFetching, error } = useGetCategoriesQuery()\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = categories.map((category) => ({\n"
+                },
+                {
+                    "date": 1699045617418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const { data, isFetching, error } = useGetCategoriesQuery()\n+  console.log('data', data)\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = categories.map((category) => ({\n"
+                },
+                {
+                    "date": 1699045678508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   console.log('data', data)\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n-  const rows: GridRowsProp = categories.map((category) => ({\n+  const rows: GridRowsProp = data.data.map((category) => ({\n     id: category.id,\n     name: category.name,\n     description: category.description,\n     isActive: category.is_active,\n"
+                },
+                {
+                    "date": 1699045714432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   console.log('data', data)\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n-  const rows: GridRowsProp = data.data.map((category) => ({\n+  const rows: GridRowsProp = data ? data.data.map((category) => ({\n     id: category.id,\n     name: category.name,\n     description: category.description,\n     isActive: category.is_active,\n"
+                },
+                {
+                    "date": 1699045724544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     name: category.name,\n     description: category.description,\n     isActive: category.is_active,\n     createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')\n-  }))\n+  })) : []\n \n   const componentsProps = {\n     toolbar: {\n       showQuickFilter: true,\n"
+                },
+                {
+                    "date": 1699048327864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const { data, isFetching, error } = useGetCategoriesQuery()\n-  console.log('data', data)\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = data ? data.data.map((category) => ({\n"
+                },
+                {
+                    "date": 1699048397080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n-import { deleteCategory, selectCategories, useGetCategoriesQuery } from './categorySlice'\n+import { deleteCategory, selectCategories, useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n \n export const ListCategory = () => {\n   const { data, isFetching, error } = useGetCategoriesQuery()\n+  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n   const categories = useAppSelector(selectCategories)\n   const dispatch = useAppDispatch()\n \n   const rows: GridRowsProp = data ? data.data.map((category) => ({\n"
+                },
+                {
+                    "date": 1699048500362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,10 +40,10 @@\n       field: 'id', headerName: \"Actions\", flex: 1, renderCell: renderActionCell, type: \"string\"\n     },\n   ]\n \n-  function handleDeleteCategory(id: string) {\n-    dispatch(deleteCategory(id))\n+  async function handleDeleteCategory(id: string) {\n+    deleteCategory({ variables: id })\n     enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n"
+                },
+                {
+                    "date": 1699048517297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     },\n   ]\n \n   async function handleDeleteCategory(id: string) {\n-    deleteCategory({ variables: id })\n+    deleteCategory({ variables: { id } })\n     enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n"
+                },
+                {
+                    "date": 1699048754287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     },\n   ]\n \n   async function handleDeleteCategory(id: string) {\n-    deleteCategory({ variables: { id } })\n+    deleteCategory({ id })\n     enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n"
+                },
+                {
+                    "date": 1699048770339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     },\n   ]\n \n   async function handleDeleteCategory(id: string) {\n-    deleteCategory({ id })\n+    await deleteCategory({ id })\n     enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n   function renderNameCell(rowData: GridRenderCellParams) {\n"
+                },
+                {
+                    "date": 1699048820350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { useAppDispatch, useAppSelector } from '../../app/hooks'\n-import { deleteCategory, selectCategories, useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n+import { selectCategories, useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, IconButton, Typography } from '@mui/material'\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { enqueueSnackbar } from 'notistack'\n"
+                },
+                {
+                    "date": 1699049106485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import DeleteIcon from '@mui/icons-material/Delete'\n import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'\n import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n+import { useEffect } from 'react'\n \n export const ListCategory = () => {\n   const { data, isFetching, error } = useGetCategoriesQuery()\n   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n@@ -42,11 +43,21 @@\n   ]\n \n   async function handleDeleteCategory(id: string) {\n     await deleteCategory({ id })\n-    enqueueSnackbar(\"Category deleted successfully!\", { variant: \"warning\" })\n   }\n \n+  useEffect(() => {\n+    if (deleteCategoryStatus.isSuccess) {\n+      enqueueSnackbar(\"Category deleted\", { variant: \"success\" })\n+    }\n+    if (deleteCategoryStatus.error) {\n+      enqueueSnackbar(\"Category not deleted\", { variant: \"error\" })\n+    }\n+  })\n+\n+\n+\n   function renderNameCell(rowData: GridRenderCellParams) {\n     return (\n       <Link style={{ textDecoration: \"none\" }} to={`/categories/edit/${rowData.id}`}>\n         <Typography color=\"primary\">{rowData.value}</Typography>\n"
                 }
             ],
             "date": 1695855743800,

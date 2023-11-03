@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/features/api/apiSlice.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1698928631609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1698928906174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\n+\n const baseURL = 'http://localhost:8000/api'\n \n export const pokemonApi = createApi({\n     reducerPath: 'pokemonApi',\n"
+                },
+                {
+                    "date": 1698928974578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\n \n const baseURL = 'http://localhost:8000/api'\n \n-export const pokemonApi = createApi({\n-    reducerPath: 'pokemonApi',\n+export const apiSlice = createApi({\n+    reducerPath: 'api',\n+    tagTypes: [\"Categories\"],\n     baseQuery: fetchBaseQuery({ baseUrl: 'http://' })\n })\n"
+                },
+                {
+                    "date": 1698929761796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,9 @@\n \n export const apiSlice = createApi({\n     reducerPath: 'api',\n     tagTypes: [\"Categories\"],\n-    baseQuery: fetchBaseQuery({ baseUrl: 'http://' })\n+    endpoints: (builder) => ({\n+\n+    }),\n+    baseQuery: fetchBaseQuery(baseURL),\n })\n"
+                },
+                {
+                    "date": 1698929770509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n     tagTypes: [\"Categories\"],\n     endpoints: (builder) => ({\n \n     }),\n-    baseQuery: fetchBaseQuery(baseURL),\n+    baseQuery: fetchBaseQuery(baseUrl),\n })\n"
+                },
+                {
+                    "date": 1698929806866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n     tagTypes: [\"Categories\"],\n     endpoints: (builder) => ({\n \n     }),\n-    baseQuery: fetchBaseQuery(baseUrl),\n+    baseQuery: fetchBaseQuery({ baseURL }),\n })\n"
+                },
+                {
+                    "date": 1698929854136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\n \n-const baseURL = 'http://localhost:8000/api'\n+const baseUrl = 'http://localhost:8000/api'\n \n export const apiSlice = createApi({\n     reducerPath: 'api',\n     tagTypes: [\"Categories\"],\n     endpoints: (builder) => ({\n \n     }),\n-    baseQuery: fetchBaseQuery({ baseURL }),\n+    baseQuery: fetchBaseQuery({ baseUrl }),\n })\n"
+                },
+                {
+                    "date": 1698931174833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,7 @@\n export const apiSlice = createApi({\n     reducerPath: 'api',\n     tagTypes: [\"Categories\"],\n     endpoints: (builder) => ({\n-\n     }),\n     baseQuery: fetchBaseQuery({ baseUrl }),\n })\n"
+                },
+                {
+                    "date": 1699035941509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\n \n-const baseUrl = 'http://localhost:8000/api'\n+export const baseUrl = \"http://localhost:8000/api\";\n \n export const apiSlice = createApi({\n-    reducerPath: 'api',\n+    reducerPath: \"api\",\n     tagTypes: [\"Categories\"],\n-    endpoints: (builder) => ({\n-    }),\n+    endpoints: (builder) => ({}),\n     baseQuery: fetchBaseQuery({ baseUrl }),\n-})\n+});\n"
+                }
+            ],
+            "date": 1698928631609,
+            "name": "Commit-0",
+            "content": "const baseURL = 'http://localhost:8000/api'\n\nexport const pokemonApi = createApi({\n    reducerPath: 'pokemonApi',\n    baseQuery: fetchBaseQuery({ baseUrl: 'http://' })\n})\n"
+        }
+    ]
+}

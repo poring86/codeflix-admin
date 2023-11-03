@@ -1,0 +1,94 @@
+{
+    "sourceFile": "src/app/store.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 19,
+            "patches": [
+                {
+                    "date": 1698929912273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1698929921932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\n import counterReducer from '../features/counter/counterSlice';\n import categorySlice from '../features/categories/categorySlice';\n+import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n"
+                },
+                {
+                    "date": 1698931340791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\n import counterReducer from '../features/counter/counterSlice';\n-import categorySlice from '../features/categories/categorySlice';\n+import categorySlice, { categoriesApiSlice } from '../features/categories/categorySlice';\n import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n-    [apiSlice.reducerPath]: apiSlice.reducer\n+    [apiSlice.reducerPath]: apiSlice.reducer,\n+    [categoriesApiSlice.reducerPath]: apiSlice.reducer\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1698935660529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,4 +19,6 @@\n   RootState,\n   unknown,\n   Action<string>\n >;\n+\n+export const { useGetCategoriesQuery } = categoriesApiSlice\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698962481623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,5 +20,4 @@\n   unknown,\n   Action<string>\n >;\n \n-export const { useGetCategoriesQuery } = categoriesApiSlice\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698963217439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n-    [categoriesApiSlice.reducerPath]: apiSlice.reducer\n+    [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699029513527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\n import counterReducer from '../features/counter/counterSlice';\n-import categorySlice, { categoriesApiSlice } from '../features/categories/categorySlice';\n+import { categoriesApiSlice } from '../features/categories/categorySlice';\n import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n"
+                },
+                {
+                    "date": 1699029532692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\n import counterReducer from '../features/counter/counterSlice';\n-import { categoriesApiSlice } from '../features/categories/categorySlice';\n+import categorySlice, { categoriesApiSlice } from '../features/categories/categorySlice';\n import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n"
+                },
+                {
+                    "date": 1699033571097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n-    [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n+    [categoriesApiSlice.reducerPath]: categoriesApiSlice.reducer,\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699033636646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n-    [categoriesApiSlice.reducerPath]: categoriesApiSlice.reducer,\n+    [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699033670515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n-    [apiSlice.reducerPath]: apiSlice.reducer,\n+    // [apiSlice.reducerPath]: apiSlice.reducer,\n     [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n"
+                },
+                {
+                    "date": 1699038349011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n-    // [apiSlice.reducerPath]: apiSlice.reducer,\n-    [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n+    [apiSlice.reducerPath]: apiSlice.reducer,\n+    // [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699038375953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n-    [apiSlice.reducerPath]: apiSlice.reducer,\n+    // [apiSlice.reducerPath]: apiSlice.reducer,\n     // [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n"
+                },
+                {
+                    "date": 1699039060960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n-    counter: counterReducer,\n-    categories: categorySlice,\n+    // counter: counterReducer,\n+    // categories: categorySlice,\n     // [apiSlice.reducerPath]: apiSlice.reducer,\n     // [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n"
+                },
+                {
+                    "date": 1699039083139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n import { apiSlice } from '../features/api/apiSlice';\n \n export const store = configureStore({\n   reducer: {\n-    // counter: counterReducer,\n-    // categories: categorySlice,\n+    counter: counterReducer,\n+    categories: categorySlice,\n     // [apiSlice.reducerPath]: apiSlice.reducer,\n     // [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n"
+                },
+                {
+                    "date": 1699039123024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n export const store = configureStore({\n   reducer: {\n     counter: counterReducer,\n     categories: categorySlice,\n-    // [apiSlice.reducerPath]: apiSlice.reducer,\n-    // [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n+    [apiSlice.reducerPath]: apiSlice.reducer,\n+    [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699039900700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,10 @@\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n     [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n+    middleware: (getDefaultMiddleware) =>\n+      getDefaultMiddleware().concat(apiSlice.middleware),\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699039910001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,9 @@\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n     [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n-    middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware().concat(apiSlice.middleware),\n+\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699039934268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n     [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n-\n+    middleware: (getDefaultMiddleware) =>\n+      getDefaultMiddleware().concat(apiSlice.middleware),\n   },\n });\n \n export type AppDispatch = typeof store.dispatch;\n"
+                },
+                {
+                    "date": 1699039947047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,12 @@\n     counter: counterReducer,\n     categories: categorySlice,\n     [apiSlice.reducerPath]: apiSlice.reducer,\n     [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n-    middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware().concat(apiSlice.middleware),\n+\n   },\n+  middleware: (getDefaultMiddleware) =>\n+    getDefaultMiddleware().concat(apiSlice.middleware),\n });\n \n export type AppDispatch = typeof store.dispatch;\n export type RootState = ReturnType<typeof store.getState>;\n"
+                }
+            ],
+            "date": 1698929912273,
+            "name": "Commit-0",
+            "content": "import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\nimport counterReducer from '../features/counter/counterSlice';\nimport categorySlice from '../features/categories/categorySlice';\n\nexport const store = configureStore({\n  reducer: {\n    counter: counterReducer,\n    categories: categorySlice,\n    [apiSlice.reducerPath]: apiSlice.reducer\n  },\n});\n\nexport type AppDispatch = typeof store.dispatch;\nexport type RootState = ReturnType<typeof store.getState>;\nexport type AppThunk<ReturnType = void> = ThunkAction<\n  ReturnType,\n  RootState,\n  unknown,\n  Action<string>\n>;\n"
+        }
+    ]
+}

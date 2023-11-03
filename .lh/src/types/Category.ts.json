@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/types/Category.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1698863450020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1698863526765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,5 +16,14 @@\n   deleted_at: string\n   is_active: boolean\n   created_at: string\n   updated_at: string\n+}\n+\n+export interface Meta {\n+  to: number\n+  from: number\n+  path: string\n+  total: number\n+  per_page: number\n+  current_page: number\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698863648348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,5 +25,11 @@\n   path: string\n   total: number\n   per_page: number\n   current_page: number\n+}\n+\n+export interface Links {\n+  prev: null\n+  last: string\n+  next: string\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698863656608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,5 +31,6 @@\n export interface Links {\n   prev: null\n   last: string\n   next: string\n+  first: string\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698863676516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n   per_page: number\n   current_page: number\n }\n \n-export interface Links {\n+export interface CategoryParams {\n   prev: null\n   last: string\n   next: string\n   first: string\n"
+                },
+                {
+                    "date": 1698863693723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n   from: number\n   path: string\n   total: number\n   per_page: number\n+  last_page: number\n   current_page: number\n }\n \n export interface CategoryParams {\n"
+                },
+                {
+                    "date": 1698863769606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n   current_page: number\n }\n \n export interface CategoryParams {\n-  prev: null\n-  last: string\n-  next: string\n-  first: string\n+  page?: number\n+  perPage?: number\n+  next?: string\n+  isActive: string\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698863778107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,6 +32,6 @@\n export interface CategoryParams {\n   page?: number\n   perPage?: number\n   next?: string\n-  isActive: string\n+  isActive?: boolean\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1698863834330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,15 @@\n   created_at: string\n   updated_at: string\n }\n \n+export interface Links {\n+  prev: null\n+  last: string\n+  next: string\n+  first: string\n+}\n+\n export interface Meta {\n   to: number\n   from: number\n   path: string\n"
+                },
+                {
+                    "date": 1699035550149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n   current_page: number\n }\n \n export interface CategoryParams {\n+  search: any\n   page?: number\n   perPage?: number\n   next?: string\n   isActive?: boolean\n"
+                },
+                {
+                    "date": 1699045765953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n   data: Category[]\n }\n \n export interface Category {\n+  description: string\n   id: string\n   name: string\n   deleted_at: string\n   is_active: boolean\n"
+                }
+            ],
+            "date": 1698863450020,
+            "name": "Commit-0",
+            "content": "export interface Results {\n  meta: Meta\n  links: Links\n  data: Category[]\n}\n\nexport interface Result {\n  meta: Meta\n  links: Links\n  data: Category[]\n}\n\nexport interface Category {\n  id: string\n  name: string\n  deleted_at: string\n  is_active: boolean\n  created_at: string\n  updated_at: string\n}"
+        }
+    ]
+}
