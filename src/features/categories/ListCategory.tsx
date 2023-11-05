@@ -1,46 +1,30 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { selectCategories, useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'
-import { Box, Button, IconButton, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import { DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar } from '@mui/x-data-grid'
-import { enqueueSnackbar } from 'notistack'
+import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'
+import { Box, Button } from '@mui/material'
+
+import { useSnackbar } from 'notistack'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { CategoriesTable } from './components/CategoryTable'
+import { GridFilterModel } from '@mui/x-data-grid'
 
 export const ListCategory = () => {
-  const { data } = useGetCategoriesQuery()
+  const [perPage] = useState(10)
+  const [search, setSearch] = useState('')
+  const [rowsPerPage] = useState([10, 25, 50, 100])
+  const { data, isFetching, error } = useGetCategoriesQuery()
   const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()
-  const categories = useAppSelector(selectCategories)
-  const dispatch = useAppDispatch()
+  const { enqueueSnackbar } = useSnackbar()
 
-  const rows: GridRowsProp = data ? data.data.map((category) => ({
-    id: category.id,
-    name: category.name,
-    description: category.description,
-    isActive: category.is_active,
-    createdAt: new Date(category.created_at).toLocaleDateString('pt-BR')
-  })) : []
-
-  const componentsProps = {
-    toolbar: {
-      showQuickFilter: true,
-      quickFilterProps: { debounceMs: 500 },
-    }
+  function handleOnPageChange(page: number) {
+    console.log(page)
   }
 
-  const columns: GridColDef[] = [
-    { field: 'name', headerName: "Name", flex: 1, renderCell: renderNameCell },
-    {
-      field: 'isActive', headerName: "Active", flex: 1, type: "boolean", renderCell: renderIsActiveCell
-    },
-    { field: 'description', headerName: "Description", flex: 1 },
-    {
-      field: 'createdAt', headerName: "Created At", flex: 1
-    },
-    {
-      field: 'id', headerName: "Actions", flex: 1, renderCell: renderActionCell, type: "string"
-    },
-  ]
+  function handleOnPageSizeChange(perPage: number) {
+    console.log(perPage)
+  }
+  function handleFilterChange(filterModel: GridFilterModel) {
+    console.log(filterModel)
+  }
 
   async function handleDeleteCategory(id: string) {
     await deleteCategory({ id })
@@ -55,32 +39,6 @@ export const ListCategory = () => {
     }
   })
 
-
-
-  function renderNameCell(rowData: GridRenderCellParams) {
-    return (
-      <Link style={{ textDecoration: "none" }} to={`/categories/edit/${rowData.id}`}>
-        <Typography color="primary">{rowData.value}</Typography>
-      </Link>
-    )
-  }
-
-  function renderActionCell(params: GridRenderCellParams) {
-    return (
-      <IconButton color="secondary" onClick={() => handleDeleteCategory(params.value)}>
-        <DeleteIcon />
-      </IconButton>
-    )
-  }
-
-  function renderIsActiveCell(rowData: GridRenderCellParams) {
-    return (
-      <Typography color={rowData.value ? "primary" : "secondary"}>
-        {rowData.value ? "Active" : "Inactive"}
-      </Typography>
-    )
-  }
-
   return (
     <Box maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box display="flex" justifyContent="flex-end">
@@ -93,20 +51,16 @@ export const ListCategory = () => {
         >New category</Button>
       </Box>
 
-      <Box style={{ display: "flex", height: 600 }}>
-        <DataGrid
-          componentsProps={componentsProps}
-          components={{ Toolbar: GridToolbar }}
-          disableRowSelectionOnClick={true}
-          columns={columns}
-          rows={rows}
-          disableColumnSelector={true}
-          disableColumnFilter={true}
-          disableDensitySelector={true}
-          checkboxSelection={true}
-          pageSizeOptions={[5, 10]}
-        />
-      </Box>
+      <CategoriesTable
+        data={data}
+        isFetching={isFetching}
+        perPage={10}
+        rowsPerPage={rowsPerPage}
+        handleDelete={handleDeleteCategory}
+        handleOnPageChange={handleOnPageChange}
+        handleOnPageSizeChange={handleOnPageSizeChange}
+        handleFilterChange={handleFilterChange}
+      />
 
 
     </Box>
