@@ -49,11 +49,24 @@ function deleteCategoryMutation(category: Category) {
     method: "DELETE",
   };
 }
+
+function createCategoryMutation(category: Category) {
+  return {
+    url: endpointUrl,
+    method: "POST",
+    body: category
+  }
+}
+
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
     getCategories: query<Results, CategoryParams>({
       query: getCategories,
       providesTags: ["Categories"],
+    }),
+    createCategory: mutation<Result, Category>({
+      query: createCategoryMutation,
+      invalidatesTags: ['Categories']
     }),
     deleteCategory: mutation<Result, { id: string }>({
       query: deleteCategoryMutation,
@@ -125,4 +138,4 @@ export default categoriesSlice.reducer
 
 export const { updateCategory, createCategory, deleteCategory } = categoriesSlice.actions
 
-export const { useGetCategoriesQuery, useDeleteCategoryMutation } = categoriesApiSlice
+export const { useGetCategoriesQuery, useDeleteCategoryMutation, useCreateCategoryMutation } = categoriesApiSlice

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 35,
+            "activePatchIndex": 36,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -148,6 +148,10 @@
                 {
                     "date": 1698846552043,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { Category, createCategory } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n+import { enqueueSnackbar } from 'notistack'\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n   const [isDisabled, setIsDisabled] = useState(false)\n@@ -19,8 +20,9 @@\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n     dispatch(createCategory({ ...categoryState, id: uuidv4() }))\n+    enqueueSnackbar(\"Success creating a category!\", { variant: \"success\" })\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n"
+                },
+                {
+                    "date": 1699324688127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { Box, Paper, Typography } from '@mui/material'\n import { useState } from 'react'\n-import { Category, createCategory } from './categorySlice'\n+import { Category, createCategory, useCreateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n import { enqueueSnackbar } from 'notistack'\n \n export const CreateCategory = () => {\n   const dispatch = useAppDispatch()\n+  const [createCategory, status] = useCreateCategoryMutation()\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
                 }
             ],
             "date": 1695855701445,

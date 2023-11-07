@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 86,
+            "activePatchIndex": 91,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -352,6 +352,26 @@
                 {
                     "date": 1699323428376,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\"\n import { RootState } from \"../../app/store\"\n import { apiSlice } from \"../api/apiSlice\"\n-import { CategoryParams, Results } from \"../../types/Category\"\n+import { CategoryParams, Result, Results } from \"../../types/Category\"\n \n export interface Category {\n   id: string,\n   name: string,\n"
+                },
+                {
+                    "date": 1699324060430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,17 @@\n     url: `${endpointUrl}/${category.id}`,\n     method: \"DELETE\",\n   };\n }\n+\n+function createCategoryMutation(category: Category) {\n+  return {\n+    url: endpointUrl,\n+    method: \"POST\",\n+    body: category\n+  }\n+}\n+\n export const categoriesApiSlice = apiSlice.injectEndpoints({\n   endpoints: ({ query, mutation }) => ({\n     getCategories: query<Results, CategoryParams>({\n       query: getCategories,\n"
+                },
+                {
+                    "date": 1699324175328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,8 +63,11 @@\n     getCategories: query<Results, CategoryParams>({\n       query: getCategories,\n       providesTags: [\"Categories\"],\n     }),\n+    createCategory: mutation<Result, Category>({\n+      query: createCategoryMutation,\n+    }),\n     deleteCategory: mutation<Result, { id: string }>({\n       query: deleteCategoryMutation,\n       invalidatesTags: [\"Categories\"],\n     }),\n"
+                },
+                {
+                    "date": 1699324205909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,8 +65,9 @@\n       providesTags: [\"Categories\"],\n     }),\n     createCategory: mutation<Result, Category>({\n       query: createCategoryMutation,\n+      invalidateTags: ['Categories']\n     }),\n     deleteCategory: mutation<Result, { id: string }>({\n       query: deleteCategoryMutation,\n       invalidatesTags: [\"Categories\"],\n"
+                },
+                {
+                    "date": 1699324303820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,9 @@\n       providesTags: [\"Categories\"],\n     }),\n     createCategory: mutation<Result, Category>({\n       query: createCategoryMutation,\n-      invalidateTags: ['Categories']\n+      invalidatesTags: ['Categories']\n     }),\n     deleteCategory: mutation<Result, { id: string }>({\n       query: deleteCategoryMutation,\n       invalidatesTags: [\"Categories\"],\n"
+                },
+                {
+                    "date": 1699324343338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -137,5 +137,5 @@\n export default categoriesSlice.reducer\n \n export const { updateCategory, createCategory, deleteCategory } = categoriesSlice.actions\n \n-export const { useGetCategoriesQuery, useDeleteCategoryMutation } = categoriesApiSlice\n\\ No newline at end of file\n+export const { useGetCategoriesQuery, useDeleteCategoryMutation, useCreateCategoryMutation } = categoriesApiSlice\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1695861518172,
