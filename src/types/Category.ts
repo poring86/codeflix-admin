@@ -7,7 +7,7 @@ export interface Results {
 export interface Result {
   meta: Meta
   links: Links
-  data: Category[]
+  data: Category
 }
 
 export interface Category {
