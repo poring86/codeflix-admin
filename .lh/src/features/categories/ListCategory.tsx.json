@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 113,
+            "activePatchIndex": 119,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -460,6 +460,30 @@
                 {
                     "date": 1699319236582,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   }\n   function handleFilterChange(filterModel: GridFilterModel) {\n     if (filterModel.quickFilterValues?.length) {\n       const search = filterModel.quickFilterValues.join('')\n-      setSearch(search)\n+      return setSearch(search)\n     }\n     return setSearch('')\n   }\n \n"
+                },
+                {
+                    "date": 1699321877928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,8 +46,12 @@\n       enqueueSnackbar(\"Category not deleted\", { variant: \"error\" })\n     }\n   })\n \n+  if (error) {\n+    return <Typography>Errir fetching categories</Typography>\n+  }\n+\n   return (\n     <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n       <Box display=\"flex\" justifyContent=\"flex-end\">\n         <Button\n"
+                },
+                {
+                    "date": 1699321883972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     }\n   })\n \n   if (error) {\n-    return <Typography>Errir fetching categories</Typography>\n+    return <Typography>Error fetching categories</Typography>\n   }\n \n   return (\n     <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n"
+                },
+                {
+                    "date": 1699321896877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n-import { Box, Button } from '@mui/material'\n+import { Box, Button, Typography } from '@mui/material'\n \n import { useSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n import { useEffect, useState } from 'react'\n"
+                },
+                {
+                    "date": 1699322030442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,11 @@\n     }\n     if (deleteCategoryStatus.error) {\n       enqueueSnackbar(\"Category not deleted\", { variant: \"error\" })\n     }\n+    if (error) {\n+      enqueueSnackbar(\"Error fetching categories\", { variant: \"error\" })\n+    }\n   })\n \n   if (error) {\n     return <Typography>Error fetching categories</Typography>\n"
+                },
+                {
+                    "date": 1699322264732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     }\n     if (error) {\n       enqueueSnackbar(\"Error fetching categories\", { variant: \"error\" })\n     }\n-  })\n+  }, [deleteCategoryStatus, enqueueSnackbar, error])\n \n   if (error) {\n     return <Typography>Error fetching categories</Typography>\n   }\n"
+                },
+                {
+                    "date": 1699323287036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     return setSearch('')\n   }\n \n   async function handleDeleteCategory(id: string) {\n-    await deleteCategory({ id })\n+    await deleteCategory({ id });\n   }\n \n   useEffect(() => {\n     if (deleteCategoryStatus.isSuccess) {\n"
                 }
             ],
             "date": 1695855743800,

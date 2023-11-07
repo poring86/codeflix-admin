@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
 import { apiSlice } from "../api/apiSlice"
-import { CategoryParams, Results } from "../../types/Category"
+import { CategoryParams, Result, Results } from "../../types/Category"
 
 export interface Category {
   id: string,
@@ -13,7 +13,7 @@ export interface Category {
   updated_at: string,
 }
 
-const endpointUrl: string = "/categories?"
+const endpointUrl: string = "/categories"
 
 function parseQueryParams(params: CategoryParams) {
   const query = new URLSearchParams()
@@ -47,19 +47,18 @@ function deleteCategoryMutation(category: Category) {
   return {
     url: `${endpointUrl}/${category.id}`,
     method: "DELETE",
-  }
+  };
 }
-
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
     getCategories: query<Results, CategoryParams>({
       query: getCategories,
       providesTags: ["Categories"],
     }),
-    deleteCategory: mutation<Results, { id: string }>({
+    deleteCategory: mutation<Result, { id: string }>({
       query: deleteCategoryMutation,
       invalidatesTags: ["Categories"],
-    })
+    }),
   })
 })
 

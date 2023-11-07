@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 83,
+            "activePatchIndex": 86,
             "patches": [
                 {
                     "date": 1695861518172,
@@ -340,6 +340,18 @@
                 {
                     "date": 1699318294190,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   created_at: string,\n   updated_at: string,\n }\n \n-const endpointUrl: string = \"/categories?page=1\"\n+const endpointUrl: string = \"/categories?\"\n \n function parseQueryParams(params: CategoryParams) {\n   const query = new URLSearchParams()\n \n"
+                },
+                {
+                    "date": 1699323373519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,21 +46,20 @@\n function deleteCategoryMutation(category: Category) {\n   return {\n     url: `${endpointUrl}/${category.id}`,\n     method: \"DELETE\",\n-  }\n+  };\n }\n-\n export const categoriesApiSlice = apiSlice.injectEndpoints({\n   endpoints: ({ query, mutation }) => ({\n     getCategories: query<Results, CategoryParams>({\n       query: getCategories,\n       providesTags: [\"Categories\"],\n     }),\n-    deleteCategory: mutation<Results, { id: string }>({\n+    deleteCategory: mutation<Result, { id: string }>({\n       query: deleteCategoryMutation,\n       invalidatesTags: [\"Categories\"],\n-    })\n+    }),\n   })\n })\n \n const category = {\n"
+                },
+                {
+                    "date": 1699323381272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   created_at: string,\n   updated_at: string,\n }\n \n-const endpointUrl: string = \"/categories?\"\n+const endpointUrl: string = \"/categories\"\n \n function parseQueryParams(params: CategoryParams) {\n   const query = new URLSearchParams()\n \n"
+                },
+                {
+                    "date": 1699323428376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\"\n import { RootState } from \"../../app/store\"\n import { apiSlice } from \"../api/apiSlice\"\n-import { CategoryParams, Results } from \"../../types/Category\"\n+import { CategoryParams, Result, Results } from \"../../types/Category\"\n \n export interface Category {\n   id: string,\n   name: string,\n"
                 }
             ],
             "date": 1695861518172,
