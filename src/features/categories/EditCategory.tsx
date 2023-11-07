@@ -2,8 +2,7 @@ import { Box, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { Category, selectCategoryById, updateCategory, useGetCategoryQuery } from './categorySlice'
+import { Category, useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
 import CategoryForm from './components/CategoryForm'
 
 export const EditCategory = () => {
@@ -11,7 +10,7 @@ export const EditCategory = () => {
   // const category = useAppSelector((state) => selectCategoryById(state, id))
   const { data: category, isFetching } = useGetCategoryQuery({ id })
   console.log('category', category)
-  const [isDisabled, setIsDisabled] = useState(false)
+  const [updateCategory, status] = useUpdateCategoryMutation()
   const [categoryState, setCategoryState] = useState<Category>({
     id: "",
     name: "",
@@ -22,12 +21,9 @@ export const EditCategory = () => {
     updated_at: "",
   })
   const { enqueueSnackbar } = useSnackbar()
-  const dispatch = useAppDispatch()
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
-    dispatch(updateCategory(categoryState))
-    enqueueSnackbar("Success updating a category!", { variant: "success" })
+    updateCategory(categoryState)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +42,15 @@ export const EditCategory = () => {
     }
   }, [category])
 
+  useEffect(() => {
+    if (status.isSuccess) {
+      enqueueSnackbar('Category updated successfully', { variant: "success" })
+    }
+    if (status.error) {
+      enqueueSnackbar('Category not updated successfully', { variant: "error" })
+    }
+  }, [enqueueSnackbar, status.error, status.isSuccess])
+
   return (
     <Box>
       <Paper>
@@ -55,7 +60,7 @@ export const EditCategory = () => {
           </Box>
           <CategoryForm
             category={categoryState}
-            isDisabled={isDisabled}
+            isDisabled={status.isLoading}
             isLoading={false}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
