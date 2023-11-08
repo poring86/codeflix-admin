@@ -77,4 +77,4 @@ export const castMembersApiSlice = apiSlice.injectEndpoints({
   }),
 })
 
-const { useGetCastMembersQuery, useGetCastMemberQuery, useDeleteCastMembersMutation, useUpdateCastMemberMutation, useCreateCastMemberMutation } = castMembersApiSlice
+export const { useGetCastMembersQuery, useGetCastMemberQuery, useDeleteCastMembersMutation, useUpdateCastMemberMutation, useCreateCastMemberMutation } = castMembersApiSlice
