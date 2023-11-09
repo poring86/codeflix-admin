@@ -2,8 +2,7 @@ import { GridColDef, GridFilterModel, GridRenderCellParams, DataGrid, GridToolba
 import { Box, IconButton, Typography } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Link } from 'react-router-dom'
-
-import { Results } from "../../../types/Category"
+import { Results } from "../../../types/CastMembers"
 
 type Props = {
   data: Results | undefined
@@ -17,7 +16,7 @@ type Props = {
   handleDelete: (id: string) => Promise<void>
 }
 
-export function CategoriesTable({
+export function CastMembersTable({
   data,
   perPage,
   isFetching,
@@ -26,7 +25,6 @@ export function CategoriesTable({
   handleFilterChange,
   handleOnPageSizeChange,
   handleDelete
-
 }: Props) {
   const componentsProps = {
     toolbar: {
@@ -38,11 +36,7 @@ export function CategoriesTable({
   const columns: GridColDef[] = [
     { field: 'name', headerName: "Name", flex: 1, renderCell: renderNameCell },
     {
-      field: 'isActive', headerName: "Active", flex: 1, type: "boolean", renderCell: renderIsActiveCell
-    },
-    { field: 'description', headerName: "Description", flex: 1 },
-    {
-      field: 'created_at', headerName: "Created At", flex: 1
+      field: 'type', headerName: "Active", flex: 1, type: "boolean", renderCell: renderTypeCell
     },
     {
       field: 'id', headerName: "Actions", flex: 1, renderCell: renderActionCell, type: "string"
@@ -50,19 +44,18 @@ export function CategoriesTable({
   ]
 
   function mapDataToGridRows(data: Results) {
-    const { data: categories } = data
-    return categories.map((category) => ({
-      id: category.id,
-      name: category.name,
-      description: category.description,
-      isActive: category.is_active,
-      created_at: new Date(category.created_at).toLocaleDateString('pt-BR')
+    const { data: castMembers } = data
+    return castMembers.map((castMember) => ({
+      id: castMember.id,
+      name: castMember.name,
+      type: castMember.type,
+      create_at: new Date(castMember.created_at).toLocaleDateString('pt-BR')
     }))
   }
 
   function renderNameCell(rowData: GridRenderCellParams) {
     return (
-      <Link style={{ textDecoration: "none" }} to={`/categories/edit/${rowData.id}`}>
+      <Link style={{ textDecoration: "none" }} to={`/cast-members/edit/${rowData.id}`}>
         <Typography color="primary">{rowData.value}</Typography>
       </Link>
     )
@@ -76,10 +69,10 @@ export function CategoriesTable({
     )
   }
 
-  function renderIsActiveCell(rowData: GridRenderCellParams) {
+  function renderTypeCell(rowData: GridRenderCellParams) {
     return (
-      <Typography color={rowData.value ? "primary" : "secondary"}>
-        {rowData.value ? "Active" : "Inactive"}
+      <Typography>
+        {rowData.value === 1 ? "Director" : "Actor"}
       </Typography>
     )
   }

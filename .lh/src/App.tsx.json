@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 40,
+            "activePatchIndex": 42,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -168,6 +168,14 @@
                 {
                     "date": 1696190831792,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n     <ThemeProvider theme={appTheme}>\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n-        right: \"right\"\n+        horizontal: \"right\"\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n           <Header />\n           <Layout>\n"
+                },
+                {
+                    "date": 1699412632881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n import { ListCategory } from './features/categories/ListCategory'\n import { CreateCategory } from './features/categories/CreateCategory'\n import { EditCategory } from './features/categories/EditCategory'\n import { SnackbarProvider } from 'notistack'\n+import ListCastMembers from './features/castMembers/ListCastMembers'\n \n \n export default function App() {\n   return (\n@@ -21,11 +22,14 @@\n           <Header />\n           <Layout>\n             <Routes>\n               <Route path=\"/\" element={<ListCategory />} />\n+              {/* Categories */}\n               <Route path=\"/categories\" element={<ListCategory />} />\n               <Route path=\"/categories/create\" element={<CreateCategory />} />\n               <Route path=\"/categories/edit/:id\" element={<EditCategory />} />\n+              {/* Cast members */}\n+              <Route path=\"/cast-members\" element={<ListCastMembers />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1699451995001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import { ListCategory } from './features/categories/ListCategory'\n import { CreateCategory } from './features/categories/CreateCategory'\n import { EditCategory } from './features/categories/EditCategory'\n import { SnackbarProvider } from 'notistack'\n-import ListCastMembers from './features/castMembers/ListCastMembers'\n+import { ListCastMembers } from './features/castMembers/ListCastMembers'\n \n \n export default function App() {\n   return (\n"
                 }
             ],
             "date": 1695757259942,

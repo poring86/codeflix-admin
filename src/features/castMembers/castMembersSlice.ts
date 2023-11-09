@@ -8,13 +8,31 @@ export const initialState: CastMember = {
   id: "",
   name: "",
   type: 0,
-  createdAt: "",
-  updatedAt: "",
-  deletedAt: null
+  created_at: "",
+  updated_at: "",
+  deleted_at: null
 }
 
 function parseQueryParams(params: CastMemberParams) {
-  return null
+  const query = new URLSearchParams()
+
+  if (params.page) {
+    query.append('page', params.page.toString())
+  }
+
+  if (params.perPage) {
+    query.append('per_page', params.perPage.toString())
+  }
+
+  if (params.search) {
+    query.append('search', params.search.toString())
+  }
+
+  if (params.type) {
+    query.append('type', params.type.toString())
+  }
+
+  return query.toString()
 }
 
 function getCastMembers(params: CastMemberParams) {

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 119,
+            "activePatchIndex": 123,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -484,6 +484,22 @@
                 {
                     "date": 1699323287036,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     return setSearch('')\n   }\n \n   async function handleDeleteCategory(id: string) {\n-    await deleteCategory({ id })\n+    await deleteCategory({ id });\n   }\n \n   useEffect(() => {\n     if (deleteCategoryStatus.isSuccess) {\n"
+                },
+                {
+                    "date": 1699479990708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n     }\n     return setSearch('')\n   }\n \n-  async function handleDeleteCategory(id: string) {\n+  async function handleDeleteCastMember(id: string) {\n     await deleteCategory({ id });\n   }\n \n   useEffect(() => {\n@@ -62,17 +62,17 @@\n           color=\"secondary\"\n           component={Link}\n           to=\"/categories/create\"\n           style={{ marginBottom: \"1rem\" }}\n-        >New category</Button>\n+        >New CastMember</Button>\n       </Box>\n \n       <CategoriesTable\n         data={data}\n         isFetching={isFetching}\n         perPage={10}\n         rowsPerPage={rowsPerPage}\n-        handleDelete={handleDeleteCategory}\n+        handleDelete={handleDeleteCastMember}\n         handleOnPageChange={handleOnPageChange}\n         handleOnPageSizeChange={handleOnPageSizeChange}\n         handleFilterChange={handleFilterChange}\n       />\n"
+                },
+                {
+                    "date": 1699480036168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import { Link } from 'react-router-dom'\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n+import { useDeleteCastMembersMutation } from '../castMembers/castMembersSlice'\n \n export const ListCategory = () => {\n   const [page, setPage] = useState(1)\n   const [perPage, setPerPage] = useState(10)\n@@ -15,9 +16,9 @@\n \n   const options = { perPage, search, page }\n \n   const { data, isFetching, error } = useGetCategoriesQuery(options)\n-  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n+  const [deleteCastMember, deleteCastMemberStatus] = useDeleteCastMembersMutation()\n   const { enqueueSnackbar } = useSnackbar()\n \n   function handleOnPageChange(page: number) {\n     setPage(page + 1)\n"
+                },
+                {
+                    "date": 1699480063240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,22 +35,22 @@\n     return setSearch('')\n   }\n \n   async function handleDeleteCastMember(id: string) {\n-    await deleteCategory({ id });\n+    await deleteCastMember({ id });\n   }\n \n   useEffect(() => {\n-    if (deleteCategoryStatus.isSuccess) {\n+    if (deleteCastMemberStatus.isSuccess) {\n       enqueueSnackbar(\"Category deleted\", { variant: \"success\" })\n     }\n-    if (deleteCategoryStatus.error) {\n+    if (deleteCastMemberStatus.error) {\n       enqueueSnackbar(\"Category not deleted\", { variant: \"error\" })\n     }\n     if (error) {\n       enqueueSnackbar(\"Error fetching categories\", { variant: \"error\" })\n     }\n-  }, [deleteCategoryStatus, enqueueSnackbar, error])\n+  }, [deleteCastMemberStatus, enqueueSnackbar, error])\n \n   if (error) {\n     return <Typography>Error fetching categories</Typography>\n   }\n"
+                },
+                {
+                    "date": 1699480077641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n+import { useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, Typography } from '@mui/material'\n \n import { useSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n"
                 }
             ],
             "date": 1695855743800,
