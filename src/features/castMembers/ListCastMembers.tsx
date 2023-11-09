@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-import { useDeleteCastMembersMutation, useGetCastMembersQuery } from './castMembersSlice'
+import { useDeleteCastMemberMutation, useGetcastMembersQuery } from './castMembersSlice'
 import { GridFilterModel } from '@mui/x-data-grid'
 import { enqueueSnackbar } from 'notistack'
 import { CastMembersTable } from './components/CastMembersTable'
@@ -14,8 +14,8 @@ export const ListCastMembers = () => {
     perPage: 10,
     rowsPerPage: [10, 20, 30],
   })
-  const { data, isFetching, error } = useGetCastMembersQuery(options)
-  const [deleteCastMember, deleteCastMemberStatus] = useDeleteCastMembersMutation()
+  const { data, isFetching, error } = useGetcastMembersQuery(options)
+  const [deleteCastMember, deleteCastMemberStatus] = useDeleteCastMemberMutation()
 
   async function handleDeleteCastMember(id: string) {
     await deleteCastMember({ id })
@@ -58,9 +58,9 @@ export const ListCastMembers = () => {
           variant="contained"
           color="secondary"
           component={Link}
-          to="/cast-member/create"
+          to="/cast-members/create"
           style={{ marginBottom: "1rem" }}
-        >New cast member</Button>
+        >New Cast Member</Button>
       </Box>
       <CastMembersTable
         data={data}

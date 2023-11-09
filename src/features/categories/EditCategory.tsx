@@ -1,9 +1,9 @@
 import { Box, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSnackbar } from 'notistack'
 import { Category, useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
 import CategoryForm from './components/CategoryForm'
+import { enqueueSnackbar } from 'notistack'
 
 export const EditCategory = () => {
   const id = useParams().id || ""
@@ -20,7 +20,6 @@ export const EditCategory = () => {
     deleted_at: "",
     updated_at: "",
   })
-  const { enqueueSnackbar } = useSnackbar()
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
     updateCategory(categoryState)

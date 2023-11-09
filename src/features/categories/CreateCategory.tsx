@@ -2,7 +2,6 @@ import { Box, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Category, useCreateCategoryMutation } from './categorySlice'
 import CategoryForm from './components/CategoryForm'
-import { useAppDispatch } from '../../app/hooks'
 import { v4 as uuidv4 } from 'uuid';
 import { enqueueSnackbar } from 'notistack'
 
