@@ -7,7 +7,6 @@ import { enqueueSnackbar } from 'notistack'
 
 export const EditCategory = () => {
   const id = useParams().id || ""
-  // const category = useAppSelector((state) => selectCategoryById(state, id))
   const { data: category, isFetching } = useGetCategoryQuery({ id })
   console.log('category', category)
   const [updateCategory, status] = useUpdateCategoryMutation()

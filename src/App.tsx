@@ -9,6 +9,7 @@ import { EditCategory } from './features/categories/EditCategory'
 import { SnackbarProvider } from 'notistack'
 import { ListCastMembers } from './features/castMembers/ListCastMembers'
 import { CreateCastMember } from './features/castMembers/CreateCastMember'
+import { EditCastMember } from './features/castMembers/EditCastMember'
 
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
               {/* Cast members */}
               <Route path="/cast-members" element={<ListCastMembers />} />
               <Route path="/cast-members/create" element={<CreateCastMember />} />
+              <Route path="/cast-members/edit/:id" element={<EditCastMember />} />
               <Route path="*" element={
                 <Box sx={{ color: 'white' }}>
                   <Typography variant="h1" component="h1">

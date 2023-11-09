@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 37,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -156,6 +156,18 @@
                 {
                     "date": 1699544332027,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,12 @@\n import { Box, Paper, Typography } from '@mui/material'\n-import { useState } from 'react'\n-import { Category, createCategory, useCreateCategoryMutation } from './categorySlice'\n+import { useEffect, useState } from 'react'\n+import { Category, useCreateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n-import { useAppDispatch } from '../../app/hooks'\n import { v4 as uuidv4 } from 'uuid';\n import { enqueueSnackbar } from 'notistack'\n \n export const CreateCategory = () => {\n-  const dispatch = useAppDispatch()\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [isDisabled, setIsDisabled] = useState(false)\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: \"\",\n@@ -20,10 +18,9 @@\n     updated_at: \"\",\n   })\n   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n     e.preventDefault()\n-    dispatch(createCategory({ ...categoryState, id: uuidv4() }))\n-    enqueueSnackbar(\"Success creating a category!\", { variant: \"success\" })\n+    await createCategory({ ...categoryState, id: uuidv4() })\n   }\n   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, value } = e.target\n     setCategoryState({ ...categoryState, [name]: value })\n@@ -32,8 +29,18 @@\n   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {\n     const { name, checked } = e.target\n     setCategoryState({ ...categoryState, [name]: checked })\n   }\n+\n+  useEffect(() => {\n+    if (status.isSuccess) {\n+      enqueueSnackbar(\"Category created successfully\", { variant: 'success' })\n+      setIsDisabled(true)\n+    }\n+    if (status.error) {\n+      enqueueSnackbar(\"Category not created\", { variant: 'error' })\n+    }\n+  }, [enqueueSnackbar, status.error, status.isSuccess])\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n"
+                },
+                {
+                    "date": 1699548301821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,14 @@\n import { Category, useCreateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { v4 as uuidv4 } from 'uuid';\n import { enqueueSnackbar } from 'notistack'\n+import { CastMember } from '../../types/CastMembers';\n \n export const CreateCategory = () => {\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [isDisabled, setIsDisabled] = useState(false)\n-  const [categoryState, setCategoryState] = useState<Category>({\n+  const [categoryState, setCategoryState] = useState<CastMember>({\n     id: \"\",\n     name: \"\",\n     description: \"\",\n     is_active: false,\n"
+                },
+                {
+                    "date": 1699548343316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n export const CreateCategory = () => {\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [isDisabled, setIsDisabled] = useState(false)\n-  const [categoryState, setCategoryState] = useState<CastMember>({\n+  const [categoryState, setCategoryState] = useState<Category>({\n     id: \"\",\n     name: \"\",\n     description: \"\",\n     is_active: false,\n"
+                },
+                {
+                    "date": 1699548367325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import { Category, useCreateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { v4 as uuidv4 } from 'uuid';\n import { enqueueSnackbar } from 'notistack'\n-import { CastMember } from '../../types/CastMembers';\n \n export const CreateCategory = () => {\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [isDisabled, setIsDisabled] = useState(false)\n"
                 }
             ],
             "date": 1695855701445,
