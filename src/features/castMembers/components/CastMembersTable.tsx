@@ -13,7 +13,7 @@ type Props = {
   handleOnPageChange: (page: number) => void
   handleFilterChange: (filterModel: GridFilterModel) => void
   handleOnPageSizeChange: (perPage: number) => void
-  handleDelete: (id: string) => Promise<void>
+  handleDelete: (id: string) => void
 }
 
 export function CastMembersTable({
