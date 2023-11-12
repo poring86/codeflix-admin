@@ -95,3 +95,5 @@ export const {
   useUpdateCategoryMutation,
   useGetCategoryQuery,
 } = categoriesApiSlice
+
+export { Category }

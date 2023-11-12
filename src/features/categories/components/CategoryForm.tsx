@@ -50,7 +50,7 @@ export default function CategoryForm({
                 value={category.description}
                 disabled={isDisabled}
                 onChange={handleChange}
-                inputProps={{ "data-testid": "name" }}
+                inputProps={{ "data-testid": "description" }}
               />
             </FormControl>
           </Grid>
@@ -64,6 +64,7 @@ export default function CategoryForm({
                     onChange={handleToggle}
                     name="is_active"
                     color="secondary"
+                    data-testid="is_active"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                   />
                 }

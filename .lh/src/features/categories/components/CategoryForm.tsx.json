@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 28,
+            "activePatchIndex": 30,
             "patches": [
                 {
                     "date": 1696083248643,
@@ -120,6 +120,14 @@
                 {
                     "date": 1696092543853,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { Box, Grid, FormControl, TextField, FormGroup, FormControlLabel, Switch, Button } from '@mui/material'\n import React from 'react'\n import { Category } from '../categorySlice'\n+import { Link } from 'react-router-dom';\n \n type Props = {\n   category: Category;\n   isDisabled?: boolean;\n"
+                },
+                {
+                    "date": 1699827939741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n                 label=\"Description\"\n                 value={category.description}\n                 disabled={isDisabled}\n                 onChange={handleChange}\n-                inputProps={{ \"data-testid\": \"name\" }}\n+                inputProps={{ \"data-testid\": \"description\" }}\n               />\n             </FormControl>\n           </Grid>\n \n"
+                },
+                {
+                    "date": 1699828116957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,8 +63,9 @@\n                     checked={category.is_active}\n                     onChange={handleToggle}\n                     name=\"is_active\"\n                     color=\"secondary\"\n+                    data-testid=\"is_active\"\n                     inputProps={{ 'aria-label': 'secondary checkbox' }}\n                   />\n                 }\n                 label=\"Active\"\n"
                 }
             ],
             "date": 1696083248643,
