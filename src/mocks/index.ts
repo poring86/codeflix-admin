@@ -39,7 +39,7 @@ export const categoryResponse: Results = {
   },
 }
 
-export const categoryResultsPage2: Results = {
+export const categoryResponse2: Results = {
   data: [
     {
       id: '8a67e65c-7ba1-4149-8a46-a737feb3139d',

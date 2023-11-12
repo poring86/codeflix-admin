@@ -2,13 +2,13 @@ import { rest } from 'msw'
 import { setupServer } from "msw/node";
 import { ListCategory } from './ListCategory'
 import { baseUrl } from '../api/apiSlice'
-import { renderWithProviders, screen, waitFor } from '../../utils/test-utils'
-import { categoryResponse } from '../../mocks'
+import { fireEvent, renderWithProviders, screen, waitFor } from '../../utils/test-utils'
+import { categoryResponse, categoryResponse2 } from '../../mocks'
 
 export const handlers = [
   rest.get(`${baseUrl}/categories`, (req, res, ctx) => {
     if (req.url.searchParams.get('page') === '2') {
-      return res(ctx.json(categoryResponse), ctx.delay(150))
+      return res(ctx.json(categoryResponse2), ctx.delay(150))
     }
 
     return res(ctx.json(categoryResponse), ctx.delay(150))
@@ -63,4 +63,21 @@ describe("Category List", () => {
       expect(error).toBeInTheDocument();
     });
   });
+
+  it("should handle On page change", async () => {
+    renderWithProviders(<ListCategory />)
+
+    await waitFor(() => {
+      const name = screen.getByText('Violet')
+      expect(name).toBeInTheDocument()
+    })
+
+    const nextButton = screen.getByTestId("KeyboardArrowRightIcon");
+    fireEvent.click(nextButton);
+
+    await waitFor(() => {
+      const name = screen.getByText('FloralWhite')
+      expect(name).toBeInTheDocument()
+    })
+  })
 })
