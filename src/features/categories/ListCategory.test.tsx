@@ -3,7 +3,7 @@ import { setupServer } from "msw/node";
 import { ListCategory } from './ListCategory'
 import { baseUrl } from '../api/apiSlice'
 import { fireEvent, renderWithProviders, screen, waitFor } from '../../utils/test-utils'
-import { categoryResponse, categoryResponse2 } from '../../mocks'
+import { categoryResponse, categoryResponse2 } from './mocks'
 
 export const handlers = [
   rest.get(`${baseUrl}/categories`, (req, res, ctx) => {
@@ -77,6 +77,45 @@ describe("Category List", () => {
 
     await waitFor(() => {
       const name = screen.getByText('FloralWhite')
+      expect(name).toBeInTheDocument()
+    })
+  })
+
+  it('should handle filter change', async () => {
+    renderWithProviders(<ListCategory />)
+
+    await waitFor(() => {
+      const name = screen.getByText('Violet')
+      expect(name).toBeInTheDocument()
+    })
+
+    const input = screen.getByPlaceholderText('Search…')
+    fireEvent.change(input, { target: { value: 'LightSteelBlue' } })
+
+    await waitFor(() => {
+      const loading = screen.getByRole('progressbar')
+      expect(loading).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
+      const name = screen.getByText('LightSteelBlue')
+      expect(name).toBeInTheDocument()
+    })
+  })
+
+  it('should handle Delete Category success', async () => {
+    renderWithProviders(<ListCategory />)
+
+    await waitFor(() => {
+      const name = screen.getByText('Violet')
+      expect(name).toBeInTheDocument()
+    })
+
+    const deleteButton = screen.getAllByTestId('DeleteButton')[0]
+    fireEvent.click(deleteButton)
+
+    await waitFor(() => {
+      const name = screen.getByText('Category deleted successfully')
       expect(name).toBeInTheDocument()
     })
   })

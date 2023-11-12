@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 58,
+            "activePatchIndex": 62,
             "patches": [
                 {
                     "date": 1695855765191,
@@ -240,6 +240,22 @@
                 {
                     "date": 1699557489079,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,12 @@\n import React, { useEffect, useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { Category, useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n+import { enqueueSnackbar } from 'notistack'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n-  // const category = useAppSelector((state) => selectCategoryById(state, id))\n   const { data: category, isFetching } = useGetCategoryQuery({ id })\n   console.log('category', category)\n   const [updateCategory, status] = useUpdateCategoryMutation()\n   const [categoryState, setCategoryState] = useState<Category>({\n"
+                },
+                {
+                    "date": 1699805447525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import { Box, Paper, Typography } from '@mui/material'\n import React, { useEffect, useState } from 'react'\n import { useParams } from 'react-router-dom'\n-import { Category, useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'\n+import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n-import { enqueueSnackbar } from 'notistack'\n+import { useSnackbar } from 'notistack'\n+import { Category } from '../../types/Category'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const { data: category, isFetching } = useGetCategoryQuery({ id })\n"
+                },
+                {
+                    "date": 1699805465577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,13 @@\n import React, { useEffect, useState } from 'react'\n import { useParams } from 'react-router-dom'\n import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n-import { useSnackbar } from 'notistack'\n import { Category } from '../../types/Category'\n \n export const EditCategory = () => {\n   const id = useParams().id || \"\"\n   const { data: category, isFetching } = useGetCategoryQuery({ id })\n-  console.log('category', category)\n   const [updateCategory, status] = useUpdateCategoryMutation()\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1699805818096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,12 @@\n import CategoryForm from './components/CategoryForm'\n import { Category } from '../../types/Category'\n \n export const EditCategory = () => {\n+  const { enqueueSnackbar } = useSnackbar()\n   const id = useParams().id || \"\"\n   const { data: category, isFetching } = useGetCategoryQuery({ id })\n+  console.log('category', category)\n   const [updateCategory, status] = useUpdateCategoryMutation()\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: \"\",\n     name: \"\",\n"
+                },
+                {
+                    "date": 1699805827488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { useParams } from 'react-router-dom'\n import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'\n import CategoryForm from './components/CategoryForm'\n import { Category } from '../../types/Category'\n+import { useSnackbar } from 'notistack'\n \n export const EditCategory = () => {\n   const { enqueueSnackbar } = useSnackbar()\n   const id = useParams().id || \"\"\n"
                 }
             ],
             "date": 1695855765191,

@@ -1,4 +1,4 @@
-import { Results } from "../types/Category"
+import { Results } from "../../../types/Category"
 
 
 export const categoryResponse: Results = {

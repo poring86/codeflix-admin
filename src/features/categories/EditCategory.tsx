@@ -1,11 +1,13 @@
 import { Box, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Category, useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
+import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
 import CategoryForm from './components/CategoryForm'
-import { enqueueSnackbar } from 'notistack'
+import { Category } from '../../types/Category'
+import { useSnackbar } from 'notistack'
 
 export const EditCategory = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const id = useParams().id || ""
   const { data: category, isFetching } = useGetCategoryQuery({ id })
   console.log('category', category)
