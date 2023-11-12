@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1695782229304,
@@ -16,6 +16,10 @@
                 {
                     "date": 1696030669400,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,11 +15,8 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n-          <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n-            News\n-          </Typography>\n           <Button color=\"inherit\">Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n"
+                },
+                {
+                    "date": 1699748136970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,15 @@\n-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'\n-import MenuIcon from '@mui/icons-material/Menu';\n-import React from 'react'\n+import MenuIcon from '@mui/icons-material/Menu'\n+import {\n+  AppBar,\n+  Box,\n+  Button,\n+  IconButton,\n+  Toolbar,\n+  Typography,\n+} from '@mui/material'\n \n-export default function Header() {\n+export function Header() {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n@@ -15,8 +21,11 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n+          <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n+            News\n+          </Typography>\n           <Button color=\"inherit\">Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n"
                 }
             ],
             "date": 1695782229304,

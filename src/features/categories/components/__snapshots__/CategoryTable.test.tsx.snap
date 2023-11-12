@@ -6,7 +6,7 @@ exports[`Category table should render CastMembersTable with loading 1`] = `
     class="MuiBox-root css-1fat0eg"
   >
     <div
-      aria-colcount="5"
+      aria-colcount="4"
       aria-multiselectable="false"
       aria-rowcount="1"
       class="MuiDataGrid-root MuiDataGrid-root--densityStandard css-1e2bxag-MuiDataGrid-root"
@@ -351,10 +351,10 @@ exports[`Category table should render CastMembersTable with loading 1`] = `
               </div>
               <div
                 aria-colindex="3"
-                aria-label="Description"
+                aria-label="Created At"
                 aria-sort="none"
                 class="MuiDataGrid-columnHeader MuiDataGrid-columnHeader--sortable"
-                data-field="description"
+                data-field="createdAt"
                 role="columnheader"
                 style="height: 56px; width: 0px; min-width: 0; max-width: 0;"
                 tabindex="-1"
@@ -374,7 +374,7 @@ exports[`Category table should render CastMembersTable with loading 1`] = `
                         class="MuiDataGrid-columnHeaderTitle css-1jbbcbn-MuiDataGrid-columnHeaderTitle"
                         data-mui-internal-clone-element="true"
                       >
-                        Description
+                        Created At
                       </div>
                     </div>
                     <div
@@ -604,7 +604,7 @@ exports[`Category table should render CategoryTable with Inactive value 1`] = `
     class="MuiBox-root css-1fat0eg"
   >
     <div
-      aria-colcount="5"
+      aria-colcount="4"
       aria-multiselectable="false"
       aria-rowcount="2"
       class="MuiDataGrid-root MuiDataGrid-root--densityStandard css-1e2bxag-MuiDataGrid-root"
@@ -922,10 +922,10 @@ exports[`Category table should render CategoryTable with Inactive value 1`] = `
               </div>
               <div
                 aria-colindex="3"
-                aria-label="Description"
+                aria-label="Created At"
                 aria-sort="none"
                 class="MuiDataGrid-columnHeader MuiDataGrid-columnHeader--sortable"
-                data-field="description"
+                data-field="createdAt"
                 role="columnheader"
                 style="height: 56px; width: 0px; min-width: 0; max-width: 0;"
                 tabindex="-1"
@@ -945,7 +945,7 @@ exports[`Category table should render CategoryTable with Inactive value 1`] = `
                         class="MuiDataGrid-columnHeaderTitle css-1jbbcbn-MuiDataGrid-columnHeaderTitle"
                         data-mui-internal-clone-element="true"
                       >
-                        Description
+                        Created At
                       </div>
                     </div>
                     <div
@@ -1091,16 +1091,16 @@ exports[`Category table should render CategoryTable with Inactive value 1`] = `
                     aria-colspan="1"
                     class="MuiDataGrid-cell MuiDataGrid-cell--textLeft"
                     data-colindex="2"
-                    data-field="description"
+                    data-field="createdAt"
                     role="cell"
                     style="min-width: 0; max-width: 0; min-height: 52px; max-height: 52px;"
                     tabindex="-1"
                   >
                     <div
                       class="MuiDataGrid-cellContent"
-                      title="test"
+                      title="28/02/2021"
                     >
-                      test
+                      28/02/2021
                     </div>
                   </div>
                 </div>
@@ -1240,7 +1240,7 @@ exports[`Category table should render CategoryTable with data 1`] = `
     class="MuiBox-root css-1fat0eg"
   >
     <div
-      aria-colcount="5"
+      aria-colcount="4"
       aria-multiselectable="false"
       aria-rowcount="2"
       class="MuiDataGrid-root MuiDataGrid-root--densityStandard css-1e2bxag-MuiDataGrid-root"
@@ -1558,10 +1558,10 @@ exports[`Category table should render CategoryTable with data 1`] = `
               </div>
               <div
                 aria-colindex="3"
-                aria-label="Description"
+                aria-label="Created At"
                 aria-sort="none"
                 class="MuiDataGrid-columnHeader MuiDataGrid-columnHeader--sortable"
-                data-field="description"
+                data-field="createdAt"
                 role="columnheader"
                 style="height: 56px; width: 0px; min-width: 0; max-width: 0;"
                 tabindex="-1"
@@ -1581,7 +1581,7 @@ exports[`Category table should render CategoryTable with data 1`] = `
                         class="MuiDataGrid-columnHeaderTitle css-1jbbcbn-MuiDataGrid-columnHeaderTitle"
                         data-mui-internal-clone-element="true"
                       >
-                        Description
+                        Created At
                       </div>
                     </div>
                     <div
@@ -1727,16 +1727,16 @@ exports[`Category table should render CategoryTable with data 1`] = `
                     aria-colspan="1"
                     class="MuiDataGrid-cell MuiDataGrid-cell--textLeft"
                     data-colindex="2"
-                    data-field="description"
+                    data-field="createdAt"
                     role="cell"
                     style="min-width: 0; max-width: 0; min-height: 52px; max-height: 52px;"
                     tabindex="-1"
                   >
                     <div
                       class="MuiDataGrid-cellContent"
-                      title="test"
+                      title="28/02/2021"
                     >
-                      test
+                      28/02/2021
                     </div>
                   </div>
                 </div>
@@ -1876,7 +1876,7 @@ exports[`Category table should render correctly 1`] = `
     class="MuiBox-root css-1fat0eg"
   >
     <div
-      aria-colcount="5"
+      aria-colcount="4"
       aria-multiselectable="false"
       aria-rowcount="1"
       class="MuiDataGrid-root MuiDataGrid-root--densityStandard css-1e2bxag-MuiDataGrid-root"
@@ -2203,10 +2203,10 @@ exports[`Category table should render correctly 1`] = `
               </div>
               <div
                 aria-colindex="3"
-                aria-label="Description"
+                aria-label="Created At"
                 aria-sort="none"
                 class="MuiDataGrid-columnHeader MuiDataGrid-columnHeader--sortable"
-                data-field="description"
+                data-field="createdAt"
                 role="columnheader"
                 style="height: 56px; width: 0px; min-width: 0; max-width: 0;"
                 tabindex="-1"
@@ -2226,7 +2226,7 @@ exports[`Category table should render correctly 1`] = `
                         class="MuiDataGrid-columnHeaderTitle css-1jbbcbn-MuiDataGrid-columnHeaderTitle"
                         data-mui-internal-clone-element="true"
                       >
-                        Description
+                        Created At
                       </div>
                     </div>
                     <div

@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react"
-import Layout from "./Layout"
+import { Layout } from "./Layout"
 
 describe("Header", () => {
   test("should render header", () => {

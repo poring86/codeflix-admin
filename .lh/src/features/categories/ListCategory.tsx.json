@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 130,
+            "activePatchIndex": 141,
             "patches": [
                 {
                     "date": 1695855743800,
@@ -528,6 +528,50 @@
                 {
                     "date": 1699544025066,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,14 @@\n import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, Typography } from '@mui/material'\n \n-import { useSnackbar } from 'notistack'\n+import { enqueueSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n-  const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n     page: 1,\n     search: \"\",\n     perPage: 10,\n"
+                },
+                {
+                    "date": 1699702329070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n \n-export const ListCategory = () => {\n+export const CategoryList = () => {\n+  const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n     page: 1,\n     search: \"\",\n     perPage: 10,\n@@ -60,11 +61,12 @@\n           color=\"secondary\"\n           component={Link}\n           to=\"/categories/create\"\n           style={{ marginBottom: \"1rem\" }}\n-        >New Category</Button>\n+        >\n+          New Category\n+        </Button>\n       </Box>\n-\n       <CategoriesTable\n         data={data}\n         isFetching={isFetching}\n         perPage={options.perPage}\n@@ -74,6 +76,6 @@\n         handleOnPageSizeChange={handleOnPageSizeChange}\n         handleFilterChange={handleFilterChange}\n       />\n     </Box>\n-  )\n-}\n+  );\n+};\n"
+                },
+                {
+                    "date": 1699702388008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n \n-export const CategoryList = () => {\n+export const ListCategory = () => {\n   const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n     page: 1,\n     search: \"\",\n"
+                },
+                {
+                    "date": 1699702396317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n-  const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n     page: 1,\n     search: \"\",\n     perPage: 10,\n"
+                },
+                {
+                    "date": 1699703136847,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n   const { data, isFetching, error } = useGetCategoriesQuery(options);\n   const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =\n     useDeleteCategoryMutation();\n \n+  console.log('data', data)\n+\n   function handleOnPageChange(page: number) {\n     setOptions({ ...options, page: page + 1 });\n   }\n \n"
+                },
+                {
+                    "date": 1699709272258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, Typography } from '@mui/material'\n \n-import { enqueueSnackbar } from 'notistack'\n+import { useSnackbar } from 'notistack'\n import { Link } from 'react-router-dom'\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n \n export const ListCategory = () => {\n+  const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n     page: 1,\n     search: \"\",\n     perPage: 10,\n"
+                },
+                {
+                    "date": 1699709398251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,10 @@\n     useDeleteCategoryMutation();\n \n   console.log('data', data)\n \n+  console.log('isFetching', isFetching)\n+\n   function handleOnPageChange(page: number) {\n     setOptions({ ...options, page: page + 1 });\n   }\n \n"
+                },
+                {
+                    "date": 1699720516935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,15 @@\n   const { data, isFetching, error } = useGetCategoriesQuery(options);\n   const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =\n     useDeleteCategoryMutation();\n \n+  useEffect(() => {\n+    fetch('https://jsonplaceholder.typicode.com/users')\n+      .then(response => response.json())\n+      .then(data => console.log('batata', data)\n+    }, [])\n+\n+\n   console.log('data', data)\n \n   console.log('isFetching', isFetching)\n \n"
+                },
+                {
+                    "date": 1699720573269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,14 +19,15 @@\n   const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =\n     useDeleteCategoryMutation();\n \n   useEffect(() => {\n-    fetch('https://jsonplaceholder.typicode.com/users')\n+    fetch(`${baseUrl}/categories`)\n       .then(response => response.json())\n-      .then(data => console.log('batata', data)\n-    }, [])\n+      .then(data => console.log(data))\n+  }, [])\n \n \n+\n   console.log('data', data)\n \n   console.log('isFetching', isFetching)\n \n"
+                },
+                {
+                    "date": 1699720582898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import { Link } from 'react-router-dom'\n import { useEffect, useState } from 'react'\n import { CategoriesTable } from './components/CategoryTable'\n import { GridFilterModel } from '@mui/x-data-grid'\n+import { baseUrl } from '../api/apiSlice'\n \n export const ListCategory = () => {\n   const { enqueueSnackbar } = useSnackbar();\n   const [options, setOptions] = useState({\n"
+                },
+                {
+                    "date": 1699720725497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \n   useEffect(() => {\n     fetch(`${baseUrl}/categories`)\n       .then(response => response.json())\n-      .then(data => console.log(data))\n+      .then(data => console.log('batata', data))\n   }, [])\n \n \n \n"
+                },
+                {
+                    "date": 1699740213222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,70 +1,59 @@\n-import { useDeleteCategoryMutation, useGetCategoriesQuery } from './categorySlice'\n import { Box, Button, Typography } from '@mui/material'\n-\n+import { GridFilterModel } from '@mui/x-data-grid'\n import { useSnackbar } from 'notistack'\n+import { useEffect, useState } from 'react'\n import { Link } from 'react-router-dom'\n-import { useEffect, useState } from 'react'\n+import {\n+  useDeleteCategoryMutation,\n+  useGetCategoriesQuery,\n+} from './categorySlice'\n import { CategoriesTable } from './components/CategoryTable'\n-import { GridFilterModel } from '@mui/x-data-grid'\n-import { baseUrl } from '../api/apiSlice'\n \n-export const ListCategory = () => {\n-  const { enqueueSnackbar } = useSnackbar();\n+export function ListCategory() {\n   const [options, setOptions] = useState({\n     page: 1,\n-    search: \"\",\n+    search: '',\n     perPage: 10,\n-    rowsPerPage: [10, 20, 30],\n-  });\n-  const { data, isFetching, error } = useGetCategoriesQuery(options);\n-  const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =\n-    useDeleteCategoryMutation();\n+    rowsPerPage: [10, 25, 50, 100],\n+  })\n \n-  useEffect(() => {\n-    fetch(`${baseUrl}/categories`)\n-      .then(response => response.json())\n-      .then(data => console.log('batata', data))\n-  }, [])\n+  const { data, isFetching, error } = useGetCategoriesQuery(options)\n \n+  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()\n+  const { enqueueSnackbar } = useSnackbar()\n \n-\n-  console.log('data', data)\n-\n-  console.log('isFetching', isFetching)\n-\n   function handleOnPageChange(page: number) {\n-    setOptions({ ...options, page: page + 1 });\n+    setOptions({ ...options, page: page + 1 })\n   }\n \n   function handleOnPageSizeChange(perPage: number) {\n-    setOptions({ ...options, perPage });\n+    setOptions({ ...options, perPage })\n   }\n \n   function handleFilterChange(filterModel: GridFilterModel) {\n-    if (!filterModel.quickFilterValues?.length) {\n-      return setOptions({ ...options, search: \"\" });\n-    }\n-\n-    const search = filterModel.quickFilterValues.join(\"\");\n-    setOptions({ ...options, search });\n+    if (filterModel.quickFilterValues?.length) {\n+      const search = filterModel.quickFilterValues.join('')\n+      setOptions({ ...options, search })\n+    } else setOptions({ ...options, search: '' })\n   }\n \n   async function handleDeleteCategory(id: string) {\n-    await deleteCategory({ id });\n+    await deleteCategory({ id })\n   }\n \n   useEffect(() => {\n-    if (deleteSuccess) {\n-      enqueueSnackbar(`Category deleted`, { variant: \"success\" });\n+    if (deleteCategoryStatus.isSuccess) {\n+      enqueueSnackbar('Category deleted successfully', { variant: 'success' })\n     }\n-    if (deleteError) {\n-      enqueueSnackbar(`Category not deleted`, { variant: \"error\" });\n+\n+    if (deleteCategoryStatus.error) {\n+      enqueueSnackbar('Category not deleted', { variant: 'error' })\n     }\n-  }, [deleteSuccess, deleteError, enqueueSnackbar]);\n+  }, [deleteCategoryStatus, enqueueSnackbar])\n \n   if (error) {\n-    return <Typography>Error fetching categories</Typography>;\n+    return <Typography variant=\"h2\">Error fetching categories</Typography>\n   }\n \n   return (\n     <Box maxWidth=\"lg\" sx={{ mt: 4, mb: 4 }}>\n@@ -73,9 +62,9 @@\n           variant=\"contained\"\n           color=\"secondary\"\n           component={Link}\n           to=\"/categories/create\"\n-          style={{ marginBottom: \"1rem\" }}\n+          style={{ marginBottom: '1rem' }}\n         >\n           New Category\n         </Button>\n       </Box>\n@@ -89,6 +78,6 @@\n         handleOnPageSizeChange={handleOnPageSizeChange}\n         handleFilterChange={handleFilterChange}\n       />\n     </Box>\n-  );\n-};\n+  )\n+}\n"
                 }
             ],
             "date": 1695855743800,

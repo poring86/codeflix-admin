@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 29,
+            "activePatchIndex": 31,
             "patches": [
                 {
                     "date": 1698929912273,
@@ -124,6 +124,14 @@
                 {
                     "date": 1699658072944,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,14 +18,8 @@\n       getDefaultMiddleware().concat(apiSlice.middleware),\n   })\n }\n \n-export const store = configureStore({\n-  reducer: rootReducer,\n-  middleware: (getDefaultMiddleware) =>\n-    getDefaultMiddleware().concat(apiSlice.middleware),\n-});\n-\n export type AppStore = ReturnType<typeof setupStore>\n export type AppDispatch = AppStore[\"dispatch\"]\n export type RootState = ReturnType<typeof rootReducer>;\n export type AppThunk<ReturnType = void> = ThunkAction<\n"
+                },
+                {
+                    "date": 1699741570769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,16 @@\n-import { configureStore, ThunkAction, Action, combineReducers, PreloadedState } from '@reduxjs/toolkit';\n-import categorySlice, { categoriesApiSlice } from '../features/categories/categorySlice';\n-import { apiSlice } from '../features/api/apiSlice';\n-import { castMembersApiSlice } from '../features/castMembers/castMembersSlice';\n+import {\n+  configureStore,\n+  ThunkAction,\n+  Action,\n+  combineReducers,\n+  PreloadedState,\n+} from '@reduxjs/toolkit'\n+import { apiSlice } from '../features/api/apiSlice'\n+import { castMembersApiSlice } from '../features/cast/castMembersSlice'\n+import { categoriesApiSlice } from '../features/categories/categorySlice'\n \n const rootReducer = combineReducers({\n-  categories: categorySlice,\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   [castMembersApiSlice.reducerPath]: apiSlice.reducer,\n })\n@@ -19,13 +24,12 @@\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n-export type AppDispatch = AppStore[\"dispatch\"]\n-export type RootState = ReturnType<typeof rootReducer>;\n+export type AppDispatch = AppStore['dispatch']\n+export type RootState = ReturnType<typeof rootReducer>\n export type AppThunk<ReturnType = void> = ThunkAction<\n   ReturnType,\n   RootState,\n   unknown,\n   Action<string>\n->;\n-\n+>\n"
+                },
+                {
+                    "date": 1699747361562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,11 @@\n   combineReducers,\n   PreloadedState,\n } from '@reduxjs/toolkit'\n import { apiSlice } from '../features/api/apiSlice'\n-import { castMembersApiSlice } from '../features/cast/castMembersSlice'\n+\n import { categoriesApiSlice } from '../features/categories/categorySlice'\n+import { castMembersApiSlice } from '../features/castMembers/castMembersSlice'\n \n const rootReducer = combineReducers({\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n"
                 }
             ],
             "date": 1698929912273,

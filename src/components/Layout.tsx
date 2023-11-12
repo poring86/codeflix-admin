@@ -1,10 +1,16 @@
 import { Box, Container } from '@mui/material'
-import React from 'react'
+import type { ReactNode } from 'react'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: ReactNode
+}
+
+export function Layout({ children }: Props) {
   return (
     <Box>
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, bg: "white" }}>{children}</Container>
+      <Container maxWidth="lg" sx={{ mt: 4, mb: 4, color: 'white' }}>
+        {children}
+      </Container>
     </Box>
   )
 }

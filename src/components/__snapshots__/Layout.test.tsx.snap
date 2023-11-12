@@ -6,7 +6,7 @@ exports[`Header should render header 1`] = `
     class="MuiBox-root css-0"
   >
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg css-1xd9xi2-MuiContainer-root"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-87kmc0-MuiContainer-root"
     >
       test
     </div>
