@@ -173,6 +173,7 @@ exports[`CategoryForm should render Category Form correcty 1`] = `
             </a>
             <button
               class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+              data-testid="Save"
               tabindex="0"
               type="submit"
             >
@@ -364,6 +365,7 @@ exports[`CategoryForm should render category form with disabled state 1`] = `
             </a>
             <button
               class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+              data-testid="Save"
               disabled=""
               tabindex="-1"
               type="submit"
@@ -553,6 +555,7 @@ exports[`CategoryForm should render category form with disabled state 2`] = `
             </a>
             <button
               class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+              data-testid="Save"
               disabled=""
               tabindex="-1"
               type="submit"
@@ -740,6 +743,7 @@ exports[`CategoryForm should render category form with loading state 1`] = `
             </a>
             <button
               class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+              data-testid="Save"
               disabled=""
               tabindex="-1"
               type="submit"

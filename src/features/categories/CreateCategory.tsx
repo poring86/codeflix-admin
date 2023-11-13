@@ -1,46 +1,46 @@
 import { Box, Paper, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useCreateCategoryMutation } from './categorySlice'
-import CategoryForm from './components/CategoryForm'
+import { CategoryForm } from './components/CategoryForm'
 import { Category } from '../../types/Category';
 import { useSnackbar } from 'notistack'
 
-export const CreateCategory = () => {
+export function CreateCategory() {
   const { enqueueSnackbar } = useSnackbar()
   const [createCategory, status] = useCreateCategoryMutation()
-  const [isDisabled, setIsDisabled] = useState(false)
   const [categoryState, setCategoryState] = useState<Category>({
-    id: "",
-    name: "",
-    description: "",
+    id: '',
+    name: '',
     is_active: false,
-    created_at: "",
-    deleted_at: "",
-    updated_at: "",
+    created_at: '2017-09-08T15:25:53Z',
+    updated_at: '2017-09-08T15:25:53Z',
+    deleted_at: '2017-09-08T15:25:53Z',
+    description: null,
   })
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
-    e.preventDefault()
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
     await createCategory(categoryState)
   }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
     setCategoryState({ ...categoryState, [name]: value })
   }
-
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
+  const handleToggle = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target
     setCategoryState({ ...categoryState, [name]: checked })
   }
 
   useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar("Category created successfully!", { variant: 'success' })
-      setIsDisabled(true)
+      enqueueSnackbar('Category created successfully!', { variant: 'success' })
     }
-    if (status.error) {
-      enqueueSnackbar("Category not created", { variant: 'error' })
+    if (status.isError) {
+      enqueueSnackbar('Category not created!', { variant: 'error' })
     }
-  }, [enqueueSnackbar, status.error, status.isSuccess])
+  }, [enqueueSnackbar, status])
+
   return (
     <Box>
       <Paper>
@@ -48,17 +48,17 @@ export const CreateCategory = () => {
           <Box mb={2}>
             <Typography variant="h4">Create Category</Typography>
           </Box>
-
-          <CategoryForm
-            category={categoryState}
-            isDisabled={isDisabled}
-            isLoading={false}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            handleToggle={handleToggle}
-          />
         </Box>
+        <CategoryForm
+          category={categoryState}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleToggle={handleToggle}
+          isDisabled={status.isLoading}
+          isLoading={status.isLoading}
+        />
       </Paper>
     </Box>
   )
 }
+

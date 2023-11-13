@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateCategory should render correctly 1`] = `
+exports[`EditCategory should render correctly 1`] = `
 <DocumentFragment>
   <div
     class="MuiBox-root css-0"
@@ -17,7 +17,7 @@ exports[`CreateCategory should render correctly 1`] = `
           <h4
             class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
           >
-            Create Category
+            Edit Category
           </h4>
         </div>
       </div>
@@ -190,15 +190,13 @@ exports[`CreateCategory should render correctly 1`] = `
                   />
                 </a>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-6k52os-MuiButtonBase-root-MuiButton-root"
+                  class="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-6k52os-MuiButtonBase-root-MuiButton-root"
                   data-testid="Save"
-                  tabindex="0"
+                  disabled=""
+                  tabindex="-1"
                   type="submit"
                 >
-                  Save
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
+                  Loading...
                 </button>
               </div>
             </div>

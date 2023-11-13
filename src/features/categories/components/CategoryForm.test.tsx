@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react"
-import CategoryForm from "./CategoryForm"
+import { CategoryForm } from "./CategoryForm"
 import { BrowserRouter } from "react-router-dom";
 
 const Props = {

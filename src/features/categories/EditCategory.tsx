@@ -1,38 +1,40 @@
 import { Box, Paper, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
-import CategoryForm from './components/CategoryForm'
-import { Category } from '../../types/Category'
 import { useSnackbar } from 'notistack'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { Category } from '../../types/Category'
+import { useGetCategoryQuery, useUpdateCategoryMutation } from './categorySlice'
+import { CategoryForm } from './components/CategoryForm'
 
-export const EditCategory = () => {
-  const { enqueueSnackbar } = useSnackbar()
-  const id = useParams().id || ""
+export function EditCategory() {
+  const id = useParams().id || ''
   const { data: category, isFetching } = useGetCategoryQuery({ id })
-  console.log('category', category)
+
   const [updateCategory, status] = useUpdateCategoryMutation()
   const [categoryState, setCategoryState] = useState<Category>({
-    id: "",
-    name: "",
-    description: "",
+    id: '',
+    name: '',
     is_active: false,
-    created_at: "",
-    deleted_at: "",
-    updated_at: "",
+    created_at: '2017-09-08T15:25:53Z',
+    updated_at: '2017-09-08T15:25:53Z',
+    deleted_at: '2017-09-08T15:25:53Z',
+    description: null,
   })
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
-    e.preventDefault()
-    updateCategory(categoryState)
+
+  const { enqueueSnackbar } = useSnackbar()
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    await updateCategory(categoryState)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
     setCategoryState({ ...categoryState, [name]: value })
   }
-
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
+  const handleToggle = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target
     setCategoryState({ ...categoryState, [name]: checked })
   }
 
@@ -44,12 +46,13 @@ export const EditCategory = () => {
 
   useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar('Category updated successfully', { variant: "success" })
+      enqueueSnackbar('Category updated successfully', { variant: 'success' })
     }
-    if (status.error) {
-      enqueueSnackbar('Category not updated successfully', { variant: "error" })
+
+    if (status.isError) {
+      enqueueSnackbar('Category not updated', { variant: 'error' })
     }
-  }, [enqueueSnackbar, status.error, status.isSuccess])
+  }, [status, enqueueSnackbar])
 
   return (
     <Box>
@@ -58,15 +61,15 @@ export const EditCategory = () => {
           <Box mb={2}>
             <Typography variant="h4">Edit Category</Typography>
           </Box>
-          <CategoryForm
-            category={categoryState}
-            isDisabled={status.isLoading}
-            isLoading={false}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            handleToggle={handleToggle}
-          />
         </Box>
+        <CategoryForm
+          category={categoryState}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleToggle={handleToggle}
+          isDisabled={status.isLoading}
+          isLoading={isFetching || status.isLoading}
+        />
       </Paper>
     </Box>
   )

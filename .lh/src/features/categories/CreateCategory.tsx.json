@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 45,
+            "activePatchIndex": 48,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -188,6 +188,18 @@
                 {
                     "date": 1699829110632,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n   }\n \n   useEffect(() => {\n     if (status.isSuccess) {\n-      enqueueSnackbar(\"Category created successfully\", { variant: 'success' })\n+      enqueueSnackbar(\"Category created successfully!\", { variant: 'success' })\n       setIsDisabled(true)\n     }\n     if (status.error) {\n       enqueueSnackbar(\"Category not created\", { variant: 'error' })\n"
+                },
+                {
+                    "date": 1699916102523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { Box, Paper, Typography } from '@mui/material'\n import { useEffect, useState } from 'react'\n import { useCreateCategoryMutation } from './categorySlice'\n-import CategoryForm from './components/CategoryForm'\n+import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n \n export const CreateCategory = () => {\n"
+                },
+                {
+                    "date": 1699916167373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,61 +4,61 @@\n import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n \n-export const CreateCategory = () => {\n+export function CreateCategory() {\n   const { enqueueSnackbar } = useSnackbar()\n   const [createCategory, status] = useCreateCategoryMutation()\n-  const [isDisabled, setIsDisabled] = useState(false)\n   const [categoryState, setCategoryState] = useState<Category>({\n-    id: \"\",\n-    name: \"\",\n-    description: \"\",\n+    id: '',\n+    name: '',\n     is_active: false,\n-    created_at: \"\",\n-    deleted_at: \"\",\n-    updated_at: \"\",\n+    created_at: '2017-09-08T15:25:53Z',\n+    updated_at: '2017-09-08T15:25:53Z',\n+    deleted_at: '2017-09-08T15:25:53Z',\n+    description: null,\n   })\n-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {\n-    e.preventDefault()\n+\n+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {\n+    event.preventDefault()\n     await createCategory(categoryState)\n   }\n-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n-    const { name, value } = e.target\n+\n+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {\n+    const { name, value } = event.target\n     setCategoryState({ ...categoryState, [name]: value })\n   }\n-\n-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {\n-    const { name, checked } = e.target\n+  const handleToggle = (event: ChangeEvent<HTMLInputElement>) => {\n+    const { name, checked } = event.target\n     setCategoryState({ ...categoryState, [name]: checked })\n   }\n \n   useEffect(() => {\n     if (status.isSuccess) {\n-      enqueueSnackbar(\"Category created successfully!\", { variant: 'success' })\n-      setIsDisabled(true)\n+      enqueueSnackbar('Category created successfully!', { variant: 'success' })\n     }\n-    if (status.error) {\n-      enqueueSnackbar(\"Category not created\", { variant: 'error' })\n+    if (status.isError) {\n+      enqueueSnackbar('Category not created!', { variant: 'error' })\n     }\n-  }, [enqueueSnackbar, status.error, status.isSuccess])\n+  }, [enqueueSnackbar, status])\n+\n   return (\n     <Box>\n       <Paper>\n         <Box p={2}>\n           <Box mb={2}>\n             <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n-\n-          <CategoryForm\n-            category={categoryState}\n-            isDisabled={isDisabled}\n-            isLoading={false}\n-            handleSubmit={handleSubmit}\n-            handleChange={handleChange}\n-            handleToggle={handleToggle}\n-          />\n         </Box>\n+        <CategoryForm\n+          category={categoryState}\n+          handleChange={handleChange}\n+          handleSubmit={handleSubmit}\n+          handleToggle={handleToggle}\n+          isDisabled={status.isLoading}\n+          isLoading={status.isLoading}\n+        />\n       </Paper>\n     </Box>\n   )\n }\n+\n"
+                },
+                {
+                    "date": 1699916227648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { Box, Paper, Typography } from '@mui/material'\n-import { useEffect, useState } from 'react'\n+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'\n import { useCreateCategoryMutation } from './categorySlice'\n import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n"
                 }
             ],
             "date": 1695855701445,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 30,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1696083248643,
@@ -128,6 +128,18 @@
                 {
                     "date": 1699828116957,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,8 +63,9 @@\n                     checked={category.is_active}\n                     onChange={handleToggle}\n                     name=\"is_active\"\n                     color=\"secondary\"\n+                    data-testid=\"is_active\"\n                     inputProps={{ 'aria-label': 'secondary checkbox' }}\n                   />\n                 }\n                 label=\"Active\"\n"
+                },
+                {
+                    "date": 1699913943863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,8 +81,9 @@\n               <Button\n                 type=\"submit\"\n                 variant=\"contained\"\n                 color=\"secondary\"\n+                data-testid=\"Save\"\n                 disabled={isDisabled || isLoading}\n               >\n                 {isLoading ? \"Loading...\" : \"Save\"}\n               </Button>\n"
+                },
+                {
+                    "date": 1699915517741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;\n   handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void;\n };\n \n-export default function CategoryForm({\n+function CategoryForm({\n   category,\n   isDisabled = false,\n   isLoading = false,\n   handleSubmit,\n@@ -94,4 +94,7 @@\n \n     </Box>\n   )\n }\n+\n+export { CategoryForm }\n+export type { Props as CategoryFormProps }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1699915723401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,8 @@\n                 inputProps={{ \"data-testid\": \"name\" }}\n               />\n             </FormControl>\n           </Grid>\n-\n-\n-\n           <Grid item xs={12}>\n             <FormControl fullWidth>\n               <TextField\n                 required\n"
                 }
             ],
             "date": 1696083248643,
