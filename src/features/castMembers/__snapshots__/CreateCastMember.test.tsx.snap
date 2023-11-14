@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateCastMembers should CreateCastMembers render correctly 1`] = `
+exports[`CreateCastMember should render correctly 1`] = `
 <DocumentFragment>
   <div
     class="MuiBox-root css-0"
@@ -57,6 +57,7 @@ exports[`CreateCastMembers should CreateCastMembers render correctly 1`] = `
                     <input
                       aria-invalid="false"
                       class="MuiInputBase-input MuiOutlinedInput-input css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input"
+                      data-testid="name"
                       id=":r0:"
                       name="name"
                       required=""
@@ -93,6 +94,7 @@ exports[`CreateCastMembers should CreateCastMembers render correctly 1`] = `
                 <div
                   aria-labelledby="type of cast member"
                   class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
+                  data-testid="type"
                   role="radiogroup"
                 >
                   <label
@@ -140,7 +142,7 @@ exports[`CreateCastMembers should CreateCastMembers render correctly 1`] = `
                     <span
                       class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
                     >
-                      Director
+                      Diretor
                     </span>
                   </label>
                   <label

@@ -1,12 +1,12 @@
 import { Box, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { enqueueSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack'
 import { initialState, useCreateCastMemberMutation } from './castMembersSlice'
-import { v4 as uuidv4 } from 'uuid';
 import { CastMember } from '../../types/CastMembers';
 import CastMemberForm from './components/CastMemberForm';
 
-export const CreateCastMember = () => {
+export const CreateCastMembers = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const [castMemberState, setCastMemberState] =
     useState<CastMember>(initialState);
   const [createCastMember, status] = useCreateCastMemberMutation();
@@ -18,16 +18,15 @@ export const CreateCastMember = () => {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('castMemberState', { ...castMemberState, id: uuidv4() })
-    await createCastMember({ ...castMemberState, id: uuidv4() });
+    await createCastMember({ ...castMemberState });
   }
 
   useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar(`Cast member created`, { variant: "success" });
+      enqueueSnackbar(`Cast member created successfully!`, { variant: "success" });
     }
     if (status.isError) {
-      enqueueSnackbar(`Cast member not created`, { variant: "error" });
+      enqueueSnackbar(`Cast member not created!`, { variant: "error" });
     }
   }, [status, enqueueSnackbar]);
 

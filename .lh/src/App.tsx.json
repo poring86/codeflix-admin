@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 48,
+            "activePatchIndex": 49,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -200,6 +200,10 @@
                 {
                     "date": 1699558466417,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import { EditCategory } from './features/categories/EditCategory'\n import { SnackbarProvider } from 'notistack'\n import { ListCastMembers } from './features/castMembers/ListCastMembers'\n import { CreateCastMember } from './features/castMembers/CreateCastMember'\n+import { EditCastMember } from './features/castMembers/EditCastMember'\n \n \n export default function App() {\n   return (\n@@ -30,9 +31,9 @@\n               <Route path=\"/categories/edit/:id\" element={<EditCategory />} />\n               {/* Cast members */}\n               <Route path=\"/cast-members\" element={<ListCastMembers />} />\n               <Route path=\"/cast-members/create\" element={<CreateCastMember />} />\n-              <Route path=\"/cast-members/edit/:id\" element={<CreateCastMember />} />\n+              <Route path=\"/cast-members/edit/:id\" element={<EditCastMember />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1699975548541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { CreateCategory } from './features/categories/CreateCategory'\n import { EditCategory } from './features/categories/EditCategory'\n import { SnackbarProvider } from 'notistack'\n import { ListCastMembers } from './features/castMembers/ListCastMembers'\n-import { CreateCastMember } from './features/castMembers/CreateCastMember'\n+import { CreateCastMember } from './features/castMembers/CreateCastMembers'\n import { EditCastMember } from './features/castMembers/EditCastMember'\n \n \n export default function App() {\n"
                 }
             ],
             "date": 1695757259942,
