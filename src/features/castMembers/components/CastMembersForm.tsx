@@ -1,24 +1,34 @@
-import { Box, Grid, FormControl, TextField, FormGroup, FormControlLabel, Button, RadioGroup, Radio, FormLabel } from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { CastMember } from '../../../types/CastMembers';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+} from '@mui/material'
+import type { ChangeEvent, FormEvent } from 'react'
+import { Link } from 'react-router-dom'
+import type { CastMember } from '../../../types/CastMembers'
 
 type Props = {
-  castMember: CastMember;
-  isDisabled?: boolean;
-  isLoading?: boolean;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  castMember: CastMember
+  isDisabled?: boolean
+  isLoading?: boolean
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
 
-export default function CastMemberForm({
+function CastMembersForm({
   castMember,
   isDisabled = false,
   isLoading = false,
   handleSubmit,
   handleChange,
 }: Props) {
-
   return (
     <Box p={2}>
       <form onSubmit={handleSubmit}>
@@ -29,10 +39,10 @@ export default function CastMemberForm({
                 required
                 name="name"
                 label="Name"
-                value={castMember.name || ""}
+                value={castMember.name}
                 disabled={isDisabled}
                 onChange={handleChange}
-                inputProps={{ "data-testid": "name" }}
+                inputProps={{ 'data-testid': 'name' }}
               />
             </FormControl>
           </Grid>
@@ -41,16 +51,15 @@ export default function CastMemberForm({
               <FormLabel>Type</FormLabel>
               <RadioGroup
                 aria-labelledby="type of cast member"
-                defaultValue="Diretor"
+                defaultValue="Director"
                 name="type"
                 onChange={handleChange}
                 value={castMember.type}
-                data-testid="type"
               >
                 <FormControlLabel
                   value={1}
                   control={<Radio />}
-                  label="Diretor"
+                  label="Director"
                 />
                 <FormControlLabel value={2} control={<Radio />} label="Actor" />
               </RadioGroup>
@@ -61,14 +70,13 @@ export default function CastMemberForm({
               <Button variant="contained" component={Link} to="/cast-members">
                 Back
               </Button>
-
               <Button
                 type="submit"
                 variant="contained"
                 color="secondary"
                 disabled={isDisabled || isLoading}
               >
-                {isLoading ? "Loading..." : "Save"}
+                {isLoading ? 'Loading...' : 'Save'}
               </Button>
             </Box>
           </Grid>
@@ -77,3 +85,6 @@ export default function CastMemberForm({
     </Box>
   )
 }
+
+export { CastMembersForm }
+export type { Props as CastMembersFormProps }

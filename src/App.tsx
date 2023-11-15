@@ -8,7 +8,7 @@ import { CreateCategory } from './features/categories/CreateCategory'
 import { EditCategory } from './features/categories/EditCategory'
 import { SnackbarProvider } from 'notistack'
 import { ListCastMembers } from './features/castMembers/ListCastMembers'
-import { CreateCastMember } from './features/castMembers/CreateCastMembers'
+import { CreateCastMember } from './features/castMembers/CreateCastMember'
 import { EditCastMember } from './features/castMembers/EditCastMember'
 
 

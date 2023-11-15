@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 
 import { useDeleteCastMemberMutation, useGetCastMembersQuery } from './castMembersSlice'
 import { GridFilterModel } from '@mui/x-data-grid'
-import { useSnackbar } from 'notistack'
 import { CastMembersTable } from './components/CastMembersTable'
+import { useSnackbar } from 'notistack'
 
 export const ListCastMembers = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const [options, setOptions] = useState({
     page: 1,
     search: "",
@@ -48,7 +49,7 @@ export const ListCastMembers = () => {
   }, [deleteCastMemberStatus, enqueueSnackbar])
 
   if (error) {
-    return <Typography variant="h2">Error!</Typography>
+    return <Typography variant="h2">Error fetching cast members!</Typography>
   }
 
   return (

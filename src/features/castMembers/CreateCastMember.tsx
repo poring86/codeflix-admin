@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { initialState, useCreateCastMemberMutation } from './castMembersSlice'
 import { CastMember } from '../../types/CastMembers';
-import CastMemberForm from './components/CastMemberForm';
+import { CastMembersForm } from './components/CastMembersForm';
 
 export const CreateCastMembers = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -38,7 +38,7 @@ export const CreateCastMembers = () => {
             <Typography variant="h4">Create Cast Member</Typography>
           </Box>
         </Box>
-        <CastMemberForm
+        <CastMembersForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           castMember={castMemberState}

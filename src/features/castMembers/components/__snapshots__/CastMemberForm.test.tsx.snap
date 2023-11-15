@@ -75,7 +75,6 @@ exports[`CastMemberForm should render castMember form correcty 1`] = `
             <div
               aria-labelledby="type of cast member"
               class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
-              data-testid="type"
               role="radiogroup"
             >
               <label
@@ -124,7 +123,7 @@ exports[`CastMemberForm should render castMember form correcty 1`] = `
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
                 >
-                  Diretor
+                  Director
                 </span>
               </label>
               <label
@@ -288,7 +287,6 @@ exports[`CastMemberForm should render castmember form with disabled state 1`] = 
             <div
               aria-labelledby="type of cast member"
               class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
-              data-testid="type"
               role="radiogroup"
             >
               <label
@@ -337,7 +335,7 @@ exports[`CastMemberForm should render castmember form with disabled state 1`] = 
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
                 >
-                  Diretor
+                  Director
                 </span>
               </label>
               <label
@@ -498,7 +496,6 @@ exports[`CastMemberForm should render castmember form with loading state 1`] = `
             <div
               aria-labelledby="type of cast member"
               class="MuiFormGroup-root css-dmmspl-MuiFormGroup-root"
-              data-testid="type"
               role="radiogroup"
             >
               <label
@@ -547,7 +544,7 @@ exports[`CastMemberForm should render castmember form with loading state 1`] = `
                 <span
                   class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
                 >
-                  Diretor
+                  Director
                 </span>
               </label>
               <label

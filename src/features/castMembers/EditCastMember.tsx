@@ -1,43 +1,52 @@
-import { Box, Paper, Typography } from '@mui/material'
+import { useSnackbar } from 'notistack'
 import { useEffect, useState } from 'react'
-import { enqueueSnackbar } from 'notistack'
-import { initialState, useGetCastMemberQuery, useUpdateCastMemberMutation } from './castMembersSlice'
-import { v4 as uuidv4 } from 'uuid';
-import { CastMember } from '../../types/CastMembers';
-import CastMemberForm from './components/CastMemberForm';
-import { useParams } from 'react-router-dom';
+import { CastMember } from '../../types/CastMembers'
+import {
+  initialState,
+  useGetCastMemberQuery,
+  useUpdateCastMemberMutation,
+} from './castMembersSlice'
+import type { ChangeEvent, FormEvent } from 'react'
 
-export const EditCastMember = () => {
-  const id = useParams().id ?? ""
-  const { data: castMember, isFetching } = useGetCastMemberQuery({ id });
+import { Box, Paper, Typography } from '@mui/material'
+import { useParams } from 'react-router-dom'
+import { CastMembersForm } from './components/CastMembersForm'
+
+export function EditCastMembers() {
+  const id = useParams().id || ''
+  const { enqueueSnackbar } = useSnackbar()
+  const { data: castMember, isFetching } = useGetCastMemberQuery({ id })
   const [castMemberState, setCastMemberState] =
-    useState<CastMember>(initialState);
-  const [updateCastMember, status] = useUpdateCastMemberMutation();
+    useState<CastMember>(initialState)
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-    setCastMemberState({ ...castMemberState, [name]: value });
+  const [updateCastMember, status] = useUpdateCastMemberMutation()
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    await updateCastMember(castMemberState)
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    await updateCastMember({ ...castMemberState });
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setCastMemberState({ ...castMemberState, [name]: value })
   }
 
   useEffect(() => {
     if (castMember) {
       setCastMemberState(castMember.data)
     }
-  }, [castMember]);
+  }, [castMember])
 
   useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar(`Cast member updated`, { variant: "success" });
+      enqueueSnackbar('Cast member updated successfully!', {
+        variant: 'success',
+      })
     }
     if (status.isError) {
-      enqueueSnackbar(`Cast member not updated`, { variant: "error" });
+      enqueueSnackbar('Cast member not updated!', { variant: 'error' })
     }
-  }, [status, enqueueSnackbar]);
+  }, [enqueueSnackbar, status])
 
   return (
     <Box>
@@ -47,14 +56,14 @@ export const EditCastMember = () => {
             <Typography variant="h4">Edit Cast Member</Typography>
           </Box>
         </Box>
-        <CastMemberForm
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
+        <CastMembersForm
           castMember={castMemberState}
-          isLoading={isFetching || status.isLoading}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
           isDisabled={status.isLoading}
+          isLoading={isFetching || status.isLoading}
         />
       </Paper>
     </Box>
-  );
-};
+  )
+}

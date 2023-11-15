@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react"
-import CastMemberForm from "./CastMemberForm"
+import { CastMembersForm } from "./CastMembersForm"
 import { BrowserRouter } from "react-router-dom"
 
 const Props = {
@@ -19,21 +19,21 @@ const Props = {
 
 describe("CastMemberForm", () => {
   it("should render castMember form correcty", () => {
-    const { asFragment } = render(<CastMemberForm  {...Props} />, {
+    const { asFragment } = render(<CastMembersForm  {...Props} />, {
       wrapper: BrowserRouter
     })
     expect(asFragment()).toMatchSnapshot()
   })
 
   it("should render castmember form with loading state", () => {
-    const { asFragment } = render(<CastMemberForm {...Props} isLoading />, {
+    const { asFragment } = render(<CastMembersForm {...Props} isLoading />, {
       wrapper: BrowserRouter
     })
     expect(asFragment()).toMatchSnapshot()
   })
 
   it("should render castmember form with disabled state", () => {
-    const { asFragment } = render(<CastMemberForm {...Props} isLoading={true} isDisabled={true} />, {
+    const { asFragment } = render(<CastMembersForm {...Props} isLoading={true} isDisabled={true} />, {
       wrapper: BrowserRouter
     })
 

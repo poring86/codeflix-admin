@@ -7,7 +7,7 @@ import {
 } from '../../utils/test-utils'
 import { baseUrl } from "../api/apiSlice"
 import { setupServer } from "msw/lib/node"
-import { CreateCastMembers } from "./CreateCastMembers"
+import { CreateCastMembers } from "./CreateCastMember"
 
 
 export const handlers = [
