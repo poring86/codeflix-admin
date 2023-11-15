@@ -3,7 +3,7 @@ import { baseUrl } from "../api/apiSlice"
 import { setupServer } from "msw/lib/node"
 import { castMembersApiSlice } from "./castMembersSlice"
 import { ListCastMembers } from "./ListCastMembers"
-import { renderWithProviders, screen, waitFor } from "../../utils/test-utils"
+import { fireEvent, renderWithProviders, screen, waitFor } from "../../utils/test-utils"
 
 import { castMembersResultPage1, castMembersResultPage2 } from './mocks'
 
@@ -69,6 +69,38 @@ describe("ListCastMembers", () => {
     await waitFor(() => {
       const error = screen.getByText('Error fetching cast members!')
       expect(error).toBeInTheDocument()
+    })
+  })
+
+  it("should handle on page change", async () => {
+    renderWithProviders(<ListCastMembers />)
+    await waitFor(() => {
+      const name = screen.getByText('Klocko')
+      expect(name).toBeInTheDocument()
+    })
+
+    const nextButton = screen.getByTestId('KeyboardArrowRightIcon')
+    fireEvent.click(nextButton)
+    await waitFor(() => {
+      const name = screen.getByText('Bartoletti')
+      expect(name).toBeInTheDocument()
+    })
+  })
+
+  it('should handle filter change', async () => {
+    renderWithProviders(<ListCastMembers />)
+
+    await waitFor(() => {
+      const name = screen.getByText('Klocko')
+      expect(name).toBeInTheDocument()
+    })
+
+    const input = screen.getByPlaceholderText('Search…')
+    fireEvent.change(input, { target: { value: 'Bartoletti' } })
+
+    await waitFor(() => {
+      const loading = screen.getByRole('progressbar')
+      expect(loading).toBeInTheDocument()
     })
   })
 })
