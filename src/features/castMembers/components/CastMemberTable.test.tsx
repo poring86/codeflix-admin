@@ -1,6 +1,6 @@
-import { CastMembersTable } from "./CastMembersTable"
-import { render } from "@testing-library/react"
-import { BrowserRouter } from "react-router-dom"
+import { render } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { CastMembersTable } from "./CastMembersTable";
 
 const Props = {
   data: {
@@ -40,12 +40,13 @@ const Props = {
 };
 
 describe("CastMembersTable", () => {
-  it("should render castmember table correctly", () => {
+  it("should render castMember talbe correcly", () => {
     const { asFragment } = render(<CastMembersTable {...Props} />, {
-      wrapper: BrowserRouter
-    })
-    expect(asFragment()).toMatchSnapshot()
-  })
+      wrapper: BrowserRouter,
+    });
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   it("should render CastMembersTable with loading", () => {
     const { asFragment } = render(<CastMembersTable {...Props} isFetching />, {
@@ -55,24 +56,30 @@ describe("CastMembersTable", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("should render castmember table  without data", () => {
-    const { asFragment } = render(<CastMembersTable {...Props} data={{ data: [], meta: {} } as any} />, {
-      wrapper: BrowserRouter
-    })
-    expect(asFragment()).toMatchSnapshot()
-  })
+  it("should render CastMembersTable with empty data", () => {
+    const { asFragment } = render(
+      <CastMembersTable {...Props} data={{ data: [], meta: {} } as any} />,
+      { wrapper: BrowserRouter }
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   it("should render corret type", () => {
-    const { asFragment } = render(<CastMembersTable
-      {...Props}
-      data={{
-        data: [{ ...Props.data.data[0], type: 2 }],
-        links: { ...Props.data.links },
-        meta: { ...Props.data.meta },
-      }}
-    />, {
-      wrapper: BrowserRouter
-    })
-    expect(asFragment()).toMatchSnapshot()
-  })
-})
+    const { asFragment } = render(
+      <CastMembersTable
+        {...Props}
+        data={{
+          data: [{ ...Props.data.data[0], type: 2 }],
+          links: { ...Props.data.links },
+          meta: { ...Props.data.meta },
+        }}
+      />,
+      {
+        wrapper: BrowserRouter,
+      }
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+});

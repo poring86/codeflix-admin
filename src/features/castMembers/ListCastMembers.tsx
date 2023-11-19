@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-
-import { useDeleteCastMemberMutation, useGetCastMembersQuery } from './castMembersSlice'
 import { GridFilterModel } from '@mui/x-data-grid'
-import { CastMembersTable } from './components/CastMembersTable'
 import { useSnackbar } from 'notistack'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  useDeleteCastMemberMutation,
+  useGetCastMembersQuery,
+} from './castMembersSlice'
+import { CastMembersTable } from './components/CastMembersTable'
 
-export const ListCastMembers = () => {
-  const { enqueueSnackbar } = useSnackbar()
+export function ListCastMembers() {
   const [options, setOptions] = useState({
     page: 1,
-    search: "",
+    search: '',
     perPage: 10,
-    rowsPerPage: [10, 20, 30],
+    rowsPerPage: [10, 25, 50, 100],
   })
+
+  const { enqueueSnackbar } = useSnackbar()
   const { data, isFetching, error } = useGetCastMembersQuery(options)
-  const [deleteCastMember, deleteCastMemberStatus] = useDeleteCastMemberMutation()
+  const [deleteCastMember, deleteCastMemberStatus] =
+    useDeleteCastMemberMutation()
 
   async function handleDeleteCastMember(id: string) {
     await deleteCastMember({ id })
@@ -32,19 +36,20 @@ export const ListCastMembers = () => {
 
   function handleFilterChange(filterModel: GridFilterModel) {
     if (filterModel.quickFilterValues?.length) {
-      const search = filterModel.quickFilterValues.join("")
-      return setOptions({ ...options, search })
-    }
-
-    return setOptions({ ...options, search: "" })
+      const search = filterModel.quickFilterValues.join('')
+      setOptions({ ...options, search })
+    } else setOptions({ ...options, search: '' })
   }
 
   useEffect(() => {
     if (deleteCastMemberStatus.isSuccess) {
-      enqueueSnackbar(`Cast member deleted`, { variant: "success" })
+      enqueueSnackbar('Cast Member deleted successfully', {
+        variant: 'success',
+      })
     }
-    if (deleteCastMemberStatus.isError) {
-      enqueueSnackbar(`Cast member not deleted`, { variant: "error" })
+
+    if (deleteCastMemberStatus.error) {
+      enqueueSnackbar('Cast Member not deleted', { variant: 'error' })
     }
   }, [deleteCastMemberStatus, enqueueSnackbar])
 
@@ -60,13 +65,15 @@ export const ListCastMembers = () => {
           color="secondary"
           component={Link}
           to="/cast-members/create"
-          style={{ marginBottom: "1rem" }}
-        >New Cast Member</Button>
+          style={{ marginBottom: '1rem' }}
+        >
+          New Cast Member
+        </Button>
       </Box>
       <CastMembersTable
         data={data}
-        perPage={options.perPage}
         isFetching={isFetching}
+        perPage={options.perPage}
         rowsPerPage={options.rowsPerPage}
         handleDelete={handleDeleteCastMember}
         handleOnPageChange={handleOnPageChange}
