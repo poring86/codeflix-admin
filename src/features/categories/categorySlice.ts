@@ -96,4 +96,3 @@ export const {
   useGetCategoryQuery,
 } = categoriesApiSlice
 
-export { Category }

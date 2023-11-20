@@ -1,7 +1,7 @@
 import { Box, Grid, FormControl, TextField, FormGroup, FormControlLabel, Switch, Button } from '@mui/material'
 import React from 'react'
-import { Category } from '../categorySlice'
 import { Link } from 'react-router-dom';
+import { Category } from '../../../types/Category';
 
 type Props = {
   category: Category;

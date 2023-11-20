@@ -10,11 +10,10 @@ import { SnackbarProvider } from 'notistack'
 import { ListCastMembers } from './features/castMembers/ListCastMembers'
 import { CreateCastMembers } from './features/castMembers/CreateCastMember'
 import { EditCastMembers } from './features/castMembers/EditCastMember'
-
+import { CreateGenre } from './features/genre/CreateGenre'
 
 export default function App() {
   return (
-
     <ThemeProvider theme={appTheme}>
       <SnackbarProvider maxSnack={3} anchorOrigin={{
         vertical: "top",
@@ -34,7 +33,7 @@ export default function App() {
               <Route path="/cast-members/create" element={<CreateCastMembers />} />
               <Route path="/cast-members/edit/:id" element={<EditCastMembers />} />
               {/* Genre */}
-              <Route path="/genre/create" element={<Typography>Genre Create</Typography>} />
+              <Route path="/genre/create" element={<CreateGenre />} />
               <Route path="*" element={
                 <Box sx={{ color: 'white' }}>
                   <Typography variant="h1" component="h1">

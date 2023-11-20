@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 33,
+            "activePatchIndex": 34,
             "patches": [
                 {
                     "date": 1696083248643,
@@ -140,6 +140,10 @@
                 {
                     "date": 1699915723401,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,8 @@\n                 inputProps={{ \"data-testid\": \"name\" }}\n               />\n             </FormControl>\n           </Grid>\n-\n-\n-\n           <Grid item xs={12}>\n             <FormControl fullWidth>\n               <TextField\n                 required\n"
+                },
+                {
+                    "date": 1700499513921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { Box, Grid, FormControl, TextField, FormGroup, FormControlLabel, Switch, Button } from '@mui/material'\n import React from 'react'\n-import { Category } from '../categorySlice'\n import { Link } from 'react-router-dom';\n+import { Category } from '../../../types/Category';\n \n type Props = {\n   category: Category;\n   isDisabled?: boolean;\n"
                 }
             ],
             "date": 1696083248643,
