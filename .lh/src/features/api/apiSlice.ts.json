@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1698928631609,
@@ -40,6 +40,10 @@
                 {
                     "date": 1699035941509,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\n \n-const baseUrl = 'http://localhost:8000/api'\n+export const baseUrl = \"http://localhost:8000/api\";\n \n export const apiSlice = createApi({\n-    reducerPath: 'api',\n+    reducerPath: \"api\",\n     tagTypes: [\"Categories\"],\n-    endpoints: (builder) => ({\n-    }),\n+    endpoints: (builder) => ({}),\n     baseQuery: fetchBaseQuery({ baseUrl }),\n-})\n+});\n"
+                },
+                {
+                    "date": 1700523638463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n export const baseUrl = \"http://localhost:8000/api\";\n \n export const apiSlice = createApi({\n     reducerPath: \"api\",\n-    tagTypes: [\"Categories\"],\n+    tagTypes: [\"Categories\", \"CastMembers\", \"Genres\"],\n     endpoints: (builder) => ({}),\n     baseQuery: fetchBaseQuery({ baseUrl }),\n });\n"
                 }
             ],
             "date": 1698928631609,
