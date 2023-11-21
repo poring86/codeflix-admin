@@ -1,7 +1,8 @@
 import { Genre, GenreParams, GenrePayload } from "../../types/Genres"
 import { apiSlice } from "../api/apiSlice"
+import { Results } from "../../types/Category"
 
-const endpointUrl = '/genres'
+const endpointUrl = "/genres";
 
 export const initialState = {
   id: "",
@@ -12,11 +13,11 @@ export const initialState = {
   isActive: false,
   categories: [],
   description: "",
-  pivot: { genre_id: "", category_id: "" }
-}
+  pivot: { genre_id: "", category_id: "" },
+};
 
 function parseQueryParams(params: GenreParams): string {
-  const query = new URLSearchParams()
+  const query = new URLSearchParams();
 
   if (params.page) {
     query.append('page', params.page.toString())
@@ -37,6 +38,10 @@ function parseQueryParams(params: GenreParams): string {
   return query.toString()
 }
 
+function getCategories() {
+  return `categories?all=true`;
+}
+
 function createGenreMutation(genre: GenrePayload) {
   return {
     url: endpointUrl,
@@ -47,9 +52,16 @@ function createGenreMutation(genre: GenrePayload) {
 
 export const genreSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
+    getCaTegories: query<Results, void>({
+      query: getCategories,
+    }),
     createGenre: mutation<Genre, GenrePayload>({
       query: createGenreMutation,
       invalidatesTags: ["Genres"]
     })
   })
 })
+
+export const {
+  useCreateGenreMutation, useGetCaTegoriesQuery
+} = genreSlice;

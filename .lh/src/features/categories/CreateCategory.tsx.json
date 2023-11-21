@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 48,
+            "activePatchIndex": 50,
             "patches": [
                 {
                     "date": 1695855701445,
@@ -200,6 +200,14 @@
                 {
                     "date": 1699916227648,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { Box, Paper, Typography } from '@mui/material'\n-import { useEffect, useState } from 'react'\n+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'\n import { useCreateCategoryMutation } from './categorySlice'\n import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n"
+                },
+                {
+                    "date": 1700533896997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,15 @@\n import { Box, Paper, Typography } from '@mui/material'\n import { ChangeEvent, FormEvent, useEffect, useState } from 'react'\n import { useCreateCategoryMutation } from './categorySlice'\n-import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n+import { useGetCategoriesQuery } from '../genre/genreSlice';\n+import { GenreForm } from '../genre/components/GenreForm';\n \n export function CreateCategory() {\n   const { enqueueSnackbar } = useSnackbar()\n+  const { data: categories } = useGetCategoriesQuery()\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: '',\n     name: '',\n@@ -48,10 +50,11 @@\n           <Box mb={2}>\n             <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n         </Box>\n-        <CategoryForm\n-          category={categoryState}\n+        <GenreForm\n+          genre={genreState}\n+          categories={categories.data}\n           handleChange={handleChange}\n           handleSubmit={handleSubmit}\n           handleToggle={handleToggle}\n           isDisabled={status.isLoading}\n"
+                },
+                {
+                    "date": 1700533928595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,13 @@\n import { Box, Paper, Typography } from '@mui/material'\n import { ChangeEvent, FormEvent, useEffect, useState } from 'react'\n import { useCreateCategoryMutation } from './categorySlice'\n+import { CategoryForm } from './components/CategoryForm'\n import { Category } from '../../types/Category';\n import { useSnackbar } from 'notistack'\n-import { useGetCategoriesQuery } from '../genre/genreSlice';\n-import { GenreForm } from '../genre/components/GenreForm';\n \n export function CreateCategory() {\n   const { enqueueSnackbar } = useSnackbar()\n-  const { data: categories } = useGetCategoriesQuery()\n   const [createCategory, status] = useCreateCategoryMutation()\n   const [categoryState, setCategoryState] = useState<Category>({\n     id: '',\n     name: '',\n@@ -50,11 +48,10 @@\n           <Box mb={2}>\n             <Typography variant=\"h4\">Create Category</Typography>\n           </Box>\n         </Box>\n-        <GenreForm\n-          genre={genreState}\n-          categories={categories.data}\n+        <CategoryForm\n+          category={categoryState}\n           handleChange={handleChange}\n           handleSubmit={handleSubmit}\n           handleToggle={handleToggle}\n           isDisabled={status.isLoading}\n"
                 }
             ],
             "date": 1695855701445,
