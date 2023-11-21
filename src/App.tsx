@@ -11,6 +11,7 @@ import { ListCastMembers } from './features/castMembers/ListCastMembers'
 import { CreateCastMembers } from './features/castMembers/CreateCastMember'
 import { EditCastMembers } from './features/castMembers/EditCastMember'
 import { CreateGenre } from './features/genre/CreateGenre'
+import { EditGenre } from './features/genre/EditGenre'
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
               <Route path="/cast-members/edit/:id" element={<EditCastMembers />} />
               {/* Genre */}
               <Route path="/genre/create" element={<CreateGenre />} />
+              <Route path="/genre/edit/:id" element={<EditGenre />} />
               <Route path="*" element={
                 <Box sx={{ color: 'white' }}>
                   <Typography variant="h1" component="h1">
