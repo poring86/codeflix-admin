@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 59,
+            "activePatchIndex": 62,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -244,6 +244,18 @@
                 {
                     "date": 1700607833503,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n import { ListCastMembers } from './features/castMembers/ListCastMembers'\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n-import { GenreEdit } from './features/genre/EditGenre'\n+import { EditGenre } from './features/genre/EditGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n@@ -34,9 +34,9 @@\n               <Route path=\"/cast-members/create\" element={<CreateCastMembers />} />\n               <Route path=\"/cast-members/edit/:id\" element={<EditCastMembers />} />\n               {/* Genre */}\n               <Route path=\"/genre/create\" element={<CreateGenre />} />\n-              <Route path=\"/genre/edit/:id\" element={<GenreEdit />} />\n+              <Route path=\"/genre/edit/:id\" element={<EditGenre />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1700683552785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n+import { GenreList } from './features/genre/ListGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n@@ -33,10 +34,11 @@\n               <Route path=\"/cast-members\" element={<ListCastMembers />} />\n               <Route path=\"/cast-members/create\" element={<CreateCastMembers />} />\n               <Route path=\"/cast-members/edit/:id\" element={<EditCastMembers />} />\n               {/* Genre */}\n-              <Route path=\"/genre/create\" element={<CreateGenre />} />\n-              <Route path=\"/genre/edit/:id\" element={<EditGenre />} />\n+              <Route path=\"/genres\" element={<GenreListes />} />\n+              <Route path=\"/genres/create\" element={<CreateGenre />} />\n+              <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1700683573319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n-import { GenreList } from './features/genre/ListGenre'\n+import { GenreList, GenreList } from './features/genre/ListGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n@@ -34,9 +34,9 @@\n               <Route path=\"/cast-members\" element={<ListCastMembers />} />\n               <Route path=\"/cast-members/create\" element={<CreateCastMembers />} />\n               <Route path=\"/cast-members/edit/:id\" element={<EditCastMembers />} />\n               {/* Genre */}\n-              <Route path=\"/genres\" element={<GenreListes />} />\n+              <Route path=\"/genres\" element={<GenreList />} />\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n"
+                },
+                {
+                    "date": 1700684123186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n-import { GenreList, GenreList } from './features/genre/ListGenre'\n+import { GenreList } from './features/genre/ListGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n"
                 }
             ],
             "date": 1695757259942,

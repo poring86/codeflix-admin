@@ -12,8 +12,6 @@ export const CreateGenre = () => {
   const [createGenre, status] = useCreateGenreMutation();
   const [genreState, setGenreState] = useState<Genre>(genreInitialState);
 
-  console.log('categories', categories)
-
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setGenreState({ ...genreState, [name]: value });
@@ -54,3 +52,4 @@ export const CreateGenre = () => {
     </Box>
   );
 };
+
