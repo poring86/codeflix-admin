@@ -6,7 +6,7 @@ import { GridFilterModel } from "@mui/x-data-grid";
 import { GenresTable } from "./components/GenreTable";
 import { useGetGenresQuery, useDeleteGenreMutation } from "./genreSlice";
 
-export const GenreList = () => {
+export const ListGenre = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [options, setOptions] = useState({
     page: 1,
