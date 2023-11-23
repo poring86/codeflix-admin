@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 62,
+            "activePatchIndex": 67,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -256,6 +256,26 @@
                 {
                     "date": 1700684123186,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n-import { GenreList, GenreList } from './features/genre/ListGenre'\n+import { GenreList } from './features/genre/ListGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n"
+                },
+                {
+                    "date": 1700775415098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import { CreateCastMembers } from './features/castMembers/CreateCastMember'\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n-import { GenreList } from './features/genre/ListGenre'\n+import { ListGenre } from './features/genre/ListGenre'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n@@ -34,9 +34,9 @@\n               <Route path=\"/cast-members\" element={<ListCastMembers />} />\n               <Route path=\"/cast-members/create\" element={<CreateCastMembers />} />\n               <Route path=\"/cast-members/edit/:id\" element={<EditCastMembers />} />\n               {/* Genre */}\n-              <Route path=\"/genres\" element={<GenreList />} />\n+              <Route path=\"/genres\" element={<ListGenre />} />\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n"
+                },
+                {
+                    "date": 1700775577293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n               {/* Genre */}\n               <Route path=\"/genres\" element={<ListGenre />} />\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n+              {/* Videos */}\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1700775849349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n               <Route path=\"/genres\" element={<ListGenre />} />\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               {/* Videos */}\n+              <Route path=\"/videos\" element={<ListGenre />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1700775857765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n               <Route path=\"/genres\" element={<ListGenre />} />\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               {/* Videos */}\n-              <Route path=\"/videos\" element={<ListGenre />} />\n+              <Route path=\"/videos\" element={<VideosList />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1700775911190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n import { ListGenre } from './features/genre/ListGenre'\n+import { VideosList } from './features/videos/VideosList'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n"
                 }
             ],
             "date": 1695757259942,

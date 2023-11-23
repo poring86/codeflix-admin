@@ -12,7 +12,8 @@ import { CreateCastMembers } from './features/castMembers/CreateCastMember'
 import { EditCastMembers } from './features/castMembers/EditCastMember'
 import { CreateGenre } from './features/genre/CreateGenre'
 import { EditGenre } from './features/genre/EditGenre'
-import { GenreList } from './features/genre/ListGenre'
+import { ListGenre } from './features/genre/ListGenre'
+import { VideosList } from './features/videos/VideosList'
 
 export default function App() {
   return (
@@ -35,9 +36,11 @@ export default function App() {
               <Route path="/cast-members/create" element={<CreateCastMembers />} />
               <Route path="/cast-members/edit/:id" element={<EditCastMembers />} />
               {/* Genre */}
-              <Route path="/genres" element={<GenreList />} />
+              <Route path="/genres" element={<ListGenre />} />
               <Route path="/genres/create" element={<CreateGenre />} />
               <Route path="/genres/edit/:id" element={<EditGenre />} />
+              {/* Videos */}
+              <Route path="/videos" element={<VideosList />} />
               <Route path="*" element={
                 <Box sx={{ color: 'white' }}>
                   <Typography variant="h1" component="h1">
