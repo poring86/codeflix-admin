@@ -85,7 +85,7 @@ export function VideosTable({
     const remainingGenres = genres.length - twoFirstGenres.length;
 
     return (
-      <Box style={{ overflowX: "scroll" }}>
+      <Box style={{ overflowX: "auto" }}>
         {twoFirstGenres.map((genre, index) => (
           <Chip
             key={index}
@@ -118,7 +118,7 @@ export function VideosTable({
     const remainingCategories = categories.length - twoFirstCategories.length;
 
     return (
-      <Box style={{ overflowX: "scroll" }}>
+      <Box style={{ overflowX: "auto" }}>
         {twoFirstCategories.map((category, index) => (
           <Chip
             key={index}
