@@ -1,5 +1,8 @@
-import { Result, Results, Video, VideoParams } from "../../types/Videos";
+import { Result, Results, Video, VideoParams, VideoPayload } from "../../types/Videos";
 import { apiSlice } from "../api/apiSlice";
+import { Results as CategoriesResults } from "../../types/Category";
+import { Genres as GenresResults } from "../../types/Genres";
+import { Results as CastMembersResults } from "../../types/CastMembers";
 
 const endpointUrl = "/videos";
 
@@ -42,9 +45,29 @@ function deleteVideo({ id }: { id: string }) {
   return { url: `${endpointUrl}/${id}`, method: "DELETE" };
 }
 
-const getVideo = ({ id }: { id: string }) => {
-  return `${endpointUrl}/?${id}`;
-};
+function getVideo({ id }: { id: string }) {
+  return `${endpointUrl}/${id}`;
+}
+
+function updateVideo(video: VideoPayload) {
+  return {
+    url: `${endpointUrl}/${video.id}`,
+    method: "PUT",
+    body: video,
+  };
+}
+
+function getAllCategories() {
+  return `categories?all=true`;
+}
+
+function getAllGenres() {
+  return `genres?all=true`;
+}
+
+function getAllCastMembers() {
+  return `cast_members?all=true`;
+}
 
 
 export const videosSlice = apiSlice.injectEndpoints({
@@ -61,11 +84,31 @@ export const videosSlice = apiSlice.injectEndpoints({
       query: deleteVideo,
       invalidatesTags: ["Videos"],
     }),
+    updateVideo: mutation<Result, VideoPayload>({
+      query: updateVideo,
+      invalidatesTags: ["Videos"],
+    }),
+    getAllCategories: query<CategoriesResults, void>({
+      query: getAllCategories,
+      providesTags: ["Categories"],
+    }),
+    getAllGenres: query<GenresResults, void>({
+      query: getAllGenres,
+      providesTags: ["Genres"],
+    }),
+    getAllCastMembers: query<CastMembersResults, void>({
+      query: getAllCastMembers,
+      providesTags: ["CastMembers"],
+    }),
   })
 })
 
 export const {
   useGetVideosQuery,
   useDeleteVideoMutation,
-  useGetVideoQuery
+  useGetVideoQuery,
+  useUpdateVideoMutation,
+  useGetAllCategoriesQuery,
+  useGetAllCastMembersQuery,
+  useGetAllGenresQuery,
 } = videosSlice

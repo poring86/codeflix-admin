@@ -64,7 +64,6 @@ describe("GenreTable", () => {
 
   it("should handle Genres table with delete button", () => {
     const { asFragment } = renderWithProviders(<GenresTable {...Props} data={mockData} handleDelete={() => {
-      console.log("delete")
     }} />)
     expect(asFragment()).toMatchSnapshot()
   })
