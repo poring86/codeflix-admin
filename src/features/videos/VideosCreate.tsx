@@ -1,21 +1,18 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { initialState, useGetAllCastMembersQuery, useGetAllCategoriesQuery, useGetAllGenresQuery, useGetVideoQuery, useUpdateVideoMutation } from "./videosSlice";
+import { initialState, useCreateVideoMutation, useGetAllCastMembersQuery, useGetAllCategoriesQuery, useGetAllGenresQuery } from "./videosSlice";
 import { Video } from "../../types/Videos";
 import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
 
-export function VideosEdit() {
+export const VideosCreate = () => {
   const { enqueueSnackbar } = useSnackbar()
+  const [videoState, setVideoState] = useState<Video>(initialState)
+  const [createVideo, status] = useCreateVideoMutation()
   const { data: genres } = useGetAllGenresQuery();
   const { data: castMembers } = useGetAllCastMembersQuery();
   const { data: categories } = useGetAllCategoriesQuery();
-  const id = useParams<{ id: string }>().id as string
-  const { data: video, isFetching } = useGetVideoQuery({ id })
-  const [videoState, setVideoState] = useState<Video>(initialState)
-  const [updateVideo, status] = useUpdateVideoMutation();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -24,21 +21,15 @@ export function VideosEdit() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    await updateVideo(mapVideoToForm(videoState))
+    await createVideo(mapVideoToForm(videoState))
   }
 
   useEffect(() => {
-    if (video) {
-      setVideoState(video.data)
-    }
-  }, [video])
-
-  useEffect(() => {
     if (status.isSuccess) {
-      enqueueSnackbar(`Video updated`, { variant: "success" });
+      enqueueSnackbar(`Video created`, { variant: "success" });
     }
     if (status.isError) {
-      enqueueSnackbar(`Error updating video`, { variant: "error" });
+      enqueueSnackbar(`Error creating video`, { variant: "error" });
     }
   }, [status, enqueueSnackbar])
 
@@ -47,7 +38,7 @@ export function VideosEdit() {
       <Paper>
         <Box p={2}>
           <Box mb={2}>
-            <Typography variant="h4">Edit Video</Typography>
+            <Typography variant="h4">Create Video</Typography>
           </Box>
         </Box>
         <VideosForm
@@ -57,8 +48,8 @@ export function VideosEdit() {
           cast_members={castMembers?.data}
           genres={genres?.data}
           categories={categories?.data}
-          isDisabled={isFetching}
-          isLoading={isFetching}
+          isDisabled={status.isLoading}
+          isLoading={status.isLoading}
         />
       </Paper>
     </Box>

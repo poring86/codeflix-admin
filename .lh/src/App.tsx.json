@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 67,
+            "activePatchIndex": 70,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -276,6 +276,18 @@
                 {
                     "date": 1700775911190,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n import { EditCastMembers } from './features/castMembers/EditCastMember'\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n import { ListGenre } from './features/genre/ListGenre'\n+import { VideosList } from './features/videos/VideosList'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n"
+                },
+                {
+                    "date": 1701089504992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n import { CreateGenre } from './features/genre/CreateGenre'\n import { EditGenre } from './features/genre/EditGenre'\n import { ListGenre } from './features/genre/ListGenre'\n import { VideosList } from './features/videos/VideosList'\n+import { VideosEdit } from './features/videos/VideosEdit'\n+import { VideosCreate } from './features/videos/VideosCreate'\n \n export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n@@ -40,8 +42,10 @@\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               {/* Videos */}\n               <Route path=\"/videos\" element={<VideosList />} />\n+              <Route path=\"/videos\" element={<VideosCreate />} />\n+              <Route path=\"/videos/edit/:id\" element={<VideosEdit />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n                     404\n"
+                },
+                {
+                    "date": 1701089525344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n               <Route path=\"/genres/create\" element={<CreateGenre />} />\n               <Route path=\"/genres/edit/:id\" element={<EditGenre />} />\n               {/* Videos */}\n               <Route path=\"/videos\" element={<VideosList />} />\n-              <Route path=\"/videos\" element={<VideosCreate />} />\n+              <Route path=\"/videos/create\" element={<VideosCreate />} />\n               <Route path=\"/videos/edit/:id\" element={<VideosEdit />} />\n               <Route path=\"*\" element={\n                 <Box sx={{ color: 'white' }}>\n                   <Typography variant=\"h1\" component=\"h1\">\n"
+                },
+                {
+                    "date": 1701089671132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n \n-export default function App() {\n+export const VideosCreate = () => {\n   return (\n     <ThemeProvider theme={appTheme}>\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n"
                 }
             ],
             "date": 1695757259942,

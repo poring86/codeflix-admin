@@ -15,6 +15,7 @@ import { EditGenre } from './features/genre/EditGenre'
 import { ListGenre } from './features/genre/ListGenre'
 import { VideosList } from './features/videos/VideosList'
 import { VideosEdit } from './features/videos/VideosEdit'
+import { VideosCreate } from './features/videos/VideosCreate'
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
               <Route path="/genres/edit/:id" element={<EditGenre />} />
               {/* Videos */}
               <Route path="/videos" element={<VideosList />} />
+              <Route path="/videos/create" element={<VideosCreate />} />
               <Route path="/videos/edit/:id" element={<VideosEdit />} />
               <Route path="*" element={
                 <Box sx={{ color: 'white' }}>
