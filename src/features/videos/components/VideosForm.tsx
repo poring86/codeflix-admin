@@ -1,21 +1,60 @@
-import { Box, Button, FormControl, Grid, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
 import { Video } from "../../../types/Videos";
 import { Genre } from "../../../types/Genres";
 import { Category } from "../../../types/Category";
 import { CastMember } from "../../../types/CastMembers";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { AutoCompleteFields } from "../../../components/AutoCompleteFields";
+import { Rating } from "../../../components/Rating";
+import { RatingsList } from "../../../components/RatingsList";
 
 type Props = {
-  video: Video
-  genres?: Genre[]
-  categories?: Category[]
-  cast_members?: CastMember[]
-  isDisabled?: boolean
-  isLoading?: boolean
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+  video: Video;
+  genres?: Genre[];
+  categories?: Category[];
+  cast_members?: CastMember[];
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const ratings: { value: Rating; label: Rating }[] = [
+  {
+    value: "L",
+    label: "L",
+  },
+  {
+    value: "10",
+    label: "10",
+  },
+  {
+    value: "12",
+    label: "12",
+  },
+  {
+    value: "14",
+    label: "14",
+  },
+  {
+    value: "16",
+    label: "16",
+  },
+  {
+    value: "18",
+    label: "18",
+  },
+];
 
 export function VideosForm({
   video,
@@ -25,13 +64,13 @@ export function VideosForm({
   isDisabled = false,
   isLoading = false,
   handleSubmit,
-  handleChange
+  handleChange,
 }: Props) {
-  console.log('video', video)
+  console.log("video", video);
   return (
     <Box p={2}>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           <Grid item xs={12} md={6} sx={{ "& .MuiTextField-root": { my: 2 } }}>
             <FormControl fullWidth>
               <TextField
@@ -116,7 +155,21 @@ export function VideosForm({
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">
+                Gender
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+              >
+                <RatingsList isDisabled={isDisabled} />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
             <Box display="flex" gap={2}>
               <Button variant="contained" component={Link} to="/videos">
                 Back
@@ -134,5 +187,5 @@ export function VideosForm({
         </Grid>
       </form>
     </Box>
-  )
+  );
 }
