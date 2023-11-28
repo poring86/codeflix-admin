@@ -1,6 +1,6 @@
-import { Box, ThemeProvider, Typography } from '@mui/material'
+import { Box, CssBaseline, ThemeProvider, Typography } from '@mui/material'
 import { Header } from './components/Header'
-import { appTheme } from './config/theme'
+import { darkTheme, lightTheme } from './config/theme'
 import { Layout } from './components/Layout'
 import { Route, Routes } from 'react-router-dom'
 import { ListCategory } from './features/categories/ListCategory'
@@ -16,16 +16,34 @@ import { ListGenre } from './features/genre/ListGenre'
 import { VideosList } from './features/videos/VideosList'
 import { VideosEdit } from './features/videos/VideosEdit'
 import { VideosCreate } from './features/videos/VideosCreate'
+import { useEffect, useState } from 'react'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 export default function App() {
+  const [theme, setTheme] = useState(darkTheme)
+  const [currentTheme, setCurrentTheme] = useLocalStorage("theme", "dark")
+  const toggle: () => void = () => {
+    const currentTheme = theme.palette.mode === "dark" ? lightTheme : darkTheme
+    setTheme(currentTheme)
+    setCurrentTheme(currentTheme.palette.mode)
+  }
+
+  useEffect(() => {
+    const currentTheme = theme.palette.mode === "dark" ? darkTheme : lightTheme
+    if (currentTheme) {
+      setTheme(currentTheme)
+    }
+  })
+
   return (
-    <ThemeProvider theme={appTheme}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <SnackbarProvider maxSnack={3} anchorOrigin={{
         vertical: "top",
         horizontal: "right"
       }}>
-        <Box component="main" sx={{ height: "100vh", backgroundColor: (theme) => theme.palette.grey[900] }}>
-          <Header />
+        <Box component="main" sx={{ height: "100vh" }}>
+          <Header toggle={toggle} theme={theme.palette.mode} />
           <Layout>
             <Routes>
               <Route path="/" element={<ListCategory />} />

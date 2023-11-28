@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1695823238091,
@@ -16,6 +16,26 @@
                 {
                     "date": 1695826720091,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createTheme } from \"@mui/material\";\n \n export const appTheme = createTheme({\n   palette: {\n-    mode: \"light\",\n+    mode: \"dark\",\n     primary: {\n       main: \"#f5f5f1\",\n     },\n     secondary: {\n"
+                },
+                {
+                    "date": 1701095808135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,11 @@\n \n export const appTheme = createTheme({\n   palette: {\n     mode: \"dark\",\n+    background: {\n+      default: \"#222\"\n+    }\n     primary: {\n       main: \"#f5f5f1\",\n     },\n     secondary: {\n"
+                },
+                {
+                    "date": 1701095819340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import { createTheme } from \"@mui/material\";\n \n export const appTheme = createTheme({\n   palette: {\n-    mode: \"dark\",\n+    // mode: \"dark\",\n     background: {\n       default: \"#222\"\n-    }\n+    },\n     primary: {\n       main: \"#f5f5f1\",\n     },\n     secondary: {\n"
+                },
+                {
+                    "date": 1701095861607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createTheme } from \"@mui/material\";\n \n-export const appTheme = createTheme({\n+export const darkTheme = createTheme({\n   palette: {\n     // mode: \"dark\",\n     background: {\n       default: \"#222\"\n"
+                },
+                {
+                    "date": 1701096143460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createTheme } from \"@mui/material\";\n \n export const darkTheme = createTheme({\n   palette: {\n-    // mode: \"dark\",\n+    mode: \"dark\",\n     background: {\n       default: \"#222\"\n     },\n     primary: {\n"
+                },
+                {
+                    "date": 1701124819162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,5 +15,15 @@\n     text: {\n       primary: \"#f5f5f1\",\n     },\n   },\n-})\n\\ No newline at end of file\n+})\n+\n+export const lightTheme = createTheme({\n+  palette: {\n+    background: {},\n+    mode: \"light\",\n+    primary: { main: \"#E50914\" },\n+    secondary: { main: \"#222222\" },\n+    text: { primary: \"#222222\" },\n+  },\n+});\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1695823238091,

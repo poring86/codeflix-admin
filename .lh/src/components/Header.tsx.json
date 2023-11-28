@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1695782229304,
@@ -20,6 +20,46 @@
                 {
                     "date": 1699748136970,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,15 @@\n-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'\n-import MenuIcon from '@mui/icons-material/Menu';\n-import React from 'react'\n+import MenuIcon from '@mui/icons-material/Menu'\n+import {\n+  AppBar,\n+  Box,\n+  Button,\n+  IconButton,\n+  Toolbar,\n+  Typography,\n+} from '@mui/material'\n \n-export default function Header() {\n+export function Header() {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n@@ -15,8 +21,11 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n+          <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n+            News\n+          </Typography>\n           <Button color=\"inherit\">Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n"
+                },
+                {
+                    "date": 1701125998973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   Toolbar,\n   Typography,\n } from '@mui/material'\n \n-export function Header() {\n+export function Header({ theme }: { theme: () => void }) {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n@@ -24,9 +24,9 @@\n           </IconButton>\n           <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n             News\n           </Typography>\n-          <Button color=\"inherit\">Login</Button>\n+          <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1701127650099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   Toolbar,\n   Typography,\n } from '@mui/material'\n \n-export function Header({ theme }: { theme: () => void }) {\n+export function Header({ toggle }: { toggle: () => void }) {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n"
+                },
+                {
+                    "date": 1701128603693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n           </IconButton>\n           <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n             News\n           </Typography>\n+          <Button color=\"inherit\" onClick={toggle}>Toggle</Button>\n           <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n"
+                },
+                {
+                    "date": 1701130795393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,11 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n-          <Typography variant=\"h6\" component=\"div\" sx={{ flexGrow: 1 }}>\n-            News\n-          </Typography>\n+          <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n+            {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n+          </IconButton>\n           <Button color=\"inherit\" onClick={toggle}>Toggle</Button>\n           <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n"
+                },
+                {
+                    "date": 1701130852645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,13 @@\n import MenuIcon from '@mui/icons-material/Menu'\n+import Brightness4Icon from \"@mui/icons-material/Brightness4\";\n+import Brightness7Icon from \"@mui/icons-material/Brightness7\";\n import {\n   AppBar,\n   Box,\n   Button,\n   IconButton,\n   Toolbar,\n-  Typography,\n } from '@mui/material'\n \n export function Header({ toggle }: { toggle: () => void }) {\n   return (\n"
+                },
+                {
+                    "date": 1701130975653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   IconButton,\n   Toolbar,\n } from '@mui/material'\n \n-export function Header({ toggle }: { toggle: () => void }) {\n+export function Header({ toggle, theme }: { toggle: () => void }) {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n"
+                },
+                {
+                    "date": 1701131024298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   IconButton,\n   Toolbar,\n } from '@mui/material'\n \n-export function Header({ toggle, theme }: { toggle: () => void }) {\n+export function Header({ toggle, theme }: { toggle: () => void, theme: string }) {\n   return (\n     <Box sx={{ flexGrow: 1 }}>\n       <AppBar position=\"static\">\n         <Toolbar>\n"
+                },
+                {
+                    "date": 1701131059026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,8 @@\n           </IconButton>\n           <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n             {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n           </IconButton>\n-          <Button color=\"inherit\" onClick={toggle}>Toggle</Button>\n           <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n"
+                },
+                {
+                    "date": 1701131223715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,12 +22,9 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n-          <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n-            {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n-          </IconButton>\n-          <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n+\n         </Toolbar>\n       </AppBar>\n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1701131234369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,12 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n-\n+          <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n+            {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n+          </IconButton>\n+          <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n   )\n"
                 }
             ],
             "date": 1695782229304,

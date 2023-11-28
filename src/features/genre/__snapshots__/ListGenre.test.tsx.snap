@@ -126,7 +126,7 @@ exports[`GenreList should render correctly 1`] = `
             style="height: -56px; width: 0px; position: absolute; top: 56px; z-index: 4; pointer-events: none;"
           >
             <div
-              class="MuiDataGrid-overlay css-1b54mmi-MuiDataGrid-overlay"
+              class="MuiDataGrid-overlay css-oxagra-MuiDataGrid-overlay"
             >
               <span
                 class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-zf6srs-MuiCircularProgress-root"

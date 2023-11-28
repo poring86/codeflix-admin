@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { setupStore } from './app/store'
 import reportWebVitals from './reportWebVitals'
-import './index.css'
+// import './index.css'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

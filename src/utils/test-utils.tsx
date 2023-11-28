@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { AppStore, RootState, setupStore } from '../app/store'
 import { ThemeProvider } from '@mui/material'
-import { appTheme } from '../config/theme'
+import { darkTheme } from '../config/theme'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
@@ -20,7 +20,7 @@ export function renderWithProviders(
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return (
-      <ThemeProvider theme={appTheme}>
+      <ThemeProvider theme={darkTheme}>
         <BrowserRouter>
           <SnackbarProvider>
             <Provider store={store}>{children}</Provider>

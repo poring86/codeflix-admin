@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1695859169534,
@@ -24,6 +24,10 @@
                 {
                     "date": 1700500761009,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { BrowserRouter } from 'react-router-dom'\n import App from './App'\n import { setupStore } from './app/store'\n import reportWebVitals from './reportWebVitals'\n+import './index.css'\n \n const container = document.getElementById('root')!\n const root = createRoot(container)\n const store = setupStore()\n"
+                },
+                {
+                    "date": 1701095646091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { BrowserRouter } from 'react-router-dom'\n import App from './App'\n import { setupStore } from './app/store'\n import reportWebVitals from './reportWebVitals'\n-import './index.css'\n+// import './index.css'\n \n const container = document.getElementById('root')!\n const root = createRoot(container)\n const store = setupStore()\n"
                 }
             ],
             "date": 1695859169534,

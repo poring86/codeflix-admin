@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 70,
+            "activePatchIndex": 92,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -288,6 +288,94 @@
                 {
                     "date": 1701089671132,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n \n-export default function App() {\n+export const VideosCreate = () => {\n   return (\n     <ThemeProvider theme={appTheme}>\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n"
+                },
+                {
+                    "date": 1701095622300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { Box, ThemeProvider, Typography } from '@mui/material'\n+import { Box, CssBaseline, ThemeProvider, Typography } from '@mui/material'\n import { Header } from './components/Header'\n import { appTheme } from './config/theme'\n import { Layout } from './components/Layout'\n import { Route, Routes } from 'react-router-dom'\n@@ -16,11 +16,12 @@\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n \n-export const VideosCreate = () => {\n+export default function App() {\n   return (\n     <ThemeProvider theme={appTheme}>\n+      <CssBaseline />\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n         horizontal: \"right\"\n       }}>\n"
+                },
+                {
+                    "date": 1701095867864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n import { VideosCreate } from './features/videos/VideosCreate'\n \n export default function App() {\n   return (\n-    <ThemeProvider theme={appTheme}>\n+    <ThemeProvider theme={darkTheme}>\n       <CssBaseline />\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n         horizontal: \"right\"\n"
+                },
+                {
+                    "date": 1701095898073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, CssBaseline, ThemeProvider, Typography } from '@mui/material'\n import { Header } from './components/Header'\n-import { appTheme } from './config/theme'\n+import { darkTheme } from './config/theme'\n import { Layout } from './components/Layout'\n import { Route, Routes } from 'react-router-dom'\n import { ListCategory } from './features/categories/ListCategory'\n import { CreateCategory } from './features/categories/CreateCategory'\n"
+                },
+                {
+                    "date": 1701124995322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n \n export default function App() {\n+  const [theme, setTheme] = useState(\"dark\")\n+\n   return (\n     <ThemeProvider theme={darkTheme}>\n       <CssBaseline />\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n"
+                },
+                {
+                    "date": 1701125090969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,11 @@\n import { VideosCreate } from './features/videos/VideosCreate'\n \n export default function App() {\n   const [theme, setTheme] = useState(\"dark\")\n+  const toggle () => {\n+    const newTheme = theme === \"dark\" ? \"light\" : \"dark\"\n+  }\n \n   return (\n     <ThemeProvider theme={darkTheme}>\n       <CssBaseline />\n"
+                },
+                {
+                    "date": 1701125113133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n import { ListGenre } from './features/genre/ListGenre'\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n+import { useState } from 'react'\n \n export default function App() {\n   const [theme, setTheme] = useState(\"dark\")\n   const toggle () => {\n"
+                },
+                {
+                    "date": 1701125137177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n import { useState } from 'react'\n \n export default function App() {\n   const [theme, setTheme] = useState(\"dark\")\n-  const toggle () => {\n+  const toggle = () => {\n     const newTheme = theme === \"dark\" ? \"light\" : \"dark\"\n   }\n \n   return (\n"
+                },
+                {
+                    "date": 1701125256917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { Box, CssBaseline, ThemeProvider, Typography } from '@mui/material'\n import { Header } from './components/Header'\n-import { darkTheme } from './config/theme'\n+import { darkTheme, lightTheme } from './config/theme'\n import { Layout } from './components/Layout'\n import { Route, Routes } from 'react-router-dom'\n import { ListCategory } from './features/categories/ListCategory'\n import { CreateCategory } from './features/categories/CreateCategory'\n@@ -20,9 +20,9 @@\n \n export default function App() {\n   const [theme, setTheme] = useState(\"dark\")\n   const toggle = () => {\n-    const newTheme = theme === \"dark\" ? \"light\" : \"dark\"\n+    setTheme(theme === \"dark\" ? darkTheme : lightTheme)\n   }\n \n   return (\n     <ThemeProvider theme={darkTheme}>\n"
+                },
+                {
+                    "date": 1701125360121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n import { VideosCreate } from './features/videos/VideosCreate'\n import { useState } from 'react'\n \n export default function App() {\n-  const [theme, setTheme] = useState(\"dark\")\n+  const [theme, setTheme] = useState(darkTheme)\n   const toggle = () => {\n     setTheme(theme === \"dark\" ? darkTheme : lightTheme)\n   }\n \n"
+                },
+                {
+                    "date": 1701125409239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n   const toggle = () => {\n-    setTheme(theme === \"dark\" ? darkTheme : lightTheme)\n+    setTheme(theme.palette.mode === \"dark\" ? darkTheme : lightTheme)\n   }\n \n   return (\n     <ThemeProvider theme={darkTheme}>\n"
+                },
+                {
+                    "date": 1701127418643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n   const toggle = () => {\n-    setTheme(theme.palette.mode === \"dark\" ? darkTheme : lightTheme)\n+    const currentTheme = theme.palette.mode === \"dark\" ? darkTheme : lightTheme\n+    setTheme(currentTheme)\n   }\n \n   return (\n     <ThemeProvider theme={darkTheme}>\n@@ -31,9 +32,9 @@\n         vertical: \"top\",\n         horizontal: \"right\"\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n-          <Header />\n+          <Header toggle={toggle} />\n           <Layout>\n             <Routes>\n               <Route path=\"/\" element={<ListCategory />} />\n               {/* Categories */}\n"
+                },
+                {
+                    "date": 1701127477944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n import { useState } from 'react'\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n-  const toggle = () => {\n+  const toggle: () => void = () => {\n     const currentTheme = theme.palette.mode === \"dark\" ? darkTheme : lightTheme\n     setTheme(currentTheme)\n   }\n \n"
+                },
+                {
+                    "date": 1701128850461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n   const toggle: () => void = () => {\n-    const currentTheme = theme.palette.mode === \"dark\" ? darkTheme : lightTheme\n+    const currentTheme = theme.palette.mode === \"dark\" ? lightTheme : darkTheme\n     setTheme(currentTheme)\n   }\n \n   return (\n"
+                },
+                {
+                    "date": 1701128876256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n     setTheme(currentTheme)\n   }\n \n   return (\n-    <ThemeProvider theme={darkTheme}>\n+    <ThemeProvider theme={theme}>\n       <CssBaseline />\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n         horizontal: \"right\"\n"
+                },
+                {
+                    "date": 1701128996439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n         vertical: \"top\",\n         horizontal: \"right\"\n       }}>\n-        <Box component=\"main\" sx={{ height: \"100vh\", backgroundColor: (theme) => theme.palette.grey[900] }}>\n+        <Box component=\"main\" sx={{ height: \"100vh\" }}>\n           <Header toggle={toggle} />\n           <Layout>\n             <Routes>\n               <Route path=\"/\" element={<ListCategory />} />\n"
+                },
+                {
+                    "date": 1701131157210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         vertical: \"top\",\n         horizontal: \"right\"\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\" }}>\n-          <Header toggle={toggle} />\n+          <Header toggle={toggle} theme={theme.palette.mode} />\n           <Layout>\n             <Routes>\n               <Route path=\"/\" element={<ListCategory />} />\n               {/* Categories */}\n"
+                },
+                {
+                    "date": 1701131473351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,17 +15,24 @@\n import { ListGenre } from './features/genre/ListGenre'\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n-import { useState } from 'react'\n+import { useEffect, useState } from 'react'\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n   const toggle: () => void = () => {\n     const currentTheme = theme.palette.mode === \"dark\" ? lightTheme : darkTheme\n     setTheme(currentTheme)\n   }\n \n+  useEffect(() => {\n+    const currentTheme = localStorage.getItem(\"theme\")\n+    if (currentTheme) {\n+      setTheme(JSON.parse(currentTheme))\n+    }\n+  })\n+\n   return (\n     <ThemeProvider theme={theme}>\n       <CssBaseline />\n       <SnackbarProvider maxSnack={3} anchorOrigin={{\n"
+                },
+                {
+                    "date": 1701131518840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n \n   useEffect(() => {\n     const currentTheme = localStorage.getItem(\"theme\")\n     if (currentTheme) {\n-      setTheme(JSON.parse(currentTheme))\n+      setTheme(currentTheme === \"dark\" ? darkTheme : lightTheme)\n     }\n   })\n \n   return (\n"
+                },
+                {
+                    "date": 1701131884202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n   const [theme, setTheme] = useState(darkTheme)\n   const toggle: () => void = () => {\n     const currentTheme = theme.palette.mode === \"dark\" ? lightTheme : darkTheme\n     setTheme(currentTheme)\n+    localStorage.setItem(\"theme\", currentTheme.palette.mode)\n   }\n \n   useEffect(() => {\n     const currentTheme = localStorage.getItem(\"theme\")\n"
+                },
+                {
+                    "date": 1701175436099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,11 +16,13 @@\n import { VideosList } from './features/videos/VideosList'\n import { VideosEdit } from './features/videos/VideosEdit'\n import { VideosCreate } from './features/videos/VideosCreate'\n import { useEffect, useState } from 'react'\n+import { useLocalStorage } from './hooks/useLocalStorage'\n \n export default function App() {\n   const [theme, setTheme] = useState(darkTheme)\n+  const [currentTheme, setCurrentTheme] = useLocalStorage(\"theme\", \"dark\")\n   const toggle: () => void = () => {\n     const currentTheme = theme.palette.mode === \"dark\" ? lightTheme : darkTheme\n     setTheme(currentTheme)\n     localStorage.setItem(\"theme\", currentTheme.palette.mode)\n"
+                },
+                {
+                    "date": 1701175570379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   const [currentTheme, setCurrentTheme] = useLocalStorage(\"theme\", \"dark\")\n   const toggle: () => void = () => {\n     const currentTheme = theme.palette.mode === \"dark\" ? lightTheme : darkTheme\n     setTheme(currentTheme)\n-    localStorage.setItem(\"theme\", currentTheme.palette.mode)\n+    setCurrentTheme(currentTheme.palette.mode)\n   }\n \n   useEffect(() => {\n     const currentTheme = localStorage.getItem(\"theme\")\n"
+                },
+                {
+                    "date": 1701175679782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,11 +28,11 @@\n     setCurrentTheme(currentTheme.palette.mode)\n   }\n \n   useEffect(() => {\n-    const currentTheme = localStorage.getItem(\"theme\")\n+    const currentTheme = theme.palette.mode === \"dark\" ? darkTheme : lightTheme\n     if (currentTheme) {\n-      setTheme(currentTheme === \"dark\" ? darkTheme : lightTheme)\n+      setTheme(currentTheme)\n     }\n   })\n \n   return (\n"
                 }
             ],
             "date": 1695757259942,

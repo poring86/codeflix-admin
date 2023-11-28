@@ -42,6 +42,16 @@ exports[`Header should render header 1`] = `
           tabindex="0"
           type="button"
         >
+          Toggle
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
           Login
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
