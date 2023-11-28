@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1695782229304,
@@ -64,6 +64,18 @@
                 {
                     "date": 1701192680640,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n+          <Box sx={{ flexGrow: 1 }} />\n           <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n             {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n           </IconButton>\n           <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n"
+                },
+                {
+                    "date": 1701204346644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,28 +8,30 @@\n   IconButton,\n   Toolbar,\n } from '@mui/material'\n \n-export function Header({ toggle, theme }: { toggle: () => void, theme: string }) {\n+export function Header({ toggle, theme, handleDrawerToggle }: HeaderProps) {\n   return (\n-    <Box sx={{ flexGrow: 1 }}>\n-      <AppBar position=\"static\">\n-        <Toolbar>\n-          <IconButton\n-            size=\"large\"\n-            edge=\"start\"\n-            color=\"inherit\"\n-            aria-label=\"menu\"\n-            sx={{ mr: 2 }}\n-          >\n-            <MenuIcon />\n-          </IconButton>\n-          <Box sx={{ flexGrow: 1 }} />\n-          <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n-            {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n-          </IconButton>\n-          <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n-        </Toolbar>\n-      </AppBar>\n+    <Box>\n+      <Toolbar>\n+        <IconButton\n+          size=\"large\"\n+          edge=\"start\"\n+          color=\"inherit\"\n+          aria-label=\"menu\"\n+          onClick={handleDrawerToggle}\n+          sx={{ mr: 2, display: { sm: \"none\" } }}\n+        >\n+          <MenuIcon />\n+        </IconButton>\n+        <Box sx={{ flexGrow: 1 }} />\n+        <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n+          {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n+        </IconButton>\n+\n+        <Button color=\"inherit\" onClick={() => keycloak.logout()}>\n+          Logout\n+        </Button>\n+      </Toolbar>\n     </Box>\n-  )\n+  );\n }\n"
+                },
+                {
+                    "date": 1701204392092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n           {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n         </IconButton>\n \n-        <Button color=\"inherit\" onClick={() => keycloak.logout()}>\n+        <Button color=\"inherit\" onClick={() => { }}>\n           Logout\n         </Button>\n       </Toolbar>\n     </Box>\n"
+                },
+                {
+                    "date": 1701204414252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,21 @@\n import MenuIcon from '@mui/icons-material/Menu'\n import Brightness4Icon from \"@mui/icons-material/Brightness4\";\n import Brightness7Icon from \"@mui/icons-material/Brightness7\";\n import {\n-  AppBar,\n+\n   Box,\n   Button,\n   IconButton,\n   Toolbar,\n } from '@mui/material'\n \n+type HeaderProps = {\n+  toggle: () => void;\n+  theme: string;\n+  handleDrawerToggle?: () => void;\n+};\n+\n export function Header({ toggle, theme, handleDrawerToggle }: HeaderProps) {\n   return (\n     <Box>\n       <Toolbar>\n"
                 }
             ],
             "date": 1695782229304,

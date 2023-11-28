@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1695815519415,
@@ -20,6 +20,46 @@
                 {
                     "date": 1699748444036,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,16 @@\n import { Box, Container } from '@mui/material'\n-import React from 'react'\n+import type { ReactNode } from 'react'\n \n-export default function Layout({ children }: { children: React.ReactNode }) {\n+type Props = {\n+  children: ReactNode\n+}\n+\n+export function Layout({ children }: Props) {\n   return (\n     <Box>\n-      <Container maxWidth=\"lg\" sx={{ mt: 4, mb: 4, bg: \"white\" }}>{children}</Container>\n+      <Container maxWidth=\"lg\" sx={{ mt: 4, mb: 4, color: 'white' }}>\n+        {children}\n+      </Container>\n     </Box>\n   )\n }\n"
+                },
+                {
+                    "date": 1701201084832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,36 @@\n }\n \n export function Layout({ children }: Props) {\n   return (\n-    <Box>\n-      <Container maxWidth=\"lg\" sx={{ mt: 4, mb: 4, color: 'white' }}>\n-        {children}\n-      </Container>\n-    </Box>\n+    <ThemeProvider theme={currentTheme}>\n+      <CssBaseline />\n+      <Box sx={{ display: \"flex\" }}>\n+        <AppBar\n+          position=\"fixed\"\n+          sx={{\n+            width: { sm: `calc(100% - ${drawerWidth}px)` },\n+            ml: { sm: `${drawerWidth}px` },\n+          }}\n+        >\n+          <Header\n+            handleDrawerToggle={handleDrawerToggle}\n+            toggle={toggleCurrentTheme}\n+            theme={currentTheme.palette.mode === \"dark\" ? \"dark\" : \"light\"}\n+          />\n+        </AppBar>\n+\n+        <ResponsiveDrawer open={mobileOpen} onClose={handleDrawerToggle} />\n+\n+        <SnackbarProvider\n+          autoHideDuration={2000}\n+          maxSnack={3}\n+          anchorOrigin={{ vertical: \"top\", horizontal: \"right\" }}\n+        >\n+          <Container maxWidth=\"lg\" sx={{ color: \"white\", my: 12 }}>\n+            {children}\n+          </Container>\n+        </SnackbarProvider>\n+      </Box>\n+    </ThemeProvider>\n   )\n }\n"
+                },
+                {
+                    "date": 1701201154608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,18 @@\n-import { Box, Container } from '@mui/material'\n+import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n import type { ReactNode } from 'react'\n \n type Props = {\n   children: ReactNode\n }\n \n export function Layout({ children }: Props) {\n+  const [mobileOpen, setMobileOpen] = useState(false);\n+  const [currentTheme, toggleCurrentTheme] = useAppTheme();\n+\n+  const handleDrawerToggle = () => {\n+    setMobileOpen(!mobileOpen);\n+  };\n   return (\n     <ThemeProvider theme={currentTheme}>\n       <CssBaseline />\n       <Box sx={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1701201182365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n import type { ReactNode } from 'react'\n+import { Header } from './Header';\n \n type Props = {\n   children: ReactNode\n }\n"
+                },
+                {
+                    "date": 1701201228955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n-import type { ReactNode } from 'react'\n+import { useState, type ReactNode } from 'react'\n import { Header } from './Header';\n+import { useAppTheme } from '../hooks/useAppTheme';\n+import { SnackbarProvider } from 'notistack';\n \n type Props = {\n   children: ReactNode\n }\n"
+                },
+                {
+                    "date": 1701204520294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,20 +2,22 @@\n import { useState, type ReactNode } from 'react'\n import { Header } from './Header';\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n+import ResponsiveDrawer from './ResponsiveDrawer';\n \n type Props = {\n   children: ReactNode\n }\n \n-export function Layout({ children }: Props) {\n+export function Layout({ children }: { children: React.ReactNode }) {\n   const [mobileOpen, setMobileOpen] = useState(false);\n   const [currentTheme, toggleCurrentTheme] = useAppTheme();\n \n   const handleDrawerToggle = () => {\n     setMobileOpen(!mobileOpen);\n   };\n+\n   return (\n     <ThemeProvider theme={currentTheme}>\n       <CssBaseline />\n       <Box sx={{ display: \"flex\" }}>\n@@ -45,6 +47,6 @@\n           </Container>\n         </SnackbarProvider>\n       </Box>\n     </ThemeProvider>\n-  )\n+  );\n }\n"
+                },
+                {
+                    "date": 1701205392913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,9 @@\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n import ResponsiveDrawer from './ResponsiveDrawer';\n \n-type Props = {\n-  children: ReactNode\n-}\n+const drawerWidth = 240;\n \n export function Layout({ children }: { children: React.ReactNode }) {\n   const [mobileOpen, setMobileOpen] = useState(false);\n   const [currentTheme, toggleCurrentTheme] = useAppTheme();\n"
+                },
+                {
+                    "date": 1701205483734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n-import { useState, type ReactNode } from 'react'\n+import { useState, React } from 'react'\n import { Header } from './Header';\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n import ResponsiveDrawer from './ResponsiveDrawer';\n"
+                },
+                {
+                    "date": 1701205513926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n-import { useState, React } from 'react'\n+import { useState }, React from 'react'\n import { Header } from './Header';\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n import ResponsiveDrawer from './ResponsiveDrawer';\n"
+                },
+                {
+                    "date": 1701205542694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { AppBar, Box, Container, CssBaseline, ThemeProvider } from '@mui/material'\n-import { useState }, React from 'react'\n+import { useState, type ReactNode } from 'react'\n import { Header } from './Header';\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n import ResponsiveDrawer from './ResponsiveDrawer';\n"
+                },
+                {
+                    "date": 1701205878220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { useAppTheme } from '../hooks/useAppTheme';\n import { SnackbarProvider } from 'notistack';\n import ResponsiveDrawer from './ResponsiveDrawer';\n \n+\n const drawerWidth = 240;\n \n export function Layout({ children }: { children: React.ReactNode }) {\n   const [mobileOpen, setMobileOpen] = useState(false);\n"
                 }
             ],
             "date": 1695815519415,

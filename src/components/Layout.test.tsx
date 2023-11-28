@@ -1,14 +1,13 @@
-import { render } from "@testing-library/react"
 import { Layout } from "./Layout"
+import { renderWithProviders } from "../utils/test-utils";
 
 describe("Header", () => {
-  test("should render header", () => {
-    const { asFragment } = render(
+  it("should render correctly", () => {
+    const { asFragment } = renderWithProviders(
       <Layout>
-        test
+        <div>Test</div>
       </Layout>
-    )
-
-    expect(asFragment()).toMatchSnapshot()
-  })
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
 })
