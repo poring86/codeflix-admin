@@ -23,6 +23,7 @@ export function Header({ toggle, theme }: { toggle: () => void, theme: string })
           >
             <MenuIcon />
           </IconButton>
+          <Box sx={{ flexGrow: 1 }} />
           <IconButton sx={{ ml: 1 }} onClick={toggle} color="inherit">
             {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>

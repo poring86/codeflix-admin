@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1695782229304,
@@ -60,6 +60,10 @@
                 {
                     "date": 1701131234369,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,12 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n-\n+          <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n+            {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n+          </IconButton>\n+          <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n         </Toolbar>\n       </AppBar>\n     </Box>\n   )\n"
+                },
+                {
+                    "date": 1701192680640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n             sx={{ mr: 2 }}\n           >\n             <MenuIcon />\n           </IconButton>\n+          <Box sx={{ flexGrow: 1 }} />\n           <IconButton sx={{ ml: 1 }} onClick={toggle} color=\"inherit\">\n             {theme === \"dark\" ? <Brightness7Icon /> : <Brightness4Icon />}\n           </IconButton>\n           <Button color=\"inherit\" onClick={() => { }}>Login</Button>\n"
                 }
             ],
             "date": 1695782229304,
