@@ -1,10 +1,11 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { initialState, useCreateVideoMutation, useGetAllCastMembersQuery, useGetAllCategoriesQuery, useGetAllGenresQuery } from "./videosSlice";
+import { initialState, useCreateVideoMutation, useGetAllCastMembersQuery, useGetAllGenresQuery } from "./videosSlice";
 import { Video } from "../../types/Videos";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
+import { useUniqueCategories } from "../../hooks/useUniqueCategories";
 
 export const VideosCreate = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -12,7 +13,7 @@ export const VideosCreate = () => {
   const [createVideo, status] = useCreateVideoMutation()
   const { data: genres } = useGetAllGenresQuery();
   const { data: castMembers } = useGetAllCastMembersQuery();
-  const { data: categories } = useGetAllCategoriesQuery();
+  const [categories, setCategories] = useUniqueCategories(videoState, setVideoState)
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -23,15 +24,6 @@ export const VideosCreate = () => {
     event.preventDefault()
     await createVideo(mapVideoToForm(videoState))
   }
-
-  useEffect(() => {
-    if (status.isSuccess) {
-      enqueueSnackbar(`Video created`, { variant: "success" });
-    }
-    if (status.isError) {
-      enqueueSnackbar(`Error creating video`, { variant: "error" });
-    }
-  }, [status, enqueueSnackbar])
 
   return (
     <Box>
@@ -47,7 +39,7 @@ export const VideosCreate = () => {
           handleSubmit={handleSubmit}
           cast_members={castMembers?.data}
           genres={genres?.data}
-          categories={categories?.data}
+          categories={categories}
           isDisabled={status.isLoading}
           isLoading={status.isLoading}
         />
