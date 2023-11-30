@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { initialState, useGetAllCastMembersQuery, useGetAllGenresQuery, useGetVideoQuery, useUpdateVideoMutation } from "./videosSlice";
-import { Video } from "../../types/Videos";
+import { FileObject, Video } from "../../types/Videos";
 import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
@@ -17,6 +17,7 @@ export function VideosEdit() {
   const [videoState, setVideoState] = useState<Video>(initialState)
   const [updateVideo, status] = useUpdateVideoMutation();
   const [categories, setCategories] = useUniqueCategories(videoState, setVideoState)
+  const [selectedFiles, setSelectedFiles] = useState<FileObject[]>([])
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -26,6 +27,14 @@ export function VideosEdit() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     await updateVideo(mapVideoToForm(videoState))
+  }
+
+  function handleAddFile({ name, file }: FileObject) {
+    setSelectedFiles([...selectedFiles, { name, file }]);
+  }
+
+  function handleRemoveFile(name: string) {
+    setSelectedFiles(selectedFiles.filter((file) => file.name !== name));
   }
 
   useEffect(() => {
@@ -61,6 +70,8 @@ export function VideosEdit() {
           categories={categories}
           isDisabled={isFetching}
           isLoading={isFetching}
+          handleAddFile={handleAddFile}
+          handleRemoveFile={handleRemoveFile}
         />
       </Paper>
     </Box>

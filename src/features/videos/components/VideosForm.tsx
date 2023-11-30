@@ -2,21 +2,19 @@ import {
   Box,
   Button,
   FormControl,
-  FormControlLabel,
   FormLabel,
   Grid,
-  Radio,
   RadioGroup,
   TextField,
 } from "@mui/material";
-import { Video } from "../../../types/Videos";
+import { FileObject, Video } from "../../../types/Videos";
 import { Genre } from "../../../types/Genres";
 import { Category } from "../../../types/Category";
 import { CastMember } from "../../../types/CastMembers";
 import { Link } from "react-router-dom";
 import { AutoCompleteFields } from "../../../components/AutoCompleteFields";
-import { Rating } from "../../../components/Rating";
 import { RatingsList } from "../../../components/RatingsList";
+import { InputFile } from "../../../components/InputFile";
 
 type Props = {
   video: Video;
@@ -27,34 +25,9 @@ type Props = {
   isLoading?: boolean;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAddFile: ({ name, file }: FileObject) => void
+  handleRemoveFile: (name: string) => void
 };
-
-const ratings: { value: Rating; label: Rating }[] = [
-  {
-    value: "L",
-    label: "L",
-  },
-  {
-    value: "10",
-    label: "10",
-  },
-  {
-    value: "12",
-    label: "12",
-  },
-  {
-    value: "14",
-    label: "14",
-  },
-  {
-    value: "16",
-    label: "16",
-  },
-  {
-    value: "18",
-    label: "18",
-  },
-];
 
 export function VideosForm({
   video,
@@ -65,8 +38,42 @@ export function VideosForm({
   isLoading = false,
   handleSubmit,
   handleChange,
+  handleAddFile,
+  handleRemoveFile
 }: Props) {
-  console.log("video", video);
+
+  const handleAddThumbnail = (file: File) => {
+    handleAddFile({ name: "thumb_file", file });
+  };
+
+  const handleRemoveThumbnail = () => {
+    handleRemoveFile("thumb_file");
+  };
+
+  const handleAddBanner = (file: File) => {
+    handleAddFile({ name: "banner_file", file });
+  };
+
+  const handleAddTrailer = (file: File) => {
+    handleAddFile({ name: "trailer_file", file });
+  };
+
+  const handleAddVideo = (file: File) => {
+    handleAddFile({ name: "video_file", file });
+  };
+
+  const handleRemoveBanner = () => {
+    handleRemoveFile("banner_file");
+  };
+
+  const handleRemoveTrailer = () => {
+    handleRemoveFile("trailer_file");
+  };
+
+  const handleRemoveVideo = () => {
+    handleRemoveFile("video_file");
+  };
+
   return (
     <Box p={2}>
       <form onSubmit={handleSubmit}>
@@ -155,18 +162,44 @@ export function VideosForm({
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl>
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Gender
-              </FormLabel>
+          <Grid item xs={12} md={6} sx={{ "& .MuiTextField-root": { my: 2 } }}>
+            <FormControl fullWidth>
+              <Box mt={2} mb={2}>
+                <FormLabel component="legend">Rating</FormLabel>
+              </Box>
               <RadioGroup
                 row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
+                name="rating"
+                value={video.rating}
+                onChange={handleChange}
               >
                 <RatingsList isDisabled={isDisabled} />
               </RadioGroup>
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputFile
+                onAdd={handleAddThumbnail}
+                onRemove={handleRemoveThumbnail}
+                data-testid="thumbnail-input"
+              />
+              <InputFile
+                onAdd={handleAddBanner}
+                onRemove={handleRemoveBanner}
+                data-testid="banner-input"
+              />
+            </FormControl>
+            <FormControl fullWidth>
+              <InputFile
+                onAdd={handleAddVideo}
+                onRemove={handleRemoveVideo}
+                data-testid="video-input"
+              />
+              <InputFile
+                onAdd={handleAddTrailer}
+                onRemove={handleRemoveTrailer}
+                data-testid="trailer-input"
+              />
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
