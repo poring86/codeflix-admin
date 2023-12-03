@@ -7,6 +7,9 @@ import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
 import { useUniqueCategories } from "../../hooks/useUniqueCategories";
+import { useAppDispatch } from "../../app/hooks";
+import { addUpload } from "../uploads/uploadSlice";
+import { nanoid } from "nanoid";
 
 export function VideosEdit() {
   const { enqueueSnackbar } = useSnackbar()
@@ -18,15 +21,33 @@ export function VideosEdit() {
   const [updateVideo, status] = useUpdateVideoMutation();
   const [categories, setCategories] = useUniqueCategories(videoState, setVideoState)
   const [selectedFiles, setSelectedFiles] = useState<FileObject[]>([])
+  const dispatch = useAppDispatch();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     setVideoState((state) => ({ ...state, [name]: value }));
   }
 
+  function handleSubmitUploads(videoId: string) {
+    selectedFiles.forEach(({ file, name }) => {
+      dispatch(addUpload({
+        id: nanoid(),
+        file,
+        videoId,
+        field: name
+      }))
+    })
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    await updateVideo(mapVideoToForm(videoState))
+    const video = mapVideoToForm(videoState)
+    try {
+      const { data } = await updateVideo(video).unwrap()
+      handleSubmitUploads(data.id)
+    } catch (e) {
+      enqueueSnackbar(`Error updating Video`, { variant: "error" });
+    }
   }
 
   function handleAddFile({ name, file }: FileObject) {
