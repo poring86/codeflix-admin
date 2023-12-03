@@ -39,9 +39,6 @@ export default function App() {
                 { name: "upload 3", progress: 30 }
               ]}
             />
-            <Box>
-              <Typography variant="h1">Codeflix</Typography>
-            </Box>
             <Routes>
               <Route path="/" element={<ListCategory />} />
               {/* Categories */}

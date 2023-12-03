@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 100,
+            "activePatchIndex": 101,
             "patches": [
                 {
                     "date": 1695757259942,
@@ -408,6 +408,10 @@
                 {
                     "date": 1701381938575,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,15 @@\n       }}>\n         <Box component=\"main\" sx={{ height: \"100vh\" }}>\n           <Header toggle={toggleCurrentTheme} theme={currentTheme.palette.mode === \"dark\" ? \"dark\" : \"light\"} />\n           <Layout>\n-            <UploadList />\n+            <UploadList\n+              uploads={[\n+                { name: \"upload 1\", progress: 10 },\n+                { name: \"upload 2\", progress: 20 },\n+                { name: \"upload 3\", progress: 30 }\n+              ]}\n+            />\n             <Box>\n               <Typography variant=\"h1\">Codeflix</Typography>\n             </Box>\n             <Routes>\n"
+                },
+                {
+                    "date": 1701639946515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,11 +38,8 @@\n                 { name: \"upload 2\", progress: 20 },\n                 { name: \"upload 3\", progress: 30 }\n               ]}\n             />\n-            <Box>\n-              <Typography variant=\"h1\">Codeflix</Typography>\n-            </Box>\n             <Routes>\n               <Route path=\"/\" element={<ListCategory />} />\n               {/* Categories */}\n               <Route path=\"/categories\" element={<ListCategory />} />\n"
                 }
             ],
             "date": 1695757259942,

@@ -181,11 +181,13 @@ export function VideosForm({
               <InputFile
                 onAdd={handleAddThumbnail}
                 onRemove={handleRemoveThumbnail}
+                placeholder="Thumbnail"
                 data-testid="thumbnail-input"
               />
               <InputFile
                 onAdd={handleAddBanner}
                 onRemove={handleRemoveBanner}
+                placeholder="Banner"
                 data-testid="banner-input"
               />
             </FormControl>
@@ -193,11 +195,13 @@ export function VideosForm({
               <InputFile
                 onAdd={handleAddVideo}
                 onRemove={handleRemoveVideo}
+                placeholder="Video"
                 data-testid="video-input"
               />
               <InputFile
                 onAdd={handleAddTrailer}
                 onRemove={handleRemoveTrailer}
+                placeholder="Trailer"
                 data-testid="trailer-input"
               />
             </FormControl>

@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { initialState, useCreateVideoMutation, useGetAllCastMembersQuery, useGetAllGenresQuery } from "./videosSlice";
 import { FileObject, Video } from "../../types/Videos";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
@@ -60,10 +60,19 @@ export const VideosCreate = () => {
       const { data } = await createVideo(payload).unwrap()
       handleSubmitUploads(data.id)
     } catch (e) {
-      await createVideo(mapVideoToForm(videoState))
+      enqueueSnackbar(`Error creating Video`, { variant: "error" });
+    }
+  }
+
+  useEffect(() => {
+    if (status.isSuccess) {
+      enqueueSnackbar(`Video created`, { variant: "success" });
     }
 
-  }
+    if (status.isError) {
+      enqueueSnackbar(`Error creating Video`, { variant: "error" });
+    }
+  }, [status, enqueueSnackbar]);
 
   return (
     <Box>
