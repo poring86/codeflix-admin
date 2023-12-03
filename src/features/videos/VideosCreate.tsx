@@ -6,6 +6,9 @@ import { useSnackbar } from "notistack";
 import { VideosForm } from "./components/VideosForm";
 import { mapVideoToForm } from "./util";
 import { useUniqueCategories } from "../../hooks/useUniqueCategories";
+import { nanoid } from "nanoid";
+import { addUpload } from "../uploads/uploadSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 export const VideosCreate = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -15,6 +18,16 @@ export const VideosCreate = () => {
   const { data: castMembers } = useGetAllCastMembersQuery();
   const [categories, setCategories] = useUniqueCategories(videoState, setVideoState)
   const [selectedFiles, setSelectedFiles] = useState<FileObject[]>([]);
+  const dispatch = useAppDispatch();
+
+  dispatch(
+    addUpload({
+      id: nanoid(),
+      file: new File([], "test"),
+      videoId: "1",
+      field: "test"
+    })
+  )
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -29,9 +42,27 @@ export const VideosCreate = () => {
     setSelectedFiles(selectedFiles.filter((file) => file.name !== name));
   }
 
+  function handleSubmitUploads(videoId: string) {
+    selectedFiles.forEach(({ file, name }) => {
+      dispatch(addUpload({
+        id: nanoid(),
+        file,
+        videoId,
+        field: name
+      }))
+    })
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    await createVideo(mapVideoToForm(videoState))
+    const { id, ...payload } = mapVideoToForm(videoState)
+    try {
+      const { data } = await createVideo(payload).unwrap()
+      handleSubmitUploads(data.id)
+    } catch (e) {
+      await createVideo(mapVideoToForm(videoState))
+    }
+
   }
 
   return (

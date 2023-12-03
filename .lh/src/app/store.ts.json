@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 31,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1698929912273,
@@ -132,6 +132,42 @@
                 {
                     "date": 1699747361562,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,11 @@\n   combineReducers,\n   PreloadedState,\n } from '@reduxjs/toolkit'\n import { apiSlice } from '../features/api/apiSlice'\n-import { castMembersApiSlice } from '../features/cast/castMembersSlice'\n+\n import { categoriesApiSlice } from '../features/categories/categorySlice'\n+import { castMembersApiSlice } from '../features/castMembers/castMembersSlice'\n \n const rootReducer = combineReducers({\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n"
+                },
+                {
+                    "date": 1701520713025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,18 @@\n import { apiSlice } from '../features/api/apiSlice'\n \n import { categoriesApiSlice } from '../features/categories/categorySlice'\n import { castMembersApiSlice } from '../features/castMembers/castMembersSlice'\n+import { genreSlice } from '../features/genre/genreSlice'\n+import { videosSlice } from '../features/videos/videosSlice'\n \n const rootReducer = combineReducers({\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   [castMembersApiSlice.reducerPath]: apiSlice.reducer,\n+  [videosSlice.reducerPath]: apiSlice.reducer,\n+  [genreSlice.reducerPath]: apiSlice.reducer,\n+  uploadSlice: uploadReducer,\n })\n \n export const setupStore = (preloadedState?: PreloadedState<RootState>) => {\n   return configureStore({\n@@ -26,9 +31,9 @@\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n export type AppDispatch = AppStore['dispatch']\n-export type RootState = ReturnType<typeof rootReducer>\n+export type RootState = ReturnType<typeof rootReducer>;\n export type AppThunk<ReturnType = void> = ThunkAction<\n   ReturnType,\n   RootState,\n   unknown,\n"
+                },
+                {
+                    "date": 1701520762087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,16 +10,17 @@\n import { categoriesApiSlice } from '../features/categories/categorySlice'\n import { castMembersApiSlice } from '../features/castMembers/castMembersSlice'\n import { genreSlice } from '../features/genre/genreSlice'\n import { videosSlice } from '../features/videos/videosSlice'\n+import { uploadsReducer } from '../features/uploads/uploadSlice'\n \n const rootReducer = combineReducers({\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n   [castMembersApiSlice.reducerPath]: apiSlice.reducer,\n   [videosSlice.reducerPath]: apiSlice.reducer,\n   [genreSlice.reducerPath]: apiSlice.reducer,\n-  uploadSlice: uploadReducer,\n+  uploadSlice: uploadsReducer,\n })\n \n export const setupStore = (preloadedState?: PreloadedState<RootState>) => {\n   return configureStore({\n@@ -31,9 +32,9 @@\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n export type AppDispatch = AppStore['dispatch']\n-export type RootState = ReturnType<typeof rootReducer>;\n+export type RootState = ReturnType<typeof rootReducer>; \\\n export type AppThunk<ReturnType = void> = ThunkAction<\n   ReturnType,\n   RootState,\n   unknown,\n"
+                },
+                {
+                    "date": 1701521481953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n export type AppDispatch = AppStore['dispatch']\n-export type RootState = ReturnType<typeof rootReducer>; \\\n+export type RootState = ReturnType<typeof rootReducer>\n export type AppThunk<ReturnType = void> = ThunkAction<\n   ReturnType,\n   RootState,\n   unknown,\n"
+                },
+                {
+                    "date": 1701542231348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   return configureStore({\n     reducer: rootReducer,\n     preloadedState,\n     middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware().concat(apiSlice.middleware),\n+      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware),\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n"
+                },
+                {
+                    "date": 1701565335530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   return configureStore({\n     reducer: rootReducer,\n     preloadedState,\n     middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware),\n+      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware).prepend(uploadQueue.middleware)\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n"
+                },
+                {
+                    "date": 1701565345501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   return configureStore({\n     reducer: rootReducer,\n     preloadedState,\n     middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware).prepend(uploadQueue.middleware)\n+      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware)\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n"
+                },
+                {
+                    "date": 1701565365189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n   return configureStore({\n     reducer: rootReducer,\n     preloadedState,\n     middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware({ serializableCheck: false }).concat(apiSlice.middleware)\n+      getDefaultMiddleware({ serializableCheck: false }).prepend(uploadQueue.middleware).concat(apiSlice.middleware)\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n"
+                },
+                {
+                    "date": 1701565371989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,11 @@\n   return configureStore({\n     reducer: rootReducer,\n     preloadedState,\n     middleware: (getDefaultMiddleware) =>\n-      getDefaultMiddleware({ serializableCheck: false }).prepend(uploadQueue.middleware).concat(apiSlice.middleware)\n+      getDefaultMiddleware({ serializableCheck: false })\n+        .prepend(uploadQueue.middleware)\n+        .concat(apiSlice.middleware)\n   })\n }\n \n export type AppStore = ReturnType<typeof setupStore>\n"
+                },
+                {
+                    "date": 1701608722380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n import { castMembersApiSlice } from '../features/castMembers/castMembersSlice'\n import { genreSlice } from '../features/genre/genreSlice'\n import { videosSlice } from '../features/videos/videosSlice'\n import { uploadsReducer } from '../features/uploads/uploadSlice'\n+import { uploadQueue } from '../middleware/uploadQueue'\n \n const rootReducer = combineReducers({\n   [apiSlice.reducerPath]: apiSlice.reducer,\n   [categoriesApiSlice.reducerPath]: apiSlice.reducer,\n"
                 }
             ],
             "date": 1698929912273,

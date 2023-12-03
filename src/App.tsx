@@ -16,6 +16,7 @@ import { VideosList } from './features/videos/VideosList'
 import { VideosEdit } from './features/videos/VideosEdit'
 import { VideosCreate } from './features/videos/VideosCreate'
 import { useAppTheme } from './hooks/useAppTheme'
+import { UploadList } from './features/uploads/UploadList'
 
 export default function App() {
 
@@ -31,6 +32,16 @@ export default function App() {
         <Box component="main" sx={{ height: "100vh" }}>
           <Header toggle={toggleCurrentTheme} theme={currentTheme.palette.mode === "dark" ? "dark" : "light"} />
           <Layout>
+            <UploadList
+              uploads={[
+                { name: "upload 1", progress: 10 },
+                { name: "upload 2", progress: 20 },
+                { name: "upload 3", progress: 30 }
+              ]}
+            />
+            <Box>
+              <Typography variant="h1">Codeflix</Typography>
+            </Box>
             <Routes>
               <Route path="/" element={<ListCategory />} />
               {/* Categories */}
