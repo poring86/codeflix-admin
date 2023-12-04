@@ -37,7 +37,17 @@ const uploadSlice = createSlice({
       if (upload) {
         upload.progress = progress
       }
-    }
+    },
+    cleanAllUploads(state) {
+      return [];
+    },
+    cleanFinishedUploads(state) {
+      const uploads = state.filter(
+        (upload) => upload.status !== "success" && upload.status !== "failed"
+      );
+      state.splice(0, state.length);
+      state.push(...uploads);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(uploadVideo.pending, (state, action) => {
@@ -63,7 +73,7 @@ const uploadSlice = createSlice({
   },
 })
 
-export const { addUpload, removeUpload, setUploadProgress } = uploadSlice.actions
+export const { addUpload, removeUpload, setUploadProgress, cleanFinishedUploads, cleanAllUploads } = uploadSlice.actions
 
 export const selectUploads = (state: RootState) => state.uploadSlice;
 
